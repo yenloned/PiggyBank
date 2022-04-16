@@ -1,0 +1,275 @@
+.about{
+    font-family: 'Fira Sans', sans-serif;
+}
+.about_header{
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+    background-image: url(../material/about/about_team.png);
+    z-index: 1;
+}
+
+.about_header_txt{
+    padding-top: 20vh;
+    padding-left: 8vw;
+    font-size: calc(30px + 1vw);
+    color:rgb(220, 220, 228);
+
+}
+
+.about_header_txt2{
+    padding-left: 8vw;
+    font-size: calc(22px + 1.2vw);
+    color:rgb(240, 240, 248);
+    font-family: 'Ms Madi', cursive;
+    font-weight: bold;
+}
+
+.about_dev{
+    padding-top: 10rem;
+    background: linear-gradient(180deg, rgb(25,25,25) 80%, rgba(100,240,240,0.5) 100%);
+    padding-bottom: 2rem;
+}
+
+.dev_txt{
+    text-align: center;
+    margin-bottom: 3rem;
+    font-size: calc(20px + 1vw);
+    color:rgb(220, 220, 228);
+    font-weight: bold;
+}
+
+.dev_txt2{
+    color:rgb(180, 180, 188);
+    margin-top: 1rem;
+    font-size: calc(15px + 0.8vw);
+    text-align: center;
+    margin: 2.5rem 12vw;
+}
+
+d2-light{
+    color:rgb(90, 215, 215);
+}
+
+.dev_showitem{
+    display: grid;
+    grid-template-columns: repeat(3, auto);
+    justify-content: center;
+}
+
+.dev_showitem div{
+    display: flex;
+    gap: 5rem;
+}
+
+.dev_react, .dev_css, .dev_nodejs, .dev_expressjs, .dev_mysql{
+    padding: 2rem;
+    background-color: rgb(255,255,255);
+    border: 3px solid rgb(100,240,240);
+    border-radius: 50%;
+}
+
+.about_who{
+    padding-top: 5rem;
+    width: 100vw;
+    height: 55vh;
+    background: linear-gradient(190deg, rgb(25,25,25) 70%, rgba(100, 240, 130, 0.5) 100%);
+}
+
+.who_header_txt{
+    text-align: center;
+    font-size: calc(20px + 1vw);
+    color:rgb(220, 220, 228);
+    margin-bottom: 2rem;
+    font-weight: bold;
+}
+
+.who_icon{
+    text-align: right;
+}
+
+.who_icon img{
+    border-radius: 50%;
+    border: 4px solid rgb(15,15,15);
+    background-color: rgb(40,40,40);
+}
+
+.who_content{
+    display: grid;
+    grid-template-columns: auto auto;
+    font-size: calc(15px + 0.8vw);
+    color:rgb(220, 220, 228);
+    text-align: left;
+    gap: 3.5rem;
+}
+
+.who_txt{
+    font-size: calc(25px + 0.8vw);
+}
+
+.who_txt2{
+    margin-top: 1rem;
+    font-size: calc(15px + 0.8vw);
+}
+
+.who_socialmedia i{
+    margin-top: 3rem;
+    font-size: calc(30px + 1vw);
+    margin-right: 1.5rem;
+    color:rgb(250, 250, 250);
+}
+
+.about_contact{
+    padding: 0 16rem;
+    padding-top: 5rem;
+    width: 100vw;
+    height: 80vh;
+    background: linear-gradient(170deg, rgb(25,25,25) 70%, rgba(235, 235, 235, 0.5) 100%);
+}
+
+.contact_content{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    justify-content: center;
+    padding-top: 2rem;
+}
+
+.contact_inputform{
+    color:rgb(220, 220, 228);
+    font-size: calc(20px + 0.6vw);
+}
+
+.contact_inputform i{
+    font-size: calc(25px + 1vw);
+}
+
+.contact_png{
+    text-align: center;
+}
+
+.contact_leave{
+    font-size: calc(18px + 0.75vw);
+}
+
+.cpmtact_form {
+    width: 5vw;
+}
+
+.contact_leave{
+    margin-top: 1rem;
+}
+
+.contact_form input{
+    width: 35vw;
+    height: 20vh;
+    font-size: 18px;
+}
+
+.contact_form button{
+    padding: 0.2rem;
+    font-size: 20px;
+}
+
+@media screen and (max-width:1450px) {
+    .dev_showitem img{
+        width: 120px;
+    }
+    .contact_png img{
+        width: 650px;
+    }
+}
+
+@media screen and (max-width:1295px) {
+    .dev_showitem{
+        grid-template-columns: auto;
+    }
+    .dev_showitem div{
+        justify-content: space-between;
+    }
+    .contact_png img{
+        width: 550px;
+    }
+}
+
+@media screen and (max-width:1190px) {
+    .about_contact{
+        height: auto;
+        padding-bottom: 2rem;
+        background: linear-gradient(180deg, rgb(25,25,25) 70%, rgba(235, 235, 235, 0.5) 100%);
+    }
+    .contact_content{
+        grid-template-columns: auto;
+    }
+    .contact_form form{
+        display: flex;
+        flex-direction: column;
+    }
+    .contact_form form input{
+        min-width: 420px;
+    }
+    .contact_form form button{
+        max-width: 100px;
+    }
+}
+
+@media screen and (max-width:1015px) {
+    .about_header{
+        background-size: 1015px 100vh;
+        background-repeat: no-repeat;
+    }
+    .about_dev{
+        padding-top: 6.5rem;
+    }
+    .dev_showitem img{
+        width: 100px;
+    }
+    .who_content{
+        grid-template-columns: auto;
+        gap: 1rem;
+    }
+    .who_icon, .who_content{
+        text-align: center;
+    }
+    .about_who{
+        height: auto;
+        padding-bottom: 2rem;
+        background: linear-gradient(180deg, rgb(25,25,25) 70%, rgba(100, 240, 130, 0.5) 100%);
+    }
+}
+
+@media screen and (max-width:560px) {
+    .about_header_txt, .about_header_txt2{
+        padding-left: 2vw;
+    }
+    .dev_showitem img{
+        width: 80px;
+    }
+    .contact_png img{
+        width: 420px;
+    }
+    .about_contact{
+        padding: 2rem 0;
+    }
+}
+
+@media screen and (max-width:485px) {
+    .contact_png img{
+        width: 340px;
+    }
+    .contact_form form input{
+        min-width: 320px;
+    }
+    .contact_form form button{
+        max-width: 80px;
+    }
+}
+
+
+@media screen and (max-width:420px) {
+    .about_dev{
+        padding-top: 5rem;
+    }
+    .dev_showitem img{
+        width: 60px;
+    }
+}
