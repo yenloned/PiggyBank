@@ -119,22 +119,22 @@ html,body{
 }
 
 .homeLeftGridHeader{
-    font-size: calc(10.5px + 1.6vw);
+    font-size: calc(14px + 1.2vw);
     padding: 1.5rem 0rem 1rem 2.5rem;
     color: rgb(255, 216, 40);
     font-family: 'Fira Sans', sans-serif;
 }
 
 .homeLeftGridBody{
-    font-size: calc(8px + 0.78vw);
+    font-size: calc(12px + 0.5vw);
     font-family: 'Heebo', sans-serif;
     color:rgb(220, 220, 228);
     padding: 0rem 20rem 0rem 2.5rem;
+    text-align: justify;
 }
 
-
 .homeRightGridHeader{
-    font-size: calc(10.5px + 1.6vw);
+    font-size: calc(14px + 1.2vw);
     float: right;
     padding: 1.5rem 2.5rem 1rem 0rem;
     color: rgb(255, 216, 40);
@@ -142,14 +142,13 @@ html,body{
 }
 
 .homeRightGridBody{
-    font-size: calc(8px + 0.78vw);
+    font-size: calc(12px + 0.5vw);
     font-family: 'Heebo', sans-serif;
     color:rgb(220, 220, 228);
     padding: 0rem 2.5rem 0rem 20rem;
-    text-align: right;
     float: right;
+    text-align: justify;
 }
-
 
 .homeContainer1{
     display: grid;
