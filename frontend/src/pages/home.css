@@ -162,6 +162,7 @@ html,body{
     background: linear-gradient(360deg, rgb(29, 29, 29) 0%, rgb(35, 35, 35) 100%);
     border-bottom: 2px solid rgb(255, 223, 79);
     margin: 0rem 0rem;
+    transition: 250ms ease-in-out;
 }
 
 .homeDisplayBlock1:hover{
@@ -169,6 +170,7 @@ html,body{
     cursor: pointer;
     transition: all 0.3s ease-out;
     box-shadow: 0px 0px 8px 16px rgb(20, 20, 20);
+    transform: translateY(-15%);
 }
 
 .homeDisplayImg{
@@ -188,14 +190,14 @@ html,body{
 
 .homeDisplayTxt{
     font-family: 'Hind', sans-serif;
-    font-size: calc(10px + 0.75vw);
+    font-size: calc(12px + 0.7vw);
     color: rgb(255, 223, 79);
     text-align: center;
 }
 
 .homeDisplayQuote{
     font-style: italic;
-    font-size: calc(8px + 0.7vw);
+    font-size: calc(10.5px + 0.65vw);
     font-family: 'Heebo', sans-serif;
     color:rgb(220, 220, 228);
     padding-bottom: 2rem;

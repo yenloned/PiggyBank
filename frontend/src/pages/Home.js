@@ -130,7 +130,7 @@ const Home = () => {
                         <div className="homeDisplayHeader">
                             Transaction
                         </div>
-                        No handling fee. Instant or Future-Dated Transaction.
+                        Instant Transaction without handling fee.
                         <div className="homeDisplayQuote">
                             -- Time to pay back your friend for that dinner.
                         </div>
@@ -145,7 +145,7 @@ const Home = () => {
                         <div className="homeDisplayHeader">
                             Withdrawal
                         </div>
-                        Easy steps to take out your money from PiggyBank.
+                        Easy steps to take out money from PiggyBank.
                         <div className="homeDisplayQuote">
                             -- Cash is King!
                         </div>
@@ -160,7 +160,7 @@ const Home = () => {
                         <div className="homeDisplayHeader">
                             Deposit
                         </div>
-                        Easy steps to save your money into PiggyBank.
+                        Easy steps to save money into PiggyBank.
                         <div className="homeDisplayQuote">
                             -- That's why we called "PiggyBank", right?
                         </div>
@@ -200,14 +200,14 @@ const Home = () => {
                     </div>
                 </div>
                 <div className="homeDisplayBlock1">
-                    <div className="homeDisplayImg"><i className="fas fa-file-code"></i></div>
+                    <div className="homeDisplayImg"><i className="fa-solid fa-user-group"></i></div>
                     <div className="homeDisplayTxt">
                         <div className="homeDisplayHeader">
-                            E-Statement
+                            Payee
                         </div>
-                            Statement generation for Account Management
+                            High Efficiency and Convenience in Transaction.
                         <div className="homeDisplayQuote">
-                            -- Trust me, even a monkey can understand it.
+                            -- You do that when you don't remember their number.
                         </div>
                         <div className="homeDisplayLearnMore">
                             Learn more <i className="fas fa-angle-double-right"></i>

@@ -3,12 +3,12 @@
     border-radius: 1rem;
     margin: 2rem 10rem;
     padding: 2rem 5rem;
+    color: rgb(255, 223, 79);
 }
 
 .AccountContainer1{
     display: flex;
     flex-direction: column;
-    color: rgb(255, 223, 79);
 }
 
 .AccountContainerRow1{
@@ -79,9 +79,21 @@
     justify-content: center;
 }
 
+.profile_debt_block{
+    display: flex;
+    justify-content: space-between;
+}
+
 .profile_payee_information, .profile_payee_add{
     display: grid;
     grid-template-columns: 1.5fr 2fr 0.8fr;
+}
+
+.profile_debtview{
+    cursor: pointer;
+    color: rgb(220, 220, 228);
+    text-decoration: underline;
+    font-size: calc(12px + 0.75vw);
 }
 
 .profile_payee_edit{

@@ -17,7 +17,6 @@ const Insurance = () => {
             <a className='insurance-btn' href='support=insurance' style={highlightbtn}> <i className="fas fa-user-shield"></i><div className="supportchoice"> Insurance</div></a>
             <a className='development-btn' href='support=development'> <i className="fas fa-file-code"></i><div className="supportchoice"> Development</div></a>
             <a className='security-btn' href='support=security'> <i className="fas fa-lock"></i><div className="supportchoice"> Security</div></a>
-            <a className='estatement-btn' href='support=estatement'> <i className="fas fa-print"></i><div className="supportchoice"> E-Statement</div></a>
         </div>
         </div>
         <h1>

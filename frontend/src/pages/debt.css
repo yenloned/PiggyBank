@@ -1,0 +1,48 @@
+.debt_topic{
+    font-size: calc(25px + 1vw);
+    font-family: 'Hind', sans-serif;
+    border-bottom: 2px solid;
+}
+
+.debt_topic i{
+    cursor: pointer;
+    font-size: calc(18px + 0.85vw);
+}
+
+.debt_row, .debt_info_row{
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    justify-content: space-around;
+    font-size: calc(16px + 0.75vw);
+    margin-bottom: 1rem;
+    font-family: 'Hind', sans-serif;
+}
+
+.debt_info_row{
+    font-size: calc(14px + 0.65vw);
+}
+
+.debt_paytxt{
+    text-decoration: underline;
+    color:rgb(220, 220, 228);
+    cursor: pointer;
+}
+
+.debt_notexist{
+    text-align: center;
+}
+
+.debt_notexist_txt{
+    color:rgb(220, 220, 228);
+    font-size: calc(20px + 0.75vw);
+    font-family: 'Hind', sans-serif;
+}
+
+.debt_notexist_goback button{
+    font-size: calc(12px + 0.45vw);
+    background-color: rgb(220, 220, 228);
+    cursor: pointer;
+    font-family: 'Hind', sans-serif;
+    font-weight: bold;
+    padding: 0.2rem;
+}

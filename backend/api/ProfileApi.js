@@ -44,6 +44,15 @@ router.post("/get_info", (req,res) => {
     })
 })
 
+router.post("/get_debt", (req,res) => {
+    const searchingID = req.body.searchingID
+
+    db_user.query("SELECT * FROM debt WHERE user_id = ?;",
+    searchingID, (err,result) => {
+        res.send(result)
+    })
+})
+
 router.post("/get_payee", (req, res) =>{
     const searchingID = req.body.searchingID
 

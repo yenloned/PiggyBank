@@ -67,7 +67,14 @@ d2-light{
     background-color: rgb(255,255,255);
     border: 3px solid rgb(100,240,240);
     border-radius: 50%;
+    cursor: pointer;
+    transition: 250ms ease-in-out;
 }
+
+.dev_react:hover, .dev_css:hover, .dev_nodejs:hover, .dev_expressjs:hover, .dev_mysql:hover{
+    transform: translateY(-15%);
+}
+
 
 .about_who{
     padding-top: 5rem;

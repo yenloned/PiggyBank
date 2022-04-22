@@ -16,8 +16,8 @@ const Profile = () => {
     const [userFirstName, setUserFirstName] = useState("");
     const [userLastName, setUserLastName] = useState("");
     const [userEmail, setUserEmail] = useState("")
-    const [userBalance, setUserBalance] = useState("");
-    const [userDebt, setUserDebt] = useState("");
+    const [userBalance, setUserBalance] = useState(0);
+    const [userDebt, setUserDebt] = useState(0);
     const [userCredit, setUserCredit] = useState("")
     const [user2FA, setUser2FA] = useState("")
     const [userType, setUserType] = useState("")
@@ -46,30 +46,22 @@ const Profile = () => {
 
     const navigate = useNavigate()
 
-    const credit_rating = (balance,debt) =>{
-        if(balance === 0 && debt === 0){
-            return setUserCredit("Not Applicable")
-        }if(balance <= 20000 && debt >= balance || debt/balance >= 2) {
-            return setUserCredit("D")
-        }if(balance > 20000 && debt >= balance || debt/balance >= 1){
-            return setUserCredit("C")
-        }if(debt/balance >= 0.75){
-            setUserCredit("CC")
-        }if(debt/balance > 0.6 || balance < 100000){
-            setUserCredit("CCC")
-        }if(debt/balance <= 0.6 && balance >= 100000){
-            setUserCredit("B")
-        }if(debt/balance <= 0.5 && balance > 500000){
-            setUserCredit("BB")
-        }if(debt/balance <= 0.4 && balance > 1000000){
-            setUserCredit("BBB")
-        }if(debt/balance <= 0.3 && balance > 15000000){
-            setUserCredit("A")
-        }if(debt/balance <= 0.2 && balance > 30000000){
-            setUserCredit("AA")
-        }if (debt/balance <= 0.1 && balance > 50000000){
-            setUserCredit("AAA")
-        }
+    const UpdateCredit = async (balance) =>{
+        await Axios.post("http://localhost:3005/profile/get_debt",{
+        searchingID: loginID})
+        .then((response) => {
+            if (response.data[0]){
+                setUserDebt(response.data[0].total);
+                Axios.post("http://localhost:3005/account/credit_scoring", {
+                balance: balance,
+                debt: response.data[0].total})
+                .then((credit) => {
+                    setUserCredit(credit.data)
+                    Axios.post("http://localhost:3005/account/update_credit", {
+                    searchingID: loginID, credit: credit.data})
+                })
+            }
+        })
     }
 
     useLayoutEffect(() => {
@@ -88,17 +80,16 @@ const Profile = () => {
                     setUserLastName(response.data[0].lastname);
                     setUserEmail(response.data[0].email);
                     setUserBalance(response.data[0].balance);
-                    setUserDebt(response.data[0].debt);
                     setUser2FA(response.data[0]["2FA"]);
                     setUserType(response.data[0].type);
-                    credit_rating(response.data[0].balance,response.data[0].debt);
+                    UpdateCredit(response.data[0].balance)
                 }
             })
-            get_payee()
         }
 
-        if (!userEmail && !userFirstName && !userLastName){
+        if (!userEmail || !userFirstName || !userLastName){
             GetInformation()
+            get_payee()
         }
     })
 
@@ -340,7 +331,10 @@ const Profile = () => {
                                 <div className="profile_balance">Balance </div>
                                 <div className="profile_userdata">HKD {userBalance}</div>
                                 <div className="profile_debt">Debt </div>
-                                <div className="profile_userdata">HKD {userDebt}</div>
+                                <div className="profile_debt_block">
+                                    <div className="profile_userdata">HKD {userDebt}</div>
+                                    <div className="profile_debtview" onClick={() => navigate('/debt')}>View Detail</div>
+                                </div>
                                 <div className="profile_credit">Credit Rating <i className="fas fa-info-circle" onClick={() => set_credit_button(!credit_button)}/></div>
                                 <div className="profile_userdata">{userCredit}</div>
                             </div>
