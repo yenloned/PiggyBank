@@ -62,22 +62,32 @@
     display: grid;
     grid-template-columns: auto auto;
 }
+.profile_billing_plan{
+    margin-bottom: 1rem;
+}
 
 .profile_billing_Row{
     display: grid;
-    grid-template-columns: 2fr 1.5fr 1.3fr;
-    padding-bottom: 1px;
+    grid-template-columns: 5fr 4fr 3fr;
+    justify-content: space-between;
+}
+
+.profile_billing_topic{
     border-bottom: 1.5px solid;
+    margin-bottom: 0.5rem;
 }
 
-.profile_billing_loan{
-    margin-top: 2rem;
+.profile_billing_history_block{
+    overflow-y: auto;
+    height: calc(100px + 5vh);
+    overflow: "scroll";
 }
 
-.profile_billing_action, .profile_billing_status{
-    display: flex;
-    justify-content: center;
+.profile_billing_data{
+    color: rgb(220, 220, 228);
+    font-size: calc(12px + 0.75vw);
 }
+
 
 .profile_debt_block{
     display: flex;
@@ -356,6 +366,7 @@
         text-align: left;
     }
     .account_operation_title{
+        text-align: center;
         border-bottom: 2px solid;
     }
     .account_operation_container{

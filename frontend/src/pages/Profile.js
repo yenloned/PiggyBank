@@ -10,9 +10,12 @@ import {userPayeeContext} from "../context/UserContext";
 const Profile = () => {
     Axios.defaults.withCredentials = true;
 
+    //useContext for the checking if user is login, and who is the user
     const {loginStatus, setLoginStatus} = useContext(LoginStatusContext);
     const {loginID, setLoginID} = useContext(LoginIDContext);
 
+    //useState for the components need to be used below
+    //user information
     const [userFirstName, setUserFirstName] = useState("");
     const [userLastName, setUserLastName] = useState("");
     const [userEmail, setUserEmail] = useState("")
@@ -22,12 +25,17 @@ const Profile = () => {
     const [user2FA, setUser2FA] = useState("")
     const [userType, setUserType] = useState("")
 
+    //payee registration
     const [payeeAdd, setPayeeAdd] = useState(false)
     const {userPayee, setUserPayee} = useContext(userPayeeContext);
     const [payeeAdd_ID, setPayeeAdd_ID] = useState("")
     const [payeeAdd_Name, setPayeeAdd_Name] = useState("")
     const [payeeAdd_Msg, setPayeeAdd_Msg] = useState("")
 
+    //user history
+    const [userHistory, setUserHistory] = useState([])
+
+    //user password changing
     const [userCurrentPassword, setUserCurrentPassword] = useState("")
     const [userOldPassword, setUserOldPassword] = useState("")
     const [userNewPassword, setUserNewPassword] = useState("")
@@ -35,47 +43,34 @@ const Profile = () => {
     const [ResetPasswordMsg, setResetPasswordMsg] = useState("")
     const [checkPasswordFailMsg, setcheckPasswordFailMsg] = useState("")
 
+    //user password termination
     const [userTerminatePassword, setUserTerminatePassword] = useState("")
     const [userTerminateConfirm, setUserTerminateConfirm] = useState("")
     const [userTerminateMsg, setUserTerminateMsg] = useState("")
 
-
+    //changing pages inside profile page
     const [profile_button, set_profile_button] = useState("information");
+    //show description of credit scoring
     const [credit_button, set_credit_button] = useState(false);
 
 
     const navigate = useNavigate()
 
-    const UpdateCredit = async (balance) =>{
-        await Axios.post("http://localhost:3005/profile/get_debt",{
-        searchingID: loginID})
-        .then((response) => {
-            if (response.data[0]){
-                setUserDebt(response.data[0].total);
-                Axios.post("http://localhost:3005/account/credit_scoring", {
-                balance: balance,
-                debt: response.data[0].total})
-                .then((credit) => {
-                    setUserCredit(credit.data)
-                    Axios.post("http://localhost:3005/account/update_credit", {
-                    searchingID: loginID, credit: credit.data})
-                })
-            }
-        })
-    }
-
+    //redirect user if not login
     useLayoutEffect(() => {
         if (!loginStatus){
             navigate('/login')
         }
     })
 
+    //get user information by useEffect, then save them into accordance components
     useEffect( () => {
         const GetInformation = async () =>{
             await Axios.post("http://localhost:3005/profile/get_info",{
             searchingID: loginID})
             .then((response) => {
                 if (response.data){
+                    //update components of user information
                     setUserFirstName(response.data[0].firstname);
                     setUserLastName(response.data[0].lastname);
                     setUserEmail(response.data[0].email);
@@ -93,6 +88,13 @@ const Profile = () => {
         }
     })
 
+    //Some components in page need to be reset back to default
+
+    const switch_billing = () =>{
+        set_profile_button("billing")
+        get_history()
+    }
+    //switching pages to payee by component state change
     const switch_payee = () =>{
         set_profile_button("payee")
         setPayeeAdd(false)
@@ -100,10 +102,12 @@ const Profile = () => {
         setPayeeAdd_Name("")
         setPayeeAdd_Msg("")
     }
+    //render payee page by component state change
     const switch_payee_add = () => {
         setPayeeAdd(!payeeAdd)
         setPayeeAdd_Msg("")
     }
+    //switching pages to security by component state change
     const switch_security = () =>{
         set_profile_button("security")
         setUserCurrentPassword("")
@@ -113,6 +117,7 @@ const Profile = () => {
         setResetPasswordMsg("")
         setcheckPasswordFailMsg("")
     }
+    //switching pages to dangerzone by component state change
     const switch_dangerzone = () =>{
         set_profile_button("dangerzone")
         setUserTerminatePassword("")
@@ -120,6 +125,59 @@ const Profile = () => {
         setUserTerminateMsg("")
     }
 
+    //Functions
+
+    
+
+    //update credit by calculation in backend site, take balance as parameter
+    const UpdateCredit = async (balance) =>{
+        //check the total debt of user
+        await Axios.post("http://localhost:3005/profile/get_debt",{
+        searchingID: loginID})
+        .then((response) => {
+            //If user has any debt
+            if (response.data[0]){
+                setUserDebt(response.data.reduce((prev, cur) => prev + cur.total, 0));
+                //with balance and total debt, send them to backend to perform credit calculation
+                Axios.post("http://localhost:3005/account/credit_scoring", {
+                balance: balance,
+                debt: response.data[0].total})
+                .then((credit) => {
+                    //update credit in component
+                    setUserCredit(credit.data)
+                    //update credit in database
+                    Axios.post("http://localhost:3005/account/update_credit", {
+                    searchingID: loginID, credit: credit.data})
+                })
+            }else{
+                //If user has no debt, the debt input will be 0
+                //Send them to backend calculation
+                Axios.post("http://localhost:3005/account/credit_scoring", {
+                balance: balance,
+                debt: 0})
+                .then((credit) => {
+                    //update credit in component
+                    setUserCredit(credit.data)
+                    //update credit in database
+                    Axios.post("http://localhost:3005/account/update_credit", {
+                    searchingID: loginID, credit: credit.data})
+                })
+            }
+        })
+    }
+
+    //get all history information by user ID
+    const get_history = async () => {
+        await Axios.post("http://localhost:3005/profile/get_history",{
+        searchingID: loginID})
+        .then((history) => {
+            if (history.data.length){
+                setUserHistory(history.data)
+            }
+        })
+    }
+
+    //get all payee information by user ID
     const get_payee = () => {
         Axios.post("http://localhost:3005/profile/get_payee",{
         searchingID: loginID})
@@ -132,6 +190,9 @@ const Profile = () => {
         setPayeeAdd_Name("")
     }
 
+    //JWT Token will be checked for below actions
+
+    //Add payee by another user ID, checking input before sending the request into backend
     const add_payee = async() => {
         if (payeeAdd_ID == ""){
             return setPayeeAdd_Msg("Payee ID can not be empty.")
@@ -142,6 +203,7 @@ const Profile = () => {
         if (payeeAdd_Name.length > 20){
             return setPayeeAdd_Msg("Payee Name is too long!")
         }
+        //check if payee is already registered for user
         await Axios.post("http://localhost:3005/profile/check_payee",{
             user_id_checkpayee: loginID,
             check_payee_id: payeeAdd_ID
@@ -149,10 +211,12 @@ const Profile = () => {
             if(checkresult.data != ''){
                 setPayeeAdd_Msg("Payee already registered on your list.")
             }else{
+                //If no, check if the payee (userID) really exist
                 Axios.post("http://localhost:3005/profile/check_user",{
                 payee_id_checkuser: payeeAdd_ID
                 }).then((checkuser_result) =>{
                     if(checkuser_result.data != ''){
+                        //If yes, add it into the user information
                         Axios.post("http://localhost:3005/profile/add_payee",{
                             user_id_addpayee: loginID,
                             add_payee_id: payeeAdd_ID,
@@ -168,22 +232,27 @@ const Profile = () => {
         })
     }
 
+    //delete payee
     const delete_payee = (payeeID) => {
         var payee_ID = payeeID
         Axios.post("http://localhost:3005/profile/delete_payee", {
             user_id_deletepayee: loginID,
             payee_id: payee_ID})
         .then(() => {
+            //reload the components in order to render the page without refresh
             get_payee()
         })
     }
 
+    //enable the 2FA status in user information
     const enable2FA = () => {
+        //check if the password correct, before sending the request into backend
         Axios.post("http://localhost:3005/account/check_password",{
             user_id_checkpassword: loginID,
             input_password: userCurrentPassword})
         .then((response_enable2FA) => {
             if (response_enable2FA.data === "Check Password Passed"){
+                //update database status of 2FA
                 Axios.post("http://localhost:3005/profile/enable_2FA",{user_id_enable2FA: loginID})
                 .then(setUser2FA(!user2FA))
                 setcheckPasswordFailMsg("")
@@ -193,12 +262,15 @@ const Profile = () => {
         })
     }
 
+    //disable the 2FA in user information
     const disable2FA = () =>{
+        //check if the password correct, before sending the request into backend
         Axios.post("http://localhost:3005/account/check_password",{
             user_id_checkpassword: loginID,
             input_password: userCurrentPassword})
         .then((response_disable2FA) => {
             if (response_disable2FA.data === "Check Password Passed"){
+                //update database status of 2FA
                 Axios.post("http://localhost:3005/profile/disable_2FA",{user_id_disable2FA: loginID})
                 .then(setUser2FA(!user2FA))
                 setcheckPasswordFailMsg("")
@@ -208,18 +280,22 @@ const Profile = () => {
         })
     }
 
+    //changing password in user information
     const resetpassword = () =>{
+        //check input if valid
         if (userNewPassword != userConfirmNewPassword){
             return setResetPasswordMsg("Password and confirm password does not match.")
         }
         if (userNewPassword.length < 8){
             return setResetPasswordMsg("New Password should contain at least 8characters long.")
         }
+        //check if the password correct, before sending the request into backend
         Axios.post("http://localhost:3005/account/check_password",{
             user_id_checkpassword: loginID,
             input_password: userOldPassword})
             .then((response_resetpassword) => {
                 if (response_resetpassword.data === "Check Password Passed"){
+                    //update password
                     Axios.post("http://localhost:3005/account/change_password",{
                         newpassword: userNewPassword,
                         targetEmail: userEmail
@@ -233,15 +309,19 @@ const Profile = () => {
             })
     }
 
+    //terminate account
     const delete_account = () =>{
+        //check if the password correct, before sending the request into backend
         Axios.post("http://localhost:3005/account/check_password",{
             user_id_checkpassword: loginID,
             input_password: userTerminatePassword
         }).then((response_deleteaccount) => {
             if (response_deleteaccount.data === "Check Password Passed"){
+                //check confirmation input
                 if (userTerminateConfirm != "terminate my account"){
                     return setUserTerminateMsg('Incorrect verification by input "terminate my account".')
                 }else{
+                    //terminate account by delete row in database
                     Axios.post("http://localhost:3005/account/delete_account",{user_id_deleteaccount:loginID})
                     window.alert("Account Terminated.\nAny problem, please contact: rudyyen.work@gmail.com")
                     logout()
@@ -252,6 +332,7 @@ const Profile = () => {
         })
     }
 
+    //logout by destory cookie
     const logout = () => {
         setLoginStatus(false)
         setLoginID(0)
@@ -283,7 +364,7 @@ const Profile = () => {
                 <div className="profile_Row2_Row3">
                     <div className="AccountContainerRow2">
                         <button className="information_button" onClick={() => set_profile_button("information")}>Information</button>
-                        <button className="billing_button" onClick={() => set_profile_button("billing")}>Billing</button>
+                        <button className="billing_button" onClick={switch_billing}>Billing</button>
                         <button className="balance_button" onClick={() => set_profile_button("balance")}>Balance</button>
                         <button className="payee_button" onClick={switch_payee}>Payee</button>
                         <button className="security_button" onClick={switch_security}>Security</button>
@@ -309,19 +390,38 @@ const Profile = () => {
                         {profile_button === "billing" &&
                         <div className="profile_billing">
                             <div className="profile_billing_plan">
+                                <div className="profile_billing_topic">Subscription</div>
                                 <div className="profile_billing_Row">
-                                    <div className="profile_plan_name">Subscription</div>
+                                    <div className="profile_plan_plan">Plan</div>
+                                    <div className="profile_plan_type">Type</div>
                                     <div className="profile_plan_date">Date</div>
-                                    <div className="profile_billing_action">Action</div>
                                 </div>
-                                <div className="profile_userdata">HKD {userBalance}</div>
+                                <div className="profile_billing_data">HKD {userBalance}</div>
                             </div>
-                            <div className="profile_billing_loan">
-                                <div className="profile_billing_Row">
-                                    <div className="profile_loan_amount">Loan Amount</div>
-                                    <div className="profile_loan_date">Date</div>
-                                    <div className="profile_billing_status">Status</div>
+                            <div className="profile_billing_history">
+                                <div className="profile_billing_topic">Transaction History</div>
+                                {userHistory.length ?
+                                <div>
+                                    <div className="profile_billing_Row">
+                                        <div className="profile_plan_plan">Amount</div>
+                                        <div className="profile_plan_type">Type</div>
+                                        <div className="profile_plan_date">Date</div>
+                                    </div>
+                                    <div className="profile_billing_history_block">
+                                    {userHistory.map((data, key) => {
+                                        return(
+                                            <div className="profile_billing_Row" key={key}>
+                                                <div className="profile_billing_data">HKD {data.amount}</div>
+                                                <div className="profile_billing_data">{data.type}</div>
+                                                <div className="profile_billing_data">{data.date.slice(0,10)}</div>
+                                            </div>
+                                            )
+                                        })}
+                                    </div>
                                 </div>
+                                :
+                                ""
+                                }
                             </div>
                         </div>}
 
@@ -349,9 +449,9 @@ const Profile = () => {
                                 <div className="profile_payee_name">Payee Name</div>
                                 <div className="profile_payee_edit" onClick={() => switch_payee_add()}><div className="profile_payee_edittxt">Add </div><i className="fas fa-plus-square"></i></div>
                             </div>
-                            {userPayee.map(data => {
+                            {userPayee.map((data, key) => {
                                 return(
-                                    <div className="profile_payee_information">
+                                    <div className="profile_payee_information" key={key}>
                                         <div className="profile_userdata">{data.payee_id}</div>
                                         <div className="profile_userdata">{data.payee_name}</div>
                                         <div className="profile_payee_editbutton" onClick={() => delete_payee(data.payee_id)}>

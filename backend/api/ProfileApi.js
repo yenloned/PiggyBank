@@ -44,6 +44,17 @@ router.post("/get_info", (req,res) => {
     })
 })
 
+//get history
+router.post("/get_history", (req, res) =>{
+    const searchingID = req.body.searchingID
+
+    db_user.query("SELECT * FROM history WHERE fromwho = ? OR towho = ?;",
+    [searchingID, searchingID], (err, result) =>{
+        res.send(result)
+    })
+})
+
+//get debt
 router.post("/get_debt", (req,res) => {
     const searchingID = req.body.searchingID
 
@@ -53,6 +64,7 @@ router.post("/get_debt", (req,res) => {
     })
 })
 
+//get payee info
 router.post("/get_payee", (req, res) =>{
     const searchingID = req.body.searchingID
 
@@ -123,7 +135,11 @@ router.post("/check_balance", (req, res) => {
     const checked_balance = req.body.check_amount
     db_user.query("SELECT balance FROM user WHERE user_id = ? AND balance >= ?;",
     [user_id_checkbalance, checked_balance], (err, result) => {
-        res.send(result)
+        if (err){
+            return
+        }else{
+            res.send(result)
+        }
     })
 })
 

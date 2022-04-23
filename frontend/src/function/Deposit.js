@@ -12,8 +12,8 @@ const Deposit = () => {
     Axios.defaults.withCredentials = true;
     const navigate = useNavigate()
 
-    const {loginStatus, setLoginStatus} = useContext(LoginStatusContext);
-    const {loginID, setLoginID} = useContext(LoginIDContext);
+    const {loginStatus} = useContext(LoginStatusContext);
+    const {loginID} = useContext(LoginIDContext);
 
     const [deposit_amount, setDeposit_Amount] = useState(0)
     const [deposit_Msg, setDeposit_Msg] = useState("")

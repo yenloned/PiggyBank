@@ -12,8 +12,8 @@ const Withdrawal = () => {
     Axios.defaults.withCredentials = true;
     const navigate = useNavigate()
 
-    const {loginStatus, setLoginStatus} = useContext(LoginStatusContext);
-    const {loginID, setLoginID} = useContext(LoginIDContext);
+    const {loginStatus} = useContext(LoginStatusContext);
+    const {loginID} = useContext(LoginIDContext);
 
     const [withdrawal_amount, setWithdrawal_Amount] = useState(0)
     const [withdrawal_Msg, setWithdrawal_Msg] = useState("")

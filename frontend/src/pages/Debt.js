@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useLayoutEffect} from "react";
+import React, {useContext, useEffect, useLayoutEffect, useState} from "react";
 import {LoginIDContext} from "../context/LoginContext";
 import {LoginStatusContext} from "../context/LoginContext";
 import { useNavigate } from "react-router-dom";
@@ -20,19 +20,21 @@ const Debt = () => {
     const {loginStatus} = useContext(LoginStatusContext);
     const {userDebt, setUserDebt} = useContext(userDebtContext);
 
+    const [payDebtMsg, setPayDebtMsg] = useState("")
+
     const navigate = useNavigate()
 
-    useEffect(() => {
-        const GetDebt = async () => {
-            await Axios.post("http://localhost:3005/account/get_debt", {
-                searchingID: loginID
-            }).then((response) => {
-                if (response.data.length){
-                    setUserDebt(response.data)
-                }
-            })
-        }
+    const GetDebt = () => {
+        Axios.post("http://localhost:3005/profile/get_debt", {
+            searchingID: loginID
+        }).then((response) => {
+            if (response.data.length){
+                setUserDebt(response.data)
+            }
+        })
+    }
 
+    useEffect(() => {
         if (!userDebt.length){
             GetDebt()
         }
@@ -45,9 +47,25 @@ const Debt = () => {
     })
 
     const paydebt = (ref) => {
-        Axios.post("http://localhost:3005/account/pay_debt", {
-            searchingID: loginID,
+        Axios.post("http://localhost:3005/account/get_debt_byref", {
             searchingRef: ref
+        }).then((debt) => {
+            Axios.post("http://localhost:3005/profile/check_balance", {
+                payerID: loginID,
+                check_amount: debt.data.total
+            }).then((canPay) => {
+                if(canPay.data.length){
+                    Axios.post("http://localhost:3005/account/pay_debt", {
+                        debtAmount: debt.data.total,
+                        searchingRef: ref,
+                        searchingID: loginID
+                    })
+                    setPayDebtMsg("");
+                    window.location.reload();
+                }else{
+                    setPayDebtMsg("Failed to pay debt, please verifiy if balance amount is valid.")
+                }
+            })
         })
     }
 
@@ -80,6 +98,9 @@ const Debt = () => {
                 )
             })}
             </div>
+            <div className="debt_msg">
+                {payDebtMsg ? payDebtMsg : ""}
+            </div>
             </div>
             :
             <div className="debt_notexist">
@@ -90,7 +111,7 @@ const Debt = () => {
                     Well, look like you don't have any debt so far.
                 </div>
                 <div className="debt_notexist_goback">
-                    <button onClick={()=>navigate("/profile")}>Back to Profile</button>
+                    <button><a href="/profile">Back to Profile</a></button>
                 </div>
             </div>
             }

@@ -23,6 +23,7 @@ import Loan from './pages/FAQ/Loan';
 import Transaction from './pages/FAQ/Transaction';
 import Security from './pages/FAQ/Security';
 
+import History from './pages/History';
 import Debt from './pages/Debt';
 import Transfer from './function/Transfer';
 import Withdrawal from './function/Withdrawal';
@@ -80,6 +81,7 @@ function App() {
               <Route path='/support=transaction' element={<Transaction />}/>
               <Route path='/support=security' element={<Security />}/>
 
+              <Route path='/history' element={<History />}/>
               <Route path='/debt' element={<Debt />}/>
               <Route path='/transfer' element={<Transfer />}/>
               <Route path='/withdrawal' element={<Withdrawal />}/>

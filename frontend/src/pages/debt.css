@@ -28,6 +28,12 @@
     cursor: pointer;
 }
 
+.debt_msg{
+    text-align: right;
+    font-size: calc(12px + 0.6vw);
+    color: rgb(241, 45, 45);
+}
+
 .debt_notexist{
     text-align: center;
 }
@@ -45,4 +51,9 @@
     font-family: 'Hind', sans-serif;
     font-weight: bold;
     padding: 0.2rem;
+}
+
+.debt_notexist_goback a{
+    color:rgb(0, 0, 0);
+    text-decoration: none;
 }

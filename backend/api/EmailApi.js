@@ -49,6 +49,7 @@ router.post("/reset_email", cors(), (req,res) => {
 
     db_user.query("SELECT verification FROM user WHERE email = ?", 
     targetemail, (err, result) => {
+        if (err){return}
         const randomcode = result[0]["verification"]
         transport.sendMail({
             from:"piggybank.noreply@gmail.com",

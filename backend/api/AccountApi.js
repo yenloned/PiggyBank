@@ -239,14 +239,14 @@ router.get('/logout', function(req, res) {
     const debt = req.body.debt
 //change it
     if(balance == 0 && debt == 0){
-        return req.send("Not Applicable")
+        return res.send("Not Applicable")
     }if(debt/balance >= 2) {
         return res.send("D")
     }if(debt/balance >= 1){
         return res.send("C")
     }if(debt/balance >= 0.75){
         return res.send("CC")
-    }if(debt/balance >= 0.5){
+    }if(debt/balance >= 0.5 || balance <= 10000){
         return res.send("CCC")
     }if(balance <= 250000){
         return res.send("B")
@@ -272,19 +272,27 @@ router.get('/logout', function(req, res) {
     [credit, searchingID])
  })
 
- //get debt info
- router.post("/get_debt", (req, res) =>{
-    const searchingID = req.body.searchingID
+ //get debt by ref
+ router.post("/get_debt_byref", (req, res) => {
+    const searchingRef = req.body.searchingRef
 
-    db_user.query("SELECT * FROM debt WHERE user_id = ?;", searchingID, (err, result) =>{
-        res.send(result)
+    db_user.query("SELECT total FROM debt WHERE ref = ?;", searchingRef, (err, debt) => {
+        res.send(debt[0])
     })
  })
 
  //pay debt
  router.post("/pay_debt", (req, res) =>{
+    const debtAmount = req.body.debtAmount
     const searchingRef = req.body.searchingRef
     const searchingID = req.body.searchingID
+
+
+    db_user.query("UPDATE user SET balance = balance - ? WHERE user_id = ?;",
+    [debtAmount, searchingID])
+    db_user.query("DELETE FROM debt WHERE ref = ?;", searchingRef, (err, result) => {
+        return res.send(true)
+    })
  })
 
  //delete account

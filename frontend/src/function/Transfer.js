@@ -17,8 +17,8 @@ const Transfer = () =>{
     Axios.defaults.withCredentials = true;
     const navigate = useNavigate()
 
-    const {loginStatus, setLoginStatus} = useContext(LoginStatusContext);
-    const {loginID, setLoginID} = useContext(LoginIDContext);
+    const {loginStatus} = useContext(LoginStatusContext);
+    const {loginID} = useContext(LoginIDContext);
     const {userPayee, setUserPayee} = useContext(userPayeeContext);
     const [transferChoice, setTransferChoice] = useState("")
     const [transfer_payee, setTransfer_payee] = useState("")

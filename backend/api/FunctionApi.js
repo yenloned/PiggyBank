@@ -51,8 +51,19 @@ router.post("/withdrawal", (req, res) =>{
     const withdrawal_userid = req.body.withdrawal_userid
     const withdrawal_amount = req.body.withdrawal_amount
 
+    let ts = Date.now();
+
+    let date_ob = new Date(ts);
+    let date = date_ob.getDate();
+    let month = date_ob.getMonth() + 1;
+    let year = date_ob.getFullYear();
+
+    const time = year + "-" + month + "-" + date;
+
     db_user.query("UPDATE user SET balance = balance - ? WHERE user_id = ?;",
     [withdrawal_amount, withdrawal_userid])
+    db_user.query("INSERT INTO history (fromwho, towho, type, amount, date) VALUES (?,?,?,?,?);",
+    [withdrawal_userid, withdrawal_userid, "Withdrawal", -withdrawal_amount, time])
 })
 
 //deposit
@@ -60,8 +71,19 @@ router.post("/deposit", (req, res) =>{
     const deposit_userid = req.body.deposit_userid
     const deposit_amount = req.body.deposit_amount
 
+    let ts = Date.now();
+
+    let date_ob = new Date(ts);
+    let date = date_ob.getDate();
+    let month = date_ob.getMonth() + 1;
+    let year = date_ob.getFullYear();
+
+    const time = year + "-" + month + "-" + date;
+
     db_user.query("UPDATE user SET balance = balance + ? WHERE user_id = ?;",
     [deposit_amount, deposit_userid])
+    db_user.query("INSERT INTO history (fromwho, towho, type, amount, date) VALUES (?,?,?,?,?);",
+    [deposit_userid, deposit_userid, "Deposit", deposit_amount, time])
 })
 
 module.exports = router
