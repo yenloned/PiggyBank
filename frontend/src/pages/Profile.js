@@ -126,9 +126,6 @@ const Profile = () => {
     }
 
     //Functions
-
-    
-
     //update credit by calculation in backend site, take balance as parameter
     const UpdateCredit = async (balance) =>{
         //check the total debt of user
@@ -172,6 +169,7 @@ const Profile = () => {
         searchingID: loginID})
         .then((history) => {
             if (history.data.length){
+                //update component to store all history sent from backend
                 setUserHistory(history.data)
             }
         })
@@ -183,9 +181,11 @@ const Profile = () => {
         searchingID: loginID})
         .then((response) => {
             if (response.data){
+                //update component to store all payee sent from backend
                 setUserPayee(response.data)
             }
         })
+        //reset component for page render
         setPayeeAdd_ID("")
         setPayeeAdd_Name("")
     }
@@ -194,6 +194,7 @@ const Profile = () => {
 
     //Add payee by another user ID, checking input before sending the request into backend
     const add_payee = async() => {
+        //check if the input make sense before sending into backend
         if (payeeAdd_ID == ""){
             return setPayeeAdd_Msg("Payee ID can not be empty.")
         }
@@ -208,6 +209,7 @@ const Profile = () => {
             user_id_checkpayee: loginID,
             check_payee_id: payeeAdd_ID
         }).then((checkresult) =>{
+            //If yes, update component to display the error message
             if(checkresult.data != ''){
                 setPayeeAdd_Msg("Payee already registered on your list.")
             }else{
@@ -222,10 +224,12 @@ const Profile = () => {
                             add_payee_id: payeeAdd_ID,
                             add_payee_name: payeeAdd_Name
                         })
+                        //turn the payee_add Boolean into False, in order to close the form
                         switch_payee_add()
                     }else{
                         setPayeeAdd_Msg("Payee ID does not exist.")
                     }
+                    //call the function of getting payee information for rendering the Profile page
                     get_payee()
                 })
             }
@@ -235,6 +239,7 @@ const Profile = () => {
     //delete payee
     const delete_payee = (payeeID) => {
         var payee_ID = payeeID
+        //perform DELETE in database row
         Axios.post("http://localhost:3005/profile/delete_payee", {
             user_id_deletepayee: loginID,
             payee_id: payee_ID})
@@ -251,11 +256,13 @@ const Profile = () => {
             user_id_checkpassword: loginID,
             input_password: userCurrentPassword})
         .then((response_enable2FA) => {
+            //If yes, the backend should response as "Check Password Passed"
             if (response_enable2FA.data === "Check Password Passed"){
                 //update database status of 2FA
                 Axios.post("http://localhost:3005/profile/enable_2FA",{user_id_enable2FA: loginID})
-                .then(setUser2FA(!user2FA))
+                .then(setUser2FA(!user2FA)) //update component state for page rendering (display 2FA is enabled)
                 setcheckPasswordFailMsg("")
+            //If no, update component state for displaying error message
             }else{
                 setcheckPasswordFailMsg("Password Incorrect, please try it again")
             }
@@ -294,16 +301,19 @@ const Profile = () => {
             user_id_checkpassword: loginID,
             input_password: userOldPassword})
             .then((response_resetpassword) => {
+                //If yes
                 if (response_resetpassword.data === "Check Password Passed"){
                     //update password
                     Axios.post("http://localhost:3005/account/change_password",{
                         newpassword: userNewPassword,
                         targetEmail: userEmail
                     }).then(() => {
+                        //show alert to user
                         window.alert("Password changed successful")
                         window.location.href = '/profile';
                     })
                 }else{
+                    //If no, update component to display error message
                     return setResetPasswordMsg("Incorrect Old Passowrd.")
                 }
             })
@@ -318,12 +328,15 @@ const Profile = () => {
         }).then((response_deleteaccount) => {
             if (response_deleteaccount.data === "Check Password Passed"){
                 //check confirmation input
+                //If incorrect, update component to display error message
                 if (userTerminateConfirm != "terminate my account"){
                     return setUserTerminateMsg('Incorrect verification by input "terminate my account".')
                 }else{
                     //terminate account by delete row in database
                     Axios.post("http://localhost:3005/account/delete_account",{user_id_deleteaccount:loginID})
+                    //alert user
                     window.alert("Account Terminated.\nAny problem, please contact: rudyyen.work@gmail.com")
+                    //destory cookie
                     logout()
                 }
             }else{
@@ -438,7 +451,9 @@ const Profile = () => {
                                 <div className="profile_credit">Credit Rating <i className="fas fa-info-circle" onClick={() => set_credit_button(!credit_button)}/></div>
                                 <div className="profile_userdata">{userCredit}</div>
                             </div>
-                        { credit_button ? (<div className="profile_credit_info">Credit Rating is the evaluation of user credit risk based on the user's balance and debt. See more detail on <a href="/feature" >Here</a>.</div>) : ""}
+                        { credit_button ? 
+                            (<div className="profile_credit_info">Credit Rating is the evaluation of user credit risk based on the user's balance and debt. See more detail on <a href="/feature" >Here</a>.</div>) 
+                            : ""}
                         </div>
                         }
 
@@ -447,7 +462,9 @@ const Profile = () => {
                             <div className="profile_payee_information">
                                 <div className="profile_payee_id">Payee ID</div>
                                 <div className="profile_payee_name">Payee Name</div>
-                                <div className="profile_payee_edit" onClick={() => switch_payee_add()}><div className="profile_payee_edittxt">Add </div><i className="fas fa-plus-square"></i></div>
+                                <div className="profile_payee_edit" onClick={() => switch_payee_add()}>
+                                    <div className="profile_payee_edittxt">Add </div><i className="fas fa-plus-square"></i>
+                                </div>
                             </div>
                             {userPayee.map((data, key) => {
                                 return(

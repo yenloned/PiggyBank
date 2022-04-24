@@ -18,7 +18,9 @@ const Deposit = () => {
     const [deposit_amount, setDeposit_Amount] = useState(0)
     const [deposit_Msg, setDeposit_Msg] = useState("")
 
+    //check input > check user balance > deposit
     const deposit = () =>{
+        //check if the input make sense before sending it into backend
         if (deposit_amount <= 0){
             return setDeposit_Msg("Invalid input for deposit")
         }
@@ -31,6 +33,7 @@ const Deposit = () => {
         if (deposit_amount > 10000000){
             return setDeposit_Msg("Deposit amount is too large")
         }
+        //deposit money into user account
         Axios.post("http://localhost:3005/function/deposit",{
         deposit_userid: loginID,
         deposit_amount: deposit_amount})

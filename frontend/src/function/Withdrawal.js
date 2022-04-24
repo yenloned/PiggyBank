@@ -18,7 +18,9 @@ const Withdrawal = () => {
     const [withdrawal_amount, setWithdrawal_Amount] = useState(0)
     const [withdrawal_Msg, setWithdrawal_Msg] = useState("")
 
+    //check input > check user balance > withdrawal
     const check_amount = () =>{
+        //check if the input makes sense before sending into backend
         if (withdrawal_amount <= 0){
             return setWithdrawal_Msg("Invalid withdrawal amount")
         }
@@ -28,15 +30,18 @@ const Withdrawal = () => {
         if (withdrawal_amount % 100){
             return setWithdrawal_Msg("Withdrawal amount should be the multiple of HKD100")
         }
+        //check if user have enough money to perform withdrawal
         Axios.post("http://localhost:3005/profile/check_balance",{
         payerID: loginID,
         check_amount: withdrawal_amount})
         .then((response) =>{
+            //If yes, perform withdrawal
             if (response.data.length > 0){
                 Axios.post("http://localhost:3005/function/withdrawal",{
                 withdrawal_userid: loginID,
                 withdrawal_amount: withdrawal_amount})
             }else{
+                //If no, update component to display error message
                 return setWithdrawal_Msg("You don't have enough money!")
             }
         })

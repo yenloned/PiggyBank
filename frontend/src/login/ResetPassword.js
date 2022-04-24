@@ -29,19 +29,26 @@ const ResetPassword = () => {
     
     const SendEmail = async () => {
         try{
+        //check if the Email Address is registered in database
         await Axios.post('http://localhost:3005/account/registered',{
             cemail: email
         }).then((response) =>{
+            //If yes, the SELECT result will have length that > 0
             if(response.data[0]){
+                //Clean the placeholder
                 document.getElementById('resetemail_input').value = ''
+                //set the useState component for page rendering to next page (code Verification)
                 setEmailSent(true);
+                //let backend generate the verification code and store it in database
                 Axios.post('http://localhost:3005/account/store_code', {
                     storeEmail: email
                 }).then (() => {
+                    //SELECT the verification code from database and send it with Email
                     Axios.post("http://localhost:3005/email/reset_email", {
                         targetemail: email,
                     })
                 })
+            //If no, set the useState component for page rendering to display error message
             }else{
                 setEmailSent(false)
                 setEmailMsg("This email address is invalid / not registered in database.")
@@ -53,13 +60,16 @@ const ResetPassword = () => {
     }
 
     const checkCode = () => {
+        //check if the code user inputted is the same as the database stored
         Axios.post('http://localhost:3005/account/check_code',{
         code: code,
         user_email: email
         }).then((response) => {
+            //If yes, change component status for page rendering to next page (reset Password)
             if(response.data){
                 setIsCodeValid(true)
                 setCodeMsg("")
+            //If no, set the useState component for page rendering to display error message 
             }else{
                 setCodeMsg("Incorrect verification code, please try again.")
             }
@@ -67,25 +77,26 @@ const ResetPassword = () => {
     }
 
     const ChangePassword = () => {
+        //password requirement vaildation before sending it into backend
         if (newpassword !== newconfirmpassword){
-            setChangePasswordMsg("New Password and Cofirm New  Password does not match.")
+            return setChangePasswordMsg("New Password and Cofirm New  Password does not match.")
         }
         if (newpassword.length < 8){
-            setChangePasswordMsg("New Password should be at least 8characters long.")
+            return setChangePasswordMsg("New Password should be at least 8characters long.")
         }
-        if (newpassword === newconfirmpassword && newpassword.length >= 8){
+        //update password in database
         Axios.post("http://localhost:3005/account/change_password",{
             targetEmail: email,
             newpassword: newpassword
             }).then((response) =>{
                 if (response){
+                    //sending a notification email to the Email Address for security alert
                     Axios.post("http://localhost:3005/email/notice_email",{
                     noticeEmail: email,
                     })
                     navigate('/login')
                 }
             })
-        }
     }
 
 
@@ -110,7 +121,9 @@ const ResetPassword = () => {
                             <button className="regbutton" onClick={SendEmail}> Submit </button>
                         </div>
                     </div>
-                    ) : (
+                    )
+                    : 
+                    (
                     <div>
                     <div className="logintitle">{!isCodeValid ? "Verification" : "Reset Password"}</div>
                         {!isCodeValid ? <img src={postbox} alt="" width='150px' /> : <img src={resetpassword} alt="" width='150px' />}
@@ -119,10 +132,10 @@ const ResetPassword = () => {
                                 {!isCodeValid ?
                                 "Verification code has been sent to "+ email : ""}
                             </div>
-                                {!isCodeValid ?
-                                <input type="text" placeholder="Verification Code" onChange={(e) => {
-                                    setCode(e.target.value);
-                                }} className="codeType"/>
+                            {!isCodeValid ?
+                            <input type="text" placeholder="Verification Code" onChange={(e) => {
+                                setCode(e.target.value);
+                            }} className="codeType"/>
                             :
                             <div>
                                 <div className="password">

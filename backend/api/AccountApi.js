@@ -61,15 +61,18 @@ const db_user = mysql.createConnection({
 //register
 router.post('/register', (req, res) => {
 
+    //input parameter
     const email = req.body.email
     const password = req.body.password
     const firstname = req.body.firstname
     const lastname = req.body.lastname
 
+    //hash the input password (with salt as saltRoute)
     bcrypt.hash(password, saltRoute, (err, hashedpw) => {
         if (err){
             res.send(err)
         }
+        //insert the hashed password instead of the password input from parameter
         db_user.query("INSERT INTO user (email, password, firstname, lastname) VALUES (?,?,?,?)", 
             [email, hashedpw, firstname, lastname], (err, result) => {
                 res.send(err);
@@ -122,30 +125,41 @@ router.get("/loggedin", (req, res) => {
 //login
 router.post('/login', (req, res) => {
 
+    //input parameter
     const email = req.body.email;
     const password = req.body.password;
 
+    //check if the email really exist
     db_user.query("SELECT * FROM user WHERE email = ?;", 
             email, (err, result) => {
                 if (err){
                     res.send(err);
                 }
-
+                
+                //If yes, there will be result (length > 0); If no, there will be no result (length = 0)
+                //length > 0
                 if (result.length > 0){
+                    //compare the input password and the hashed password stored in database
+                    //comparedresult will be a Boolean
                     bcrypt.compare(password, result[0].password, (err,comparedresult) =>{
+                        //If success, cookie session and JWT token will be signed and assigned to user
                         if (comparedresult){
 
                             const user_id = result[0].user_id
                             const jwttoken = jwt.sign({user_id}, jwt_secret, {
                                 expiresIn: 7200,
                             })
+                            //assign cookie
                             req.session.user = result;
 
+                            //assign jwt
                             res.json({auth: true, token: jwttoken, result: result});
+                        //If fail, response as authenication fail
                         }else{
                             res.json({auth: false});
                         }
                     })
+                //length = 0, response as authnication fail
                 }else{
                     res.json({auth: false})
                 }
@@ -159,9 +173,11 @@ router.get('/logout', function(req, res) {
 
 //store verification code
  router.post("/store_code", (req,res) => {
+    //generate random code
     const storeCode = Math.floor(Math.random() * (999999 - 100000) + 100000)
     const storeEmail = req.body.storeEmail
 
+    //store the generated random code into the database's user column
     db_user.query("UPDATE user SET verification = ? WHERE email = ?;", 
     [storeCode, storeEmail], (err, result) => {
         res.send(result);

@@ -43,14 +43,15 @@ const db_user = mysql.createConnection({
     database: "user"
 });
 
-
+//Since the database is stored with the random code, now it will be sent to user's inputted Email Address
 router.post("/reset_email", cors(), (req,res) => {
     const targetemail = req.body.targetemail
 
+    //take the verification code from database
     db_user.query("SELECT verification FROM user WHERE email = ?", 
     targetemail, (err, result) => {
-        if (err){return}
         const randomcode = result[0]["verification"]
+        //send it through SMTP Server by nodemailer
         transport.sendMail({
             from:"piggybank.noreply@gmail.com",
             to:targetemail,

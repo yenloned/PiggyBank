@@ -31,16 +31,19 @@ export default function Login(){
         }
     })
 
+    //login
     const login_post = () => {
         Axios.post('http://localhost:3005/account/login', {
             email: email, 
             password: password,
 
         }).then((response) => {
-
+            //login success
             if (response.data.auth) {
                 setLoginStatus(true)
+                //jwt
                 localStorage.setItem("token", response.data.token)
+            //login fail, display error message by component render
             }else{
                 setLoginDisplay("Email Address / Password does not exist")
                 setLoginStatus(false)
@@ -48,6 +51,7 @@ export default function Login(){
         })
     }
 
+    //JWT Token, will be implemented in the future
     const userAuth = () => {
         Axios.get("http://localhost:3005/account/auth", {
             headers: {
@@ -58,32 +62,43 @@ export default function Login(){
         })
     }
 
+    //check if the user has enabled 2FA
     const login_check_2FA_status = () => {
+        //SELECT the 2FA status from database by user ID
         Axios.post("http://localhost:3005/account/check_2FA", {
             user_email: email
         }).then((result) =>{
+            //If the 2FA status is True, which means it is enabled
             if (result.data){
+                //change the useState component in order to render the page (code Verification)
                 setLoginAuth(true)
+                //generate random code in backend and store it in database
                 Axios.post('http://localhost:3005/account/store_code', {
                     storeEmail: email
                 }).then (() => {
+                    //SELECT the verification code and send it to Email (registered one)
                     Axios.post("http://localhost:3005/email/reset_email", {
                         targetemail: email,
                     })
                 })
+            //If it is not enabled, just perform login process
             }else{
                 login_post()
             }
         })
     }
 
+    //check if the user input match the verification code stored in database
     const login_check_2FA = () => {
         Axios.post("http://localhost:3005/account/check_code", {
             code: code,
             user_email: email
         }).then((response) => {
+            //If success, the SELECT result will have length > 0, which means True in Boolean
             if(response.data){
+                //perform login process
                 login_post()
+            //If fail, update component status to dispaly the error message
             }else{
                 setLogin2FAMsg("Incorrect verification code, please try again.")
             }

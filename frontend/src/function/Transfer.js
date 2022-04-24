@@ -25,39 +25,48 @@ const Transfer = () =>{
     const [transfer_amount, setTransfer_Amount] = useState(0)
     const [transfer_errormsg, setTransfer_Errormsg] = useState("")
 
+    //get Payee Information by user ID
     const get_payee = () => {
         Axios.post("http://localhost:3005/profile/get_payee",{
         searchingID: loginID})
         .then((response) => {
             if (response.data){
+                //input all of them into the component for frontend display
                 setUserPayee(response.data)
             }
         })
     }
 
+    //update component status to render the page according to user choice (By Payee ID)
     const transfer_by_payee = () =>{
         get_payee()
         setTransferChoice("by_payee")
     }
 
+    //update component status to render the page according to user choice (By ID)
     const transfer_by_id = () => {
         get_payee()
         setTransferChoice("by_id")
     }
 
+    //check if user exist before performing the money transfer
     const check_user = () =>{
         Axios.post("http://localhost:3005/profile/check_user",{
         payee_id_checkuser: transfer_payee
         }).then((checkuser_result) =>{
+            //If it is existed, perform transfer_money
             if(checkuser_result.data != ''){
                 transfer_money()
+            //If no, update component to display the error message
             }else{
                 setTransfer_Errormsg("Payee ID does not exist.")
             }
         })
     }
 
+    //transfer the money to target
     const transfer_money = () =>{
+        //check if the transfer amount make sense before sending it to backend
         if (transfer_payee == loginID){
             return setTransfer_Errormsg("You can not transfer money to yourself.")
         }
@@ -70,16 +79,19 @@ const Transfer = () =>{
         if (transfer_amount > 100000000){
             return setTransfer_Errormsg("Transaction amount is too large.")
         }
+        //check if user have enough balance to transfer that amount
         Axios.post("http://localhost:3005/profile/check_balance",{
         payerID: loginID,
         check_amount: transfer_amount})
         .then((response) =>{
+            //If yes, do the transfer
             if (response.data.length > 0){
                 console.log("OK")
                 Axios.post("http://localhost:3005/function/transfer",{
                 transfer_payerID: loginID,
                 transfer_amount: transfer_amount,
                 transfer_payeeID: transfer_payee})
+            //If no, update component to display error message
             }else{
                 return setTransfer_Errormsg("You don't have enough money!")
             }

@@ -27,53 +27,60 @@ const Register = () => {
     const [mask, setMask] = useState(true);
     const [mask2, setMask2] = useState(true);
 
-    
+    //regular experssion
     const emailRegex = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
     const infoRegex = /^[a-zA-Z0-9 ]+$/
+
+    //icon toggle for masking/showing the password
     const PasswordToggle = () => {setMask(!mask)}
     const ConfirmPasswordToggle = () => {setMask2(!mask2)}
 
+
+    //check if password meet requirements by regular experssion
     const checkReg = async () => {
         setPasswordMsg("")
         setEmailMsg("")
         setuserInfoMsg("")
         setConfirmPasswordMsg("")
 
+        //check if the account(Email) is already registered
         Axios.post('http://localhost:3005/account/registered',{
             cemail: emailReg
         }).then((response) =>{
+            //If yes, update component to display error message
             if(response.data[0]){
-                setEmailMsg("Email Address already existed.")
+                return setEmailMsg("Email Address already existed.")
             }
         })
 
+        //password requirement by conditional statement
         if (Confirmpassword !== passwordReg){
-            setConfirmPasswordMsg("Password and confirm password does not match.")}
+            return setConfirmPasswordMsg("Password and confirm password does not match.")}
         if(!passwordReg){
-            setPasswordMsg("Password is required.")}
+            return setPasswordMsg("Password is required.")}
         if (!emailReg){
-            setEmailMsg("Email Adress is required.")}
+            return setEmailMsg("Email Adress is required.")}
         if (!firstnameReg || !lastnameReg){
-            setuserInfoMsg("User Information is required.")
+            return setuserInfoMsg("User Information is required.")
         }else{
         if(passwordReg.length < 8){
-            setPasswordMsg("Password should be at least 8characters long.")}
+            return setPasswordMsg("Password should be at least 8characters long.")}
         if(!emailRegex.test(emailReg)){
-            setEmailMsg("Email Address is invalid.")}
+            return setEmailMsg("Email Address is invalid.")}
         if(!infoRegex.test(firstnameReg) || !infoRegex.test(lastnameReg)){
-            setuserInfoMsg("User Information should not contain any special characters except space.")}
+            return setuserInfoMsg("User Information should not contain any special characters except space.")}
         else if(firstnameReg.length > 30 || lastnameReg.length > 20){
-            setuserInfoMsg("User Information is too long.")}
+            return setuserInfoMsg("User Information is too long.")}
 
-        if (passwordReg.length >= 8 && emailRegex.test(emailReg) && infoRegex.test(firstnameReg) && infoRegex.test(lastnameReg) && firstnameReg.length < 30 && lastnameReg.length < 20 && Confirmpassword === passwordReg){
+            //If everything ok, perform the register function
             register_post()
-            }
     
         }
     }
 
+    //acount register
     const register_post = () => {
-
+        //input the user information to register account
         Axios.post('http://localhost:3005/account/register', {
             email: emailReg, 
             password: passwordReg,
@@ -81,6 +88,7 @@ const Register = () => {
             lastname: lastnameReg,
         }).then((response) => {
             if (!response.data){
+                //redirect to Login page if success
                 navigate('/login')
             }
         })
