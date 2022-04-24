@@ -1,3 +1,5 @@
+//Store the elements used to display in the navigation bar
+//list of objects
 export const NavItem = [
     {
         title: 'Home',

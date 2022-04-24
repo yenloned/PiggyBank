@@ -63,7 +63,9 @@
 .menu-icon{
     display: none;
 }
-
+/*  hidden the elements shown on the right side of navigation bar, display the menu button.
+    In this point, the navigation bar will be displayed for phone user.
+    The elements get from NavItem.js will now only display after clicking the menu button. */
 @media screen and (max-width:1014px) {
     .navbar {
         position: sticky;

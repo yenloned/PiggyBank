@@ -262,7 +262,7 @@ const Profile = () => {
                 Axios.post("http://localhost:3005/profile/enable_2FA",{user_id_enable2FA: loginID})
                 .then(setUser2FA(!user2FA)) //update component state for page rendering (display 2FA is enabled)
                 setcheckPasswordFailMsg("")
-            //If no, update component state for displaying error message
+            //If no, update component status for displaying error message
             }else{
                 setcheckPasswordFailMsg("Password Incorrect, please try it again")
             }
@@ -276,11 +276,14 @@ const Profile = () => {
             user_id_checkpassword: loginID,
             input_password: userCurrentPassword})
         .then((response_disable2FA) => {
+            //If yes
             if (response_disable2FA.data === "Check Password Passed"){
                 //update database status of 2FA
                 Axios.post("http://localhost:3005/profile/disable_2FA",{user_id_disable2FA: loginID})
                 .then(setUser2FA(!user2FA))
+                //reset the error message
                 setcheckPasswordFailMsg("")
+            //If no, update component to display error message
             }else{
                 setcheckPasswordFailMsg("Password Incorrect, please try it again")
             }
@@ -387,6 +390,8 @@ const Profile = () => {
                     <div className="AccountContainerRow3">
 
                         {profile_button === "information" &&
+                        /*  This is the information page.
+                            User information will be displayed by the components saved from useEffect functions.*/
                         <div className="profile_information">
                             <div className="profile_firstname">Firstname </div>
                             <div className="profile_userdata">{userFirstName}</div>
@@ -401,6 +406,10 @@ const Profile = () => {
                         </div>}
 
                         {profile_button === "billing" &&
+                        /*  This is the Billing page.
+                            Subsription information (development status) and Transaction History will be displayed by the components.
+                            Transaction History will be displayed by the conditional statement for checking if user have any.
+                            Then using map method to show all of them as a list of objects.*/
                         <div className="profile_billing">
                             <div className="profile_billing_plan">
                                 <div className="profile_billing_topic">Subscription</div>
@@ -439,6 +448,10 @@ const Profile = () => {
                         </div>}
 
                         {profile_button === "balance" &&
+                        /*  This is the Balance page.
+                            Debt information and Credit will be displayed by the functions and components.
+                            "View Detail" will redirect user to Debt page for more detail.
+                            Credit will be dispalyed according to the componenets which defined by backend calculation.*/
                         <div>
                             <div className="profile_information">
                                 <div className="profile_balance">Balance </div>
@@ -458,6 +471,8 @@ const Profile = () => {
                         }
 
                         {profile_button === "payee" &&
+                        /*  This is the Payee page.
+                            */
                         <div id="payee">
                             <div className="profile_payee_information">
                                 <div className="profile_payee_id">Payee ID</div>
@@ -496,6 +511,8 @@ const Profile = () => {
                         </div>}
 
                         {profile_button === "security" &&
+                        /*  This is the Security page.
+                            */
                         <div className="profile_security">
                             <div className="profile_2FA">Two Factor Authenication</div>
                             <div className="profile_2FA_txt">Two-factor authentication (2FA) is a security control by additional verifcation. See more detail on <a href="feature">Here</a>.</div>
@@ -537,6 +554,8 @@ const Profile = () => {
                         </div>}
 
                         {profile_button === "dangerzone" &&
+                        /*  This is the Dangerzone page.
+                            */
                         <div className="profile_dangerzone_information">
                             <div className="profile_terminate">Terminate Account</div>
                             <div className="profile_warning">WARNING: Please be noticed that all your information will be deleted once you terminate your account.</div>

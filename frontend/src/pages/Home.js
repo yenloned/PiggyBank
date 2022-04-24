@@ -21,18 +21,20 @@ const Home = () => {
     const [userLastName, setUserLastName] = useState("");
 
     useEffect( () => {
-        
+        //get user information
         async function GetInformation(){
         await Axios.post("http://localhost:3005/profile/get_info",{
         searchingID: loginID})
         .then((response) => {
             if (response.data){
+                //save them into components
                 setUserFirstName(response.data[0].firstname);
                 setUserLastName(response.data[0].lastname);
                 }
             })
         }
         if (loginStatus){
+            //get the information by calling the function
             GetInformation()
         }
     })

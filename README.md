@@ -12,12 +12,14 @@ ReactJS, CSS, NodeJS, ExpressJS, MySQL, Axios, Bcrypt
 Running FrontEnd (ReactJS)
 ```node
 cd frontend
+npm install
 npm start
 ```
 
 Running BackEnd (NodeJs)
 ```node
 cd backend
+npm install
 node index.js
 ```
 
@@ -36,7 +38,6 @@ Open [http://localhost:3000](http://localhost:3000) and you will see the page ap
 * Deposit
 * Loan
 * Insurance
-* E-Statement
 #### Features
 * Password Hashing
 * Forgot Password
@@ -47,6 +48,7 @@ Open [http://localhost:3000](http://localhost:3000) and you will see the page ap
 * Transaction History
 * Credit Scoring
 * Interest / Loan Calculator
+* Debt
 * FAQ Page
 
 

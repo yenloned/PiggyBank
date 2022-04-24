@@ -5,6 +5,9 @@ import forgotpassword from "../material/pictures/forgot-password.png";
 import resetpassword from "../material/pictures/reset-password.png";
 import postbox from "../material/pictures/postbox.png";
 
+import "./login.css";
+import "./register.css";
+
 const ResetPassword = () => {
 
     const navigate = useNavigate()
@@ -77,7 +80,7 @@ const ResetPassword = () => {
     }
 
     const ChangePassword = () => {
-        //password requirement vaildation before sending it into backend
+        //perform password requirement vaildation before sending it into backend
         if (newpassword !== newconfirmpassword){
             return setChangePasswordMsg("New Password and Cofirm New  Password does not match.")
         }
