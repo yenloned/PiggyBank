@@ -1,0 +1,24 @@
+.history_block{
+    background-color: rgb(35, 35, 35);
+    margin: 1rem 0;
+    padding: 1rem 3rem;
+    font-size: calc(17.5px + 0.85vw);
+    font-family: 'Hind', sans-serif;
+    color: rgb(255, 216, 40);
+}
+
+.history_row1, .history_row2{
+    display: flex;
+    justify-content: space-between;
+}
+
+.history_data{
+    color:rgb(220, 220, 228);
+    font-size: calc(16.5px + 0.85vw);
+}
+
+@media screen and (max-width:500px) {
+    .history_row1, .history_row2{
+        flex-direction: column;
+    }
+}

@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import Axios from "axios";
 import './profile.css';
 
+import no_history from "../material/pictures/no_history.png"
+
 import {LoginStatusContext} from "../context/LoginContext";
 import {LoginIDContext} from "../context/LoginContext";
 import {userPayeeContext} from "../context/UserContext";
@@ -63,8 +65,9 @@ const Profile = () => {
         }
     })
 
-    //get user information by useEffect, then save them into accordance components
+    
     useEffect( () => {
+        //get user information by useEffect, then save them into accordance components
         const GetInformation = async () =>{
             await Axios.post("http://localhost:3005/profile/get_info",{
             searchingID: loginID})
@@ -90,6 +93,7 @@ const Profile = () => {
 
     //Some components in page need to be reset back to default
 
+    //switching pages to billing by component state change
     const switch_billing = () =>{
         set_profile_button("billing")
         get_history()
@@ -418,10 +422,11 @@ const Profile = () => {
                                     <div className="profile_plan_type">Type</div>
                                     <div className="profile_plan_date">Date</div>
                                 </div>
-                                <div className="profile_billing_data">HKD {userBalance}</div>
                             </div>
                             <div className="profile_billing_history">
-                                <div className="profile_billing_topic">Transaction History</div>
+                                <div className="profile_billing_topic" onClick={() => navigate("/history") }>
+                                    <a>Transaction History <i className="fa-solid fa-arrow-right-long"></i></a>
+                                </div>
                                 {userHistory.length ?
                                 <div>
                                     <div className="profile_billing_Row">
@@ -433,16 +438,23 @@ const Profile = () => {
                                     {userHistory.map((data, key) => {
                                         return(
                                             <div className="profile_billing_Row" key={key}>
-                                                <div className="profile_billing_data">HKD {data.amount}</div>
+                                                <div className="profile_billing_data">
+                                                    HKD 
+                                                    {data.type == "Transfer" && data.fromwho == loginID
+                                                    ?
+                                                    (-data.amount) : (data.amount)}</div>
                                                 <div className="profile_billing_data">{data.type}</div>
-                                                <div className="profile_billing_data">{data.date.slice(0,10)}</div>
+                                                <div className="profile_billing_data">{data.date.split(',')[0]}</div>
                                             </div>
                                             )
                                         })}
                                     </div>
                                 </div>
                                 :
-                                ""
+                                <div className="profile_no_history">
+                                    <img loading="lazy" src={no_history} width='128' alt=""/>
+                                    <div>You don't have any Transaction History.</div>
+                                </div>
                                 }
                             </div>
                         </div>}
@@ -472,7 +484,8 @@ const Profile = () => {
 
                         {profile_button === "payee" &&
                         /*  This is the Payee page.
-                            */
+                            Payee Registeration by map method and component render can be performed here
+                            The change of component status will render what it display by the conditional statement*/
                         <div id="payee">
                             <div className="profile_payee_information">
                                 <div className="profile_payee_id">Payee ID</div>
@@ -512,6 +525,9 @@ const Profile = () => {
 
                         {profile_button === "security" &&
                         /*  This is the Security page.
+                            User can toggle the status of Two Factor Authenication (Enable/Disable).
+                            Also, user can change their password here.
+                            The change of component status will render what it display by the conditional statement.
                             */
                         <div className="profile_security">
                             <div className="profile_2FA">Two Factor Authenication</div>
@@ -555,6 +571,7 @@ const Profile = () => {
 
                         {profile_button === "dangerzone" &&
                         /*  This is the Dangerzone page.
+                            User can terminate their account here.
                             */
                         <div className="profile_dangerzone_information">
                             <div className="profile_terminate">Terminate Account</div>

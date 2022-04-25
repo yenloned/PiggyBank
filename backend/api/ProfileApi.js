@@ -48,7 +48,8 @@ router.post("/get_info", (req,res) => {
 router.post("/get_history", (req, res) =>{
     const searchingID = req.body.searchingID
 
-    db_user.query("SELECT * FROM history WHERE fromwho = ? OR towho = ?;",
+    //descending order by reference number, which display as First In Last Out
+    db_user.query("SELECT * FROM history WHERE fromwho = ? OR towho = ? ORDER BY ref DESC;",
     [searchingID, searchingID], (err, result) =>{
         res.send(result)
     })

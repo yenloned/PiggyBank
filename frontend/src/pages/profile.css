@@ -46,6 +46,13 @@
     font-size: calc(13.5px + 0.65vw);
 }
 
+.profile_no_history{
+    color: rgb(220, 220, 228);
+    text-align: center;
+    margin-top: 3rem;
+    font-size: calc(12px + 0.75vw);
+}
+
 .AccountContainerRow3{
     padding: 1rem 0rem 2rem 0rem;
     font-size: calc(14.5px + 0.85vw);
@@ -75,6 +82,10 @@
 .profile_billing_topic{
     border-bottom: 1.5px solid;
     margin-bottom: 0.5rem;
+}
+
+.profile_billing_topic a{
+    cursor: pointer;
 }
 
 .profile_billing_history_block{
@@ -272,7 +283,7 @@
 }
 
 .account_operation_title{
-    font-size: calc(13.5px + 1vw);
+    font-size: calc(16px + 0.8vw);
     font-family: 'PT Sans', sans-serif;
     padding-bottom: 1rem;
 }

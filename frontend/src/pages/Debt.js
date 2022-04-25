@@ -117,7 +117,7 @@ const Debt = () => {
                     <img loading="lazy" src={without_debt} width='300' alt=""/>
                 </div>
                 <div className="debt_notexist_txt">
-                    Well, look like you don't have any debt so far.
+                    Well, look like you don't have any Debt so far.
                 </div>
                 <div className="debt_notexist_goback">
                     <button><a href="/profile">Back to Profile</a></button>
