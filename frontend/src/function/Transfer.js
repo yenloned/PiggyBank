@@ -94,6 +94,8 @@ const Transfer = () =>{
                 transfer_payerID: loginID,
                 transfer_amount: transfer_amount,
                 transfer_payeeID: transfer_payee})
+                //redirect user to transaction history page after the money transfer
+                window.location.replace('/history')
             //If no, update component to display error message
             }else{
                 return setTransfer_Errormsg("You don't have enough money!")
@@ -108,6 +110,8 @@ const Transfer = () =>{
     })
 
     return(
+        /*  Component will be used for transfer choice in the beginning along with conditional statement
+            Then, each page may contain other components for page rendering, like amount, payee selected*/
         <div className="transfer">
             { transferChoice === "" &&
             <div className="transfer_choice_container">

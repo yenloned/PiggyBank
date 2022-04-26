@@ -36,16 +36,17 @@ const History = () => {
                 if (history.data.length){
                     //update component to store all history sent from backend
                     setUserHistory(history.data)
-                    console.log(history.data)
                 }
             })
         }
     })
 
     return (
+        /*  Component is used to determine if showing the transaction history to user
+            map method is used to display all information from a list of objects */
         <div className="Profile">
             <div className="debt_topic">
-                <i className="fas fa-arrow-alt-circle-left" onClick={()=> navigate("/profile")}></i> Transaction History
+                <a href="/profile"><i className="fas fa-arrow-alt-circle-left"></i> Transaction History</a>
             </div>
             {userHistory.length
             ?

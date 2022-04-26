@@ -36,12 +36,14 @@ const Debt = () => {
         })
     }
 
+    //get debt information once user enter the page
     useEffect(() => {
         if (!userDebt.length){
             GetDebt()
         }
     })
 
+    //redirect user if he is not logined
     useLayoutEffect(() => {
         if (!loginStatus){
             navigate('/login')
@@ -80,6 +82,10 @@ const Debt = () => {
 
 
     return (
+        /*  Component usage to display the debt information and error message
+            Conditional statement is used to determine if showing the debt information and error message
+            map method used to display all debt information from the list of objects (component)
+            function of pay debt is implemented with data validation and balance checking*/
         <div className="Profile">
         {loginStatus && userDebt ? (
             <div>
@@ -99,7 +105,7 @@ const Debt = () => {
                         <div className="profile_userdata">HKD {String(data.monthly)}</div>
                         <div className="profile_userdata">{String(data.tenor)} Months</div>
                         <div className="profile_userdata">{String(data.type)}</div>
-                        <div className="profile_userdata">{String(data.date.slice(0,10))}</div>
+                        <div className="profile_userdata">{String(data.date.split(',')[0])}</div>
                         <div className="debt_paybutton">
                             <div className="debt_paytxt" onClick={()=> paydebt(data.ref)}>Pay Debt </div>
                         </div>

@@ -36,14 +36,15 @@ export default function Login(){
         Axios.post('http://localhost:3005/account/login', {
             email: email, 
             password: password,
-
+        //the login prcoess in real case will be creating cookie and session, which will be performed in backend
         }).then((response) => {
-            //login success
+            //If login success
             if (response.data.auth) {
+                //change share component status
                 setLoginStatus(true)
-                //jwt
+                //jwt token store in localStorage
                 localStorage.setItem("token", response.data.token)
-            //login fail, display error message by component render
+            //If login fail, display error message by component render
             }else{
                 setLoginDisplay("Email Address / Password does not exist")
                 setLoginStatus(false)
@@ -105,10 +106,11 @@ export default function Login(){
         })
     }
 
+    //component for toggle the masking / showing of password text
     const [mask, setMask] = useState(true)
 
+    //the toggle function, called when user click the eye icon
     const PasswordToggle = () => {
-    
         setMask(!mask)
     }
     

@@ -1,5 +1,9 @@
 import React, {useState, useEffect, useContext} from "react";
 import Axios from "axios";
+
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+
 import './home.css'
 import './respondMedia.css'
 import goldpiggy from '../material/pictures/goldpiggy.jpg';
@@ -21,6 +25,7 @@ const Home = () => {
     const [userLastName, setUserLastName] = useState("");
 
     useEffect( () => {
+        AOS.init({duration: 800})
         //get user information
         async function GetInformation(){
         await Axios.post("http://localhost:3005/profile/get_info",{
@@ -43,13 +48,13 @@ const Home = () => {
         <div className="home">
             <div className="pig">
                 <div className="homeheader">
-                    <div className="headerimg">
+                    <div data-aos="slide-left" className="headerimg">
                         <img src={goldpiggy} width='700' alt="goldpiggy"/>
                         <br/>
                     </div>
                     <div className="headertitle">
                         PIGGYBANK
-                        <div className="headertxt">
+                        <div data-aos="fade-down" className="headertxt">
                             <div className="headerline1">
                                 <i className="fas fa-coins"></i>Transaction and Withdrawal
                             </div>
@@ -79,10 +84,10 @@ const Home = () => {
             </div>
             <div className="homeContainer">
                 <div className="homeDisplayBlock">
-                    <div className="homeLeftGrid">
+                    <div data-aos="slide-right" data-aos-once="true" className="homeLeftGrid">
                         <img src={alwayshere} alt="alwayshere"/>
                     </div>
-                    <div className="homeLeftGridTxt">
+                    <div data-aos="slide-left" data-aos-once="true" className="homeLeftGridTxt">
                         <div className="homeLeftGridHeader">
                             PiggyBank is always here
                         </div>
@@ -90,21 +95,21 @@ const Home = () => {
                             Unlike traditional banks, you can browse PiggyBank anytime you want. As PiggyBank is hosted online and running 24x7, the limitation brought by time and geography is broken. You can use our bank services anytime and anywhere you want. View more <a href="/about">About PiggyBank</a> here.
                         </div>
                     </div>
-                    <div className="homeRightGridTxt">
+                    <div data-aos="slide-right" data-aos-once="true" className="homeRightGridTxt">
                         <div className="homeRightGridHeader">
                             More features, Less complex
                         </div>
                         <div className="homeRightGridBody">
-                        PiggyBank is the generation of creativity and innovation. We provide various helpful and special features, which improve the user experience and comprehensive function in different aspects. You can view more details of <a href="/feature">Feature</a> here.
+                            PiggyBank is the generation of creativity and innovation. We provide various helpful and special features, which improve the user experience and comprehensive function in different aspects. You can view more details of <a href="/feature">Feature</a> here.
                         </div>
                     </div>
-                    <div className="homeRightGrid">
+                    <div data-aos="slide-left" data-aos-once="true" className="homeRightGrid">
                         <img src={lesscomplex} alt="lesscomplex"/>
                     </div>
-                    <div className="homeLeftGrid">
+                    <div data-aos="slide-right" data-aos-once="true" className="homeLeftGrid">
                         <img src={wecare} alt="wecare"/>
                     </div>
-                    <div className="homeLeftGridTxt">
+                    <div data-aos="slide-left" data-aos-once="true" className="homeLeftGridTxt">
                         <div className="homeLeftGridHeader">
                             PiggyBank cares about you
                         </div>
@@ -112,20 +117,20 @@ const Home = () => {
                             At PiggyBank, we care about what you care about, especially your data security and privacy protection. Therefore, we developed a series of <a href="/feature#security">Security Controls</a> and <a href="/privacy">Privacy policies</a>, in order to provide the best and most reliable services.
                         </div>
                     </div>
-                    <div className="homeRightGridTxt">
+                    <div data-aos="slide-right" data-aos-once="true" className="homeRightGridTxt">
                         <div className="homeRightGridHeader">
                             Less confusion, More friendly
                         </div>
                         <div className="homeRightGridBody">
-                        To offer the best user experience, PiggyBank makes sure you have no difficulties and confusion during usage. You can visit our <a href="/support=general">FAQ Page</a> for a handy solution to any obstacles. We would wish you have an enjoyable experience here.
+                            To offer the best user experience, PiggyBank makes sure you have no difficulties and confusion during usage. You can visit our <a href="/support=general">FAQ Page</a> for a handy solution to any obstacles. We would wish you have an enjoyable experience here.
                         </div>
                     </div>
-                    <div className="homeRightGrid">
+                    <div data-aos="slide-left" data-aos-once="true" className="homeRightGrid">
                         <img src={tohelp} alt="tohelp"/>
                     </div>
                 </div>
             </div>
-            <div className="homeContainer1">
+            <div data-aos="fade-down" data-aos-once="true" className="homeContainer1">
                 <div className="homeDisplayBlock1">
                     <div className="homeDisplayImg"><i className="fa-solid fa-money-bill-transfer"></i></div>
                     <div className="homeDisplayTxt">

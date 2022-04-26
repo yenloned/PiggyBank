@@ -102,10 +102,6 @@
         display: flex;
         flex-direction: column;
     }
-    .homeLeftGrid img, .homeRightGrid img{
-        max-width: 660px;
-        max-height: 407px;
-    }
     .homeRightGrid img{
         margin-bottom: 2rem;
     }

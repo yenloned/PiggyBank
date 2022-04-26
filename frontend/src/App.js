@@ -44,18 +44,26 @@ function App() {
   Axios.defaults.withCredentials = true;
 
     useEffect(()=> {
+      //check if user have logined (by cookie session)
         Axios.get("http://localhost:3005/account/loggedin")
         .then((response) => {
+              //store user login status into component, which is shared with other files
               setLoginStatus(response.data.loggedIn);
+            //if user is logined
             if (response.data.user){
+              //store user login idenitity into component, which is shared with other files
               setLoginID(response.data.user[0].user_id)
+            //if user is not logined
             }else{
+              //store 0 as user login idenitity into component
               setLoginID(0)
             }
         })
     })
 
   return (
+    /*It provides a router function for all the other files.
+      Also perform as a useContext Provider which share the useContext component status to other files. */
     <BrowserRouter>
     <LoginStatusContext.Provider value={{loginStatus, setLoginStatus}}>
       <LoginIDContext.Provider value={{loginID, setLoginID}}>

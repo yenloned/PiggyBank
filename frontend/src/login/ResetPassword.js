@@ -26,6 +26,7 @@ const ResetPassword = () => {
     const [mask, setMask] = useState(true);
     const [mask2, setMask2] = useState(true);
     
+    //icon toggle for masking/showing the password
     const PasswordToggle = () => {setMask(!mask)}
     const ConfirmPasswordToggle = () => {setMask2(!mask2)}
     
@@ -104,6 +105,10 @@ const ResetPassword = () => {
 
 
     return (
+        /*  Component usage for 3pages rendering: 
+        -   is Email sent? (first page > second page)
+        -   is the input code correct? (second page > third page)
+            each pages will contain their functions for data validation and backend operation*/
         <div className="login">
             <div className="regContainer">
                 {!emailSent ? (

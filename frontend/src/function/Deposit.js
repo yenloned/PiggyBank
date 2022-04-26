@@ -37,6 +37,8 @@ const Deposit = () => {
         Axios.post("http://localhost:3005/function/deposit",{
         deposit_userid: loginID,
         deposit_amount: deposit_amount})
+        //redirect user to transaction history page after the deposit
+        window.location.replace('/history')
     }
 
     useLayoutEffect(() => {

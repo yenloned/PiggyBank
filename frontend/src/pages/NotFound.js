@@ -6,7 +6,7 @@ import Footer from '../comps/Footer';
 
 const NotFound = () => {
     return (
-        <React.Fragment>
+        <div className="notfound">
         <h1>
             404 Not Found.<br/>Page Not Exist.<br/>
             <img src={notfound} alt="" width='300px' /><br/>
@@ -24,7 +24,7 @@ const NotFound = () => {
              </h1>
          </div>
          < Footer />
-         </React.Fragment>
+         </div>
     )
 }
 

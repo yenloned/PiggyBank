@@ -10,4 +10,16 @@ footer{
     grid-template-columns: 2fr 1fr 1fr 1fr 3fr;
 }
 
+body::-webkit-scrollbar{
+    background-color:rgb(25, 25, 25);
+}
+
+body::-webkit-scrollbar-thumb{
+    background-color:rgb(255, 223, 79);
+    border: 5px solid rgb(25, 25, 25);
+    border-radius: 25px;
+}
+
+
+
 

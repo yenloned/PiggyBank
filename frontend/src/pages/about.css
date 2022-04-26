@@ -1,5 +1,6 @@
 .about{
     font-family: 'Fira Sans', sans-serif;
+    overflow-x: hidden;
 }
 .about_header{
     width: 100vw;

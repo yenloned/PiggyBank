@@ -1,5 +1,8 @@
-import React from "react";
+import React, {useEffect} from "react";
 import "./about.css"
+
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 import react from "../material/about/react.png"
 import css from "../material/about/css.png"
@@ -13,6 +16,11 @@ import contact from "../material/about/contact.svg"
 import Footer from '../comps/Footer';
 
 const About = () => {
+
+    useEffect(() => {
+        AOS.init({duration: 800})
+    }, [])
+
     return (
         <div className="about">
             <div className="about_header">
@@ -30,7 +38,7 @@ const About = () => {
                 <div className="dev_txt2">
                     PIGGYBank uses modern technologies for web application development in a full-stack architecture. <d2-light>ReactJS</d2-light> and <d2-light>CSS</d2-light> are used for the fully responsive design and client-side components usage. On the other hand, <d2-light>NodeJS</d2-light> and <d2-light>ExpressJS</d2-light> are used for the backend application as RESTful API, with <d2-light>MySQL</d2-light> Database performing CRUD Operation in data management.
                 </div>
-                <div className="dev_showitem">
+                <div data-aos="zoom-out" data-aos-once="true" className="dev_showitem">
                     <div>
                         <div className="dev_react">
                             <img src={react} width='150' alt=""/>
@@ -61,7 +69,7 @@ const About = () => {
                     Who owns PiggyBank
                 </div>
                 <div className="who_content">
-                    <div className="who_icon">
+                    <div data-aos="zoom-out" data-aos-once="true" className="who_icon">
                         <img src={about_icon} width='300' alt=""/>
                     </div>
                     <div className="who_txt">
@@ -84,7 +92,7 @@ const About = () => {
                     Contact PiggyBank
                 </div>
                 <div className="contact_content">
-                    <div className="contact_png">
+                    <div data-aos="zoom-out" data-aos-once="true" className="contact_png">
                         <img src={contact} width='750' alt=""/>
                     </div>
                     <div className="contact_inputform">

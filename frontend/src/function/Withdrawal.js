@@ -40,6 +40,8 @@ const Withdrawal = () => {
                 Axios.post("http://localhost:3005/function/withdrawal",{
                 withdrawal_userid: loginID,
                 withdrawal_amount: withdrawal_amount})
+                //redirect user to transaction history page after the withdrawal
+                window.location.replace('/history')
             }else{
                 //If no, update component to display error message
                 return setWithdrawal_Msg("You don't have enough money!")

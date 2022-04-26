@@ -1,3 +1,6 @@
+.notfound{
+    overflow-x: hidden;
+}
 .homebutton{
     background-color: black;
     text-decoration: none;

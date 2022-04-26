@@ -4,6 +4,7 @@
     margin: 2rem 10rem;
     padding: 2rem 5rem;
     color: rgb(255, 223, 79);
+    overflow: hidden;
 }
 
 .AccountContainer1{
@@ -92,6 +93,16 @@
     overflow-y: auto;
     height: calc(100px + 5vh);
     overflow: "scroll";
+}
+
+.profile_billing_history_block::-webkit-scrollbar{
+    background-color:rgb(25, 25, 25);
+}
+
+.profile_billing_history_block::-webkit-scrollbar-thumb{
+    background-color:rgb(255, 223, 79);
+    border: 5px solid rgb(25, 25, 25);
+    border-radius: 25px;
 }
 
 .profile_billing_data{
