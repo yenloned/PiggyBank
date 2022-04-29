@@ -1,0 +1,299 @@
+.service{
+    overflow-x: hidden;
+    color: rgb(255, 223, 79);
+}
+
+.service_topic{
+    font-family: 'Fira Sans', sans-serif;
+    font-weight: bolder;
+    font-size: calc(25px + 1.2vw);
+    margin: 10vw 10vw 5vw 10vw;
+    padding: 0vw 5vw 5vw 0vw;
+    border-bottom: 1.5px solid;
+}
+
+.service_title{
+    font-family: 'PT Sans', sans-serif;
+    font-size: calc(25px + 0.8vw);
+    margin-bottom: 3rem;
+    font-weight: bolder;
+}
+
+.service_bank_operation, .service_loan{
+    text-align: center;
+    margin: 0 10vw 10vw 10vw;
+}
+
+.service_operation_container, .service_loan_container{
+    display: flex;
+    justify-content: space-around;
+}
+
+.service_loan_container{
+    gap: 5rem;
+}
+
+.service_operation_block{
+    padding: 2rem;
+    width: 400px;
+    background-color: rgb(0,0,0);
+    cursor: pointer;
+}
+
+.service_operation_block:hover{
+    transition: all 0.3s ease-out;
+    box-shadow: 0px 0px 2px 4px rgb(255, 223, 79);
+    transform: translateY(-10%);
+}
+
+.service_block_title{
+    font-family: 'Hind', sans-serif;
+    font-size: calc(16px + 0.8vw);
+}
+
+.service_block_list{
+    font-family: 'Hind', sans-serif;
+    font-size: calc(14px + 0.5vw);
+    text-align: left;
+    position: absolute;
+    width: 80%;
+    transition: ease-in 200ms;
+}
+
+.service_block_list i{
+    color: rgb(255, 223, 79);
+    font-size: calc(12px + 0.5vw);
+}
+
+
+.service_operation_block:hover > .service_block_container > .service_block_list{
+    opacity: 0;
+}
+
+.service_operation_block:hover > .service_block_container > .service_block_txt{
+    opacity: 1;
+}
+
+.service_block_txt{
+    color:rgb(220, 220, 228);
+    font-size: calc(14.5px + 0.35vw);
+    font-family: 'Heebo', sans-serif;
+    text-align: justify;
+    opacity: 0;
+    transition: ease-in 200ms;
+}
+
+.service_loan_block{
+    width: 350px;
+}
+
+.service_loan_txt{
+    color:rgb(220, 220, 228);
+    font-size: calc(14.5px + 0.35vw);
+    font-family: 'Heebo', sans-serif;
+    text-align: left;
+}
+
+.service_loan_txt a{
+    color: rgb(255, 230, 118);
+}
+
+.service_loan_demotxt{
+    font-family: 'Hind', sans-serif;
+    margin: 3vw;
+    color:rgb(230, 230, 238);
+    font-size: calc(15px + 0.4vw);
+}
+
+.service_loan_calculator{
+    font-family: 'Hind', sans-serif;
+    background: linear-gradient(360deg, rgb(0, 0, 0) 0%, rgb(26, 26, 26) 100%);
+    margin: 0 10vw 0 10vw;
+    border-top: 2px solid; 
+    border-radius: 20px;
+}
+
+.calculator_title{
+    font-size: calc(18px + 0.8vw);
+    padding: 3rem 0 0 0;
+    margin: 0 10vw 2rem 10vw;
+    border-bottom: 2px solid;
+}
+
+.calculator_title2{
+    color: rgb(255, 223, 79);
+    font-size: calc(16px + 0.75vw);
+}
+
+.calculator_content{
+    color:rgb(220, 220, 228);
+    font-size: calc(15px + 0.6vw);
+}
+
+.calculator_content input{
+    -moz-appearance: textfield;
+    color: rgb(220, 220, 228);
+    text-align: center;
+    font-size: calc(16px + 0.6vw);
+    background-color: rgb(25,25,25);
+    padding: 0.3rem;
+    border: 1px solid;
+    margin-bottom: 1.5rem;
+    width: 8rem;
+    font-weight: bold;
+}
+
+.calculator_content input::-webkit-inner-spin-button, 
+.calculator_content input::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
+
+.calculator_slider_range{
+    width: 38vw;
+    -webkit-appearance: none;
+    appearance: none;
+    background: rgb(220, 220, 228);
+    border-radius: 30px;
+    border: 2px solid rgb(255, 196, 0);
+}
+
+.calculator_slider_range::-webkit-slider-thumb{
+    -webkit-appearance: none;
+    appearance: none;
+    width: 25px;
+    height: 25px;
+    border-radius: 25px;
+    box-shadow: 0 0 4px 8px rgb(255, 223, 79);
+    background: rgb(250,250,250);
+    cursor: pointer;
+}
+
+.calculator_slider_range::-moz-range-thumb{
+    -webkit-appearance: none;
+    appearance: none;
+    width: 25px;
+    height: 25px;
+    border-radius: 25px;
+    box-shadow: 0 0 4px 8px rgb(255, 223, 79);
+    background: rgb(250,250,250);
+    cursor: pointer;
+}
+
+.calculator_range_num{
+    display: flex;
+    justify-content: space-between;
+    margin: 0 12vw 2rem 12vw;
+}
+
+.calculator_result_title{
+    text-align: left;
+}
+
+.calculator_result{
+    margin-top: 2rem;
+    display: flex;
+    justify-content: center;
+    gap: calc(2rem + 5vw);
+}
+
+.calculator_result_block{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: calc(16px + 0.6vw);
+}
+
+.calculator_result_data{
+    color: rgb(220, 220, 228);
+    font-size: calc(16px + 0.6vw);
+    background-color: rgb(25,25,25);
+    padding: 0.1rem;
+    border: 1px solid;
+    margin-bottom: 1.5rem;
+    min-width: 7rem;
+    font-weight: bold;
+}
+
+.calculator_monthly_repayment{
+    font-size: calc(28px + 0.8vw);
+    font-weight: bold;
+}
+
+.calculator_claim{
+    text-align: justify;
+    color: rgb(220, 220, 228);
+    margin: 0 12vw;
+    padding-bottom: 2rem;
+}
+
+@media screen and (max-width:1523px) {
+    .service_block_title{
+        text-align: left;
+    }
+    .service_operation_container{
+        flex-direction: column;
+        gap: 2rem;
+    }
+    .service_operation_block{
+        display: flex;
+        width: 100%;
+    }
+    .service_block_container{
+        margin: 0 0 0 10vw;
+    }
+    .service_loan_container{
+        align-items: center;
+        flex-wrap: wrap;
+    }
+    .service_loan_block{
+        flex: 1 0 40%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+@media screen and (max-width:1300px) {
+    .service_loan_calculator{
+        margin: 5vw 5vw 0 5vw;
+    }
+}
+
+@media screen and (max-width:1000px) {
+    .service_loan_calculator{
+        margin: 5vw 2vw 0 2vw;
+    }
+    .service_loan{
+        margin: 0 5vw 10vw 5vw;
+    }
+    .calculator_slider_range{
+        width: 60vw;
+    }
+}
+
+@media screen and (max-width:740px) {
+    .service_block_title{
+        text-align: center;
+    }
+    .service_operation_block{
+        display: block;
+    }
+    .service_block_container{
+        margin: 0;
+    }
+    .service_loan_block{
+        width: 300px;
+    }
+}
+
+@media screen and (max-width:650px) {
+    .service_loan_calculator{
+        margin: 5vw 0 0 0;
+    }
+    .calculator_result{
+        flex-direction: column;
+        gap: 0rem;
+    }
+}
+
