@@ -12,15 +12,47 @@ import high_amount from "../material/pictures/high_amount.png"
 import long_duration from "../material/pictures/long_duration.png"
 import no_fee from "../material/pictures/no_fee.png"
 
+import accident_insurance from "../material/pictures/accident_insurance.png"
+import cancer_insurance from "../material/pictures/cancer_insurance.png"
+import life_insurance from "../material/pictures/life_insurance.png"
+
 import Footer from '../comps/Footer';
 
 const Service = () => {
-
+    
+    //loan
     const [calculatorAmount, setCalculatorAmount] = useState(10000)
     const [calculatorTenor, setCalculatorTenor] = useState(3)
     const [calculatorAPR, setCalculatorAPR] = useState(1.67)
     const [calculatorMFR, setCalculatorMFR] = useState(calculatorAPR/(calculatorTenor*1.9))
     const [calculatorHandlingFee, setCalculatorHandlingFee] = useState(1*(calculatorAmount/1500000))
+    //insurance
+    const [insuranceChoice, setInsuranceChoice] = useState("Life")
+    const [insuranceGender, setInsuranceGender] = useState("male")
+    const [insuranceSmoking, setInsuranceSmoking] = useState(false)
+    const [insuranceAge, setInsuranceAge] = useState(18)
+    const [insuranceAmount, setInsuranceAmount] = useState(200000)
+    const [insuranceHighest, setInsuranceHighest] = useState(10000000)
+
+    const switchingGender = (switchID, disableID, gender) => {
+        const turnOn = document.getElementById(switchID)
+        turnOn.style.background = "rgb(255, 223, 79)";
+        turnOn.style.color = "rgb(25,25,25)";
+        const turnOff = document.getElementById(disableID)
+        turnOff.style.background = "none";
+        turnOff.style.color = "rgb(255, 223, 79)";
+        setInsuranceGender(gender)
+    }
+
+    const switchingSmoke = (switchID, disableID, smokingStatus) => {
+        const turnOn = document.getElementById(switchID)
+        turnOn.style.background = "rgb(255, 223, 79)";
+        turnOn.style.color = "rgb(25,25,25)";
+        const turnOff = document.getElementById(disableID)
+        turnOff.style.background = "none";
+        turnOff.style.color = "rgb(255, 223, 79)";
+        setInsuranceSmoking(smokingStatus)
+    }
 
     useEffect( () => {
         AOS.init({duration: 600})
@@ -180,6 +212,10 @@ const Service = () => {
                             <input type="range" min="1.67" max="100" value={calculatorAPR} step="0.01"
                             onChange={(e) => {setCalculatorAPR(e.target.value);}} className="calculator_slider_range"/>
                         </div>
+                        <div className="calculator_range_num">
+                            <div>1.67%</div>
+                            <div>100%</div>
+                        </div>
                     </div>
                     <div data-aos="fade-in">
                         <div className="calculator_result">
@@ -216,6 +252,103 @@ const Service = () => {
                         </div>
                     </div>
                 </div>
+                <div data-aos="zoom-in">
+                    <button className="service_get_started">
+                        <a href="/loan">Apply Now</a>
+                    </button>
+                </div>
+            </div>
+            <div className="service_insurance">
+                <div className="service_title">
+                    Insurance
+                </div>
+                <div className="service_insurance_subtitle">
+                    PiggyBank provides 3 major fields of Insurance to guard your wealth, health, and family.
+                </div>
+                <div className="service_insurance_choice">
+                    <div className="service_insurance_block" onClick={() => setInsuranceChoice("Life")}>
+                        <div><img data-aos="zoom-in" src={life_insurance} width='192' alt=""/></div>
+                        <div className="service_block_title">Life Term Insurance</div>
+                        <div className="service_insurance_txt">
+                            Life Term Insurance is a lifelong subscription as long as payment is settled.
+                            The Beneficiary will receive a death benefit if the insured person dies in the period of subscription. Assured amount could be <a>up to HKD 10,000,000</a>.
+                        </div>
+                    </div>
+                    <div className="service_insurance_block" onClick={() => setInsuranceChoice("Cancer")}>
+                        <div><img data-aos="zoom-in" src={cancer_insurance} width='192' alt=""/></div>
+                        <div className="service_block_title">Cancer Insurance</div>
+                        <div className="service_insurance_txt">
+                            Cancer Insurance would fully cover the medical cost of diagnosis, treatment, recovery, and terminal for any kind of cancer.
+                            3 Benefit Options can be chosen which have the most coverage costs <a>up to HKD 3,000,000</a>.
+                        </div>
+                    </div>
+                    <div className="service_insurance_block" onClick={() => setInsuranceChoice("Accident")}>
+                        <div><img data-aos="zoom-in" src={accident_insurance} width='192' alt=""/></div>
+                        <div className="service_block_title">Accident Insurance</div>
+                        <div className="service_insurance_txt">
+                            Accident Insurance covers the medical cost of accidents like outpatient treatment, inpatient treatment, and surgery.
+                            Covers 700+ Job positions like drivers, construction workers, and fitness trainers. Assured amount could be <a>up to HKD 500,000</a> annually.
+                        </div>
+                    </div>
+                </div>
+                <div className="service_insurance_calculator">
+                    {insuranceChoice === "Life" && 
+                    <div>
+                        <div className="calculator_title">
+                            <select onChange={(e) => {setInsuranceChoice(e.target.value)}}>
+                                <option selected="selected">Life Term Insurance</option>
+                                <option>Cancer Insurance</option>
+                                <option>Accident Insurance</option>
+                            </select>
+                        </div>
+                        <div className="calculator_info">
+                            <div className="insurance_gender">
+                                <div>Gender</div>
+                                <div className="insurance_choice">
+                                    <div className="gender_male" onClick={() => switchingGender("insurance_gender_male", "insurance_gender_female", "male")}>
+                                        <i className="fa-solid fa-person" id="insurance_gender_male"></i>
+                                    </div>
+                                    <div className="gender_female" onClick={() => switchingGender("insurance_gender_female", "insurance_gender_male", "female")}>
+                                        <i className="fa-solid fa-person-dress" id="insurance_gender_female"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="insurance_smoke">
+                                <div>Smoking Status</div>
+                                <div className="insurance_choice">
+                                    <div className="smoke_yes" onClick={() => switchingSmoke("insurance_smoking_yes", "insurance_smoking_no", true)}>
+                                    <i class="fa-regular fa-circle-check" id="insurance_smoking_yes"></i>
+                                    </div>
+                                    <div className="smoke_no" onClick={() => switchingSmoke("insurance_smoking_no", "insurance_smoking_yes", false)}>
+                                        <i className="fa-regular fa-circle-xmark" id="insurance_smoking_no"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="insurance_age">
+                            <div className="calculator_title2">Age</div>
+                            <div className="calculator_slider">
+                                <input type="range" min="18" max="65" value={insuranceAge} step="1"
+                                onChange={(e) => {setInsuranceAge(e.target.value);}} className="calculator_slider_range"/>
+                            </div>
+                            <div className="calculator_range_num">
+                                <div>18 Years Old</div>
+                                <div>65 Years Old</div>
+                            </div>
+                        </div>
+                        <div className="calculator_title2">Assured Amount (HKD)</div>
+                        <div className="calculator_slider">
+                            <input type="range" min="200000" max={insuranceHighest} value={insuranceAmount} step="50000"
+                            onChange={(e) => {setInsuranceAmount(e.target.value);}} className="calculator_slider_range"/>
+                        </div>
+                        <div className="calculator_range_num">
+                            <div>HKD 200,000</div>
+                            <div>HKD {insuranceHighest.toLocaleString()}</div>
+                        </div>
+                    </div>
+                    }
+                </div>
+                {insuranceChoice}
             </div>
         <Footer />
         </div>
