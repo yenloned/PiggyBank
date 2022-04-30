@@ -36,7 +36,7 @@
 .service_operation_block{
     padding: 2rem;
     width: 400px;
-    background-color: rgb(0,0,0);
+    background-color: rgb(18,18,18);
     cursor: pointer;
 }
 
@@ -106,9 +106,9 @@
     color: rgb(255, 230, 118);
 }
 
-.service_loan_demotxt{
+.service_demotxt{
     font-family: 'Hind', sans-serif;
-    margin: 3vw;
+    margin: 3rem 3vw 1rem 3vw;
     color:rgb(230, 230, 238);
     font-size: calc(15px + 0.4vw);
 }
@@ -116,7 +116,7 @@
 .service_loan_calculator{
     font-family: 'Hind', sans-serif;
     background: linear-gradient(360deg, rgb(0, 0, 0) 0%, rgb(26, 26, 26) 100%);
-    margin: 0 10vw;
+    margin: 2.5rem 10vw 0 10vw;
     border-top: 2px solid; 
     border-radius: 20px;
 }
@@ -138,7 +138,7 @@
     font-size: calc(15px + 0.6vw);
 }
 
-.calculator_content input{
+.calculator_content input, .insurance_data input{
     -moz-appearance: textfield;
     color: rgb(220, 220, 228);
     text-align: center;
@@ -147,12 +147,15 @@
     padding: 0.3rem;
     border: 1px solid;
     margin-bottom: 1.5rem;
-    width: 8rem;
+    min-width: 8rem;
+    max-width: 10rem;
     font-weight: bold;
 }
 
 .calculator_content input::-webkit-inner-spin-button, 
-.calculator_content input::-webkit-outer-spin-button { 
+.calculator_content input::-webkit-outer-spin-button,
+.insurance_data input::-webkit-inner-spin-button, 
+.insurance_data input::-webkit-outer-spin-button { 
   -webkit-appearance: none; 
   margin: 0; 
 }
@@ -194,6 +197,10 @@
     margin: 0 12vw 2rem 12vw;
 }
 
+.service_insurance_calculator .calculator_range_num{
+    margin: 0 6vw 2rem 6vw;
+}
+
 .calculator_result_title{
     text-align: left;
 }
@@ -224,15 +231,20 @@
 }
 
 .calculator_monthly_repayment{
+    color: rgb(230, 230, 232);
     font-size: calc(28px + 0.8vw);
     font-weight: bold;
 }
 
-.calculator_claim{
+.calculator_claim, .loan_calculator_claim{
     text-align: justify;
     color: rgb(220, 220, 228);
     margin: 0 12vw;
     padding-bottom: 2rem;
+}
+
+.loan_calculator_claim{
+    margin: 0 8vw;
 }
 
 .service_get_started{
@@ -275,7 +287,7 @@
 }
 
 .service_insurance_block{
-    background-color: rgb(35,35,35);
+    background-color: rgb(18,18,18);
     padding: 1.5rem;
     border: 2px solid rgb(255, 223, 79);
     cursor: pointer;
@@ -311,9 +323,9 @@
 
 .gender_male i, .gender_female i{
     cursor: pointer;
-    font-size: calc(25px + 0.8vw);
-    border: 4px solid;
-    padding: 0.3rem 0.6rem;
+    font-size: calc(15px + 0.8vw);
+    border: 3.5px solid;
+    padding: 0.3rem 0.5rem;
     border-radius: 50%;
 }
 
@@ -326,6 +338,24 @@
 .gender_male i, .smoke_no i{
     background-color: rgb(255, 223, 79);
     color: rgb(25,25,25);
+}
+
+.cancer_insurance_choice{
+    color: rgb(228, 228, 238);
+    font-size: calc(15px + 0.6vw);
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 3rem;
+}
+@media screen and (max-width:1600px) {
+    .service_insurance_choice{
+        flex-direction: column;
+    }
+    .service_insurance_block{
+        width: 100%;
+        display: flex;
+        gap: calc(2rem + 5vw);
+    }
 }
 
 @media screen and (max-width:1523px) {
@@ -365,7 +395,10 @@
     .service_loan_calculator{
         margin: 5vw 2vw 0 2vw;
     }
-    .service_loan{
+    .service_insurance_calculator{
+        margin: 7.5vw 4vw 0 4vw;
+    }
+    .service_loan, .service_insurance{
         margin: 0 5vw 10vw 5vw;
     }
     .calculator_slider_range{
@@ -391,6 +424,22 @@
     }
     .service_loan_txt{
         text-align: justify;
+    }
+    .service_insurance_choice{
+        align-items: center;
+        gap: 2.5rem;
+    }
+    .service_insurance_block{
+        flex-direction: column;
+        gap: 1rem;
+        width: 330px;
+    }
+    .service_insurance_block img{
+        width: 128px;
+    }
+    .cancer_insurance_choice{
+        display: flex;
+        flex-direction: column;
     }
 }
 

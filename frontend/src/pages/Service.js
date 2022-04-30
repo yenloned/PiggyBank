@@ -27,12 +27,22 @@ const Service = () => {
     const [calculatorMFR, setCalculatorMFR] = useState(calculatorAPR/(calculatorTenor*1.9))
     const [calculatorHandlingFee, setCalculatorHandlingFee] = useState(1*(calculatorAmount/1500000))
     //insurance
-    const [insuranceChoice, setInsuranceChoice] = useState("Life")
+    const [insuranceChoice, setInsuranceChoice] = useState("Life Term Insurance")
     const [insuranceGender, setInsuranceGender] = useState("male")
     const [insuranceSmoking, setInsuranceSmoking] = useState(false)
+    //life
     const [insuranceAge, setInsuranceAge] = useState(18)
-    const [insuranceAmount, setInsuranceAmount] = useState(200000)
+    const [lifeInsuranceAmount, setLifeInsuranceAmount] = useState(200000)
+    const [cancerInsuranceAmount, setCancerInsuranceAmount] = useState(0)
+    const [accidentInsuranceAmount, setAccidentInsuranceAmount] = useState(10000)
     const [insuranceHighest, setInsuranceHighest] = useState(10000000)
+    const [insuranceBonus, setInsuranceBonus] = useState(1)
+    //cancer
+    const [smokeCancerBonus, setSmokeCancerBonus] = useState(1)
+    //accident
+    const [accidentGender, setAccidentGender] = useState("male")
+    const [accidentBonus, setAccidentBonus] = useState(1)
+
 
     const switchingGender = (switchID, disableID, gender) => {
         const turnOn = document.getElementById(switchID)
@@ -42,6 +52,16 @@ const Service = () => {
         turnOff.style.background = "none";
         turnOff.style.color = "rgb(255, 223, 79)";
         setInsuranceGender(gender)
+    }
+
+    const switchingGender_Accident = (switchID, disableID, gender) => {
+        const turnOn = document.getElementById(switchID)
+        turnOn.style.background = "rgb(255, 223, 79)";
+        turnOn.style.color = "rgb(25,25,25)";
+        const turnOff = document.getElementById(disableID)
+        turnOff.style.background = "none";
+        turnOff.style.color = "rgb(255, 223, 79)";
+        setAccidentGender(gender)
     }
 
     const switchingSmoke = (switchID, disableID, smokingStatus) => {
@@ -60,6 +80,12 @@ const Service = () => {
         setCalculatorTenor(Math.floor(calculatorTenor))
         setCalculatorMFR(Math.floor(calculatorAPR/(calculatorTenor*1.9) * 100) / 100)
         setCalculatorHandlingFee(Math.floor(1*(calculatorAmount/1500000) * 100) / 100)
+
+        if (insuranceAge > 20){
+            setInsuranceHighest(12000000 - (Math.floor(insuranceAge / 10) - 1)* 2000000 )
+        }else{
+            setInsuranceHighest(10000000)
+        }
         if (calculatorAmount < 10000){
             setCalculatorAmount(10000)
         }else if(calculatorAmount > 1500000){
@@ -74,6 +100,38 @@ const Service = () => {
             setCalculatorAPR(1.67)
         }else if(calculatorAPR > 100){
             setCalculatorAPR(100)
+        }
+        //life
+        if (lifeInsuranceAmount < 200000){
+            setLifeInsuranceAmount(200000)
+        }else if (lifeInsuranceAmount > insuranceHighest){
+            setLifeInsuranceAmount(insuranceHighest)
+        }
+        if (insuranceSmoking && insuranceGender == "male"){
+            setInsuranceBonus(1.32)
+        }else if(insuranceSmoking){
+            setInsuranceBonus(1.28)
+        }else if (insuranceGender == "male"){
+            setInsuranceBonus(1.15)
+        }else{
+            setInsuranceBonus(1)
+        }
+        //cancer
+        if (insuranceSmoking){
+            setSmokeCancerBonus(1.5)
+        }else{
+            setSmokeCancerBonus(1)
+        }
+        //accident
+        if (accidentInsuranceAmount < 10000){
+            setAccidentInsuranceAmount(10000)
+        }else if (accidentInsuranceAmount > 500000){
+            setAccidentInsuranceAmount(500000)
+        }
+        if (accidentGender == "male"){
+            setAccidentBonus(1.33)
+        }else{
+            setAccidentBonus(1)
         }
     })
 
@@ -168,7 +226,7 @@ const Service = () => {
                         </div>
                     </div>
                 </div>
-                <div data-aos="zoom-in" className="service_loan_demotxt">
+                <div data-aos="zoom-in" className="service_demotxt">
                     YOU CAN TRY OUR DEMO IN THE LOAN CALCULATOR BELOW.
                 </div>
                 <div className="service_loan_calculator">
@@ -266,42 +324,47 @@ const Service = () => {
                     PiggyBank provides 3 major fields of Insurance to guard your wealth, health, and family.
                 </div>
                 <div className="service_insurance_choice">
-                    <div className="service_insurance_block" onClick={() => setInsuranceChoice("Life")}>
+                    <div className="service_insurance_block" onClick={() => setInsuranceChoice("Life Term Insurance")}>
                         <div><img data-aos="zoom-in" src={life_insurance} width='192' alt=""/></div>
-                        <div className="service_block_title">Life Term Insurance</div>
-                        <div className="service_insurance_txt">
-                            Life Term Insurance is a lifelong subscription as long as payment is settled.
-                            The Beneficiary will receive a death benefit if the insured person dies in the period of subscription. Assured amount could be <a>up to HKD 10,000,000</a>.
+                        <div className="insurance_block_content">
+                            <div className="service_block_title">Life Term Insurance</div>
+                            <div className="service_insurance_txt">
+                                Life Term Insurance is a lifelong subscription as long as payment is settled.
+                                The Beneficiary will receive a death benefit if the insured person dies in the period of subscription. Assured amount could be <a>up to HKD 10,000,000</a>.
+                            </div>
                         </div>
                     </div>
-                    <div className="service_insurance_block" onClick={() => setInsuranceChoice("Cancer")}>
+                    <div className="service_insurance_block" onClick={() => setInsuranceChoice("Cancer Insurance")}>
                         <div><img data-aos="zoom-in" src={cancer_insurance} width='192' alt=""/></div>
-                        <div className="service_block_title">Cancer Insurance</div>
-                        <div className="service_insurance_txt">
-                            Cancer Insurance would fully cover the medical cost of diagnosis, treatment, recovery, and terminal for any kind of cancer.
-                            3 Benefit Options can be chosen which have the most coverage costs <a>up to HKD 3,000,000</a>.
+                        <div className="insurance_block_content">
+                            <div className="service_block_title">Cancer Insurance</div>
+                            <div className="service_insurance_txt">
+                                Cancer Insurance would fully cover the medical cost of diagnosis, treatment, recovery, and terminal for any kind of cancer.
+                                3 Benefit Options can be chosen which have the most coverage costs <a>up to HKD 3,000,000</a>.
+                            </div>
                         </div>
                     </div>
-                    <div className="service_insurance_block" onClick={() => setInsuranceChoice("Accident")}>
+                    <div className="service_insurance_block" onClick={() => setInsuranceChoice("Accident Insurance")}>
                         <div><img data-aos="zoom-in" src={accident_insurance} width='192' alt=""/></div>
-                        <div className="service_block_title">Accident Insurance</div>
-                        <div className="service_insurance_txt">
-                            Accident Insurance covers the medical cost of accidents like outpatient treatment, inpatient treatment, and surgery.
-                            Covers 700+ Job positions like drivers, construction workers, and fitness trainers. Assured amount could be <a>up to HKD 500,000</a> annually.
+                        <div className="insurance_block_content">
+                            <div className="service_block_title">Accident Insurance</div>
+                            <div className="service_insurance_txt">
+                                Accident Insurance covers the medical cost of accidents like outpatient treatment, inpatient treatment, and surgery.
+                                Covers 700+ Job positions like drivers, construction workers, and fitness trainers. Assured amount could be <a>up to HKD 500,000</a> annually.
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div className="service_insurance_calculator">
-                    {insuranceChoice === "Life" && 
+                <div data-aos="zoom-in" className="service_demotxt">
+                    YOU CAN SELECT THE INSURANCE PLAN AND TRY OUR DEMO IN THE INSURANCE CALCULATOR BELOW.
+                </div>
+                <div className="service_insurance_calculator"> 
+                    <div className="calculator_title">
+                        {insuranceChoice}
+                    </div>
+                    {insuranceChoice == "Accident Insurance" ? "" :
                     <div>
-                        <div className="calculator_title">
-                            <select onChange={(e) => {setInsuranceChoice(e.target.value)}}>
-                                <option selected="selected">Life Term Insurance</option>
-                                <option>Cancer Insurance</option>
-                                <option>Accident Insurance</option>
-                            </select>
-                        </div>
-                        <div className="calculator_info">
+                        <div data-aos="fade-in" className="calculator_info">
                             <div className="insurance_gender">
                                 <div>Gender</div>
                                 <div className="insurance_choice">
@@ -317,7 +380,7 @@ const Service = () => {
                                 <div>Smoking Status</div>
                                 <div className="insurance_choice">
                                     <div className="smoke_yes" onClick={() => switchingSmoke("insurance_smoking_yes", "insurance_smoking_no", true)}>
-                                    <i class="fa-regular fa-circle-check" id="insurance_smoking_yes"></i>
+                                    <i className="fa-regular fa-circle-check" id="insurance_smoking_yes"></i>
                                     </div>
                                     <div className="smoke_no" onClick={() => switchingSmoke("insurance_smoking_no", "insurance_smoking_yes", false)}>
                                         <i className="fa-regular fa-circle-xmark" id="insurance_smoking_no"></i>
@@ -325,8 +388,15 @@ const Service = () => {
                                 </div>
                             </div>
                         </div>
-                        <div className="insurance_age">
+                    </div>
+                    }
+                    {insuranceChoice === "Life Term Insurance" &&
+                    <div>
+                        <div data-aos="fade-in" className="insurance_age">
                             <div className="calculator_title2">Age</div>
+                            <div className="insurance_data">
+                                <input type="number" onChange={(e) => {setInsuranceAge(e.target.value);}} value={insuranceAge} />
+                            </div>
                             <div className="calculator_slider">
                                 <input type="range" min="18" max="65" value={insuranceAge} step="1"
                                 onChange={(e) => {setInsuranceAge(e.target.value);}} className="calculator_slider_range"/>
@@ -336,19 +406,142 @@ const Service = () => {
                                 <div>65 Years Old</div>
                             </div>
                         </div>
-                        <div className="calculator_title2">Assured Amount (HKD)</div>
-                        <div className="calculator_slider">
-                            <input type="range" min="200000" max={insuranceHighest} value={insuranceAmount} step="50000"
-                            onChange={(e) => {setInsuranceAmount(e.target.value);}} className="calculator_slider_range"/>
+                        <div data-aos="fade-in">
+                            <div className="calculator_title2">Assured Amount (HKD)</div>
+                            <div className="insurance_data">
+                                <input type="number" onChange={(e) => {setLifeInsuranceAmount(e.target.value);}} value={lifeInsuranceAmount} />
+                            </div>
+                            <div className="calculator_slider">
+                                <input type="range" min="200000" max={insuranceHighest} value={lifeInsuranceAmount} step="50000"
+                                onChange={(e) => {setLifeInsuranceAmount(e.target.value);}} className="calculator_slider_range"/>
+                            </div>
+                            <div className="calculator_range_num">
+                                <div>HKD 200,000</div>
+                                <div>HKD {insuranceHighest.toLocaleString()}</div>
+                            </div>
                         </div>
-                        <div className="calculator_range_num">
-                            <div>HKD 200,000</div>
-                            <div>HKD {insuranceHighest.toLocaleString()}</div>
+                        <div data-aos="fade-in">
+                            <div className="calculator_title2">Monthly Repayment</div>
+                            <div className="calculator_monthly_repayment">
+                                HKD {Math.round(
+                                    (lifeInsuranceAmount * 1.025) * 0.000025 * insuranceBonus * ( ((insuranceAge) / 10) * Math.floor(Math.log(insuranceAge * 2) / Math.log(3-insuranceBonus) - 3) )
+                                    )}
+                            </div>
+                        </div>
+                        <div data-aos="fade-in" className="loan_calculator_claim">
+                            ** The monthly repayment amount and the monthly repayment shown in the above calculation are for illustrative purpose only.
+                            The actual premiums are affected by time, inflation, underwriting, Insurance Authority levies and other factors. <br/>
+                            ** The above demo calculation method would be following the statistical data on the age of death in gender and smoking population.
+                        </div>
+                    </div>
+                    }
+                    {insuranceChoice === "Cancer Insurance" && 
+                    <div>
+                        <div data-aos="fade-in" className="insurance_age">
+                            <div className="calculator_title2">Age</div>
+                            <div className="insurance_data">
+                                <input type="number" onChange={(e) => {setInsuranceAge(e.target.value);}} value={insuranceAge} />
+                            </div>
+                            <div className="calculator_slider">
+                                <input type="range" min="18" max="65" value={insuranceAge} step="1"
+                                onChange={(e) => {setInsuranceAge(e.target.value);}} className="calculator_slider_range"/>
+                            </div>
+                            <div className="calculator_range_num">
+                                <div>18 Years Old</div>
+                                <div>65 Years Old</div>
+                            </div>
+                        </div>
+                        <div data-aos="fade-in">
+                            <div className="calculator_title2">Assured Amount Options (HKD)</div>
+                            <div className="cancer_insurance_choice">
+                                <div><input type="radio" name="cancer_plans" id="cancer_plans" value="1000000" onChange={(e) => {setCancerInsuranceAmount(e.target.value);}}/> HKD 1,000,000</div>
+                                <div><input type="radio" name="cancer_plans" id="cancer_plans" value="2000000" onChange={(e) => {setCancerInsuranceAmount(e.target.value);}}/> HKD 2,000,000</div>
+                                <div><input type="radio" name="cancer_plans" id="cancer_plans" value="3000000" onChange={(e) => {setCancerInsuranceAmount(e.target.value);}}/> HKD 3,000,000</div>
+                            </div>
+                        </div>
+                        <div data-aos="fade-in">
+                            <div className="calculator_title2">Monthly Repayment</div>
+                            {cancerInsuranceAmount ?
+                            <div className="calculator_monthly_repayment">
+                            HKD {Math.round(
+                                (cancerInsuranceAmount * (cancerInsuranceAmount / 1250000 ) * 0.000025 * insuranceBonus * 
+                                (((insuranceAge) / 10)* Math.floor(Math.log(insuranceAge) / Math.log(3)) )
+                                ) * smokeCancerBonus
+                                )}
+                            </div>
+                            :
+                            <div className="calculator_monthly_repayment"> -- </div>
+                            }
+                            <div className="loan_calculator_claim">
+                                ** The monthly repayment amount and the monthly repayment shown in the above calculation are for illustrative purpose only.
+                                The actual premiums are affected by time, inflation, underwriting, Insurance Authority levies and other factors. <br/>
+                                ** The above demo calculation method would be following the statistical data on the age of cancer in gender and smoking population.
+                            </div>
+                        </div>
+                    </div>
+                    }
+                    {insuranceChoice == "Accident Insurance" &&
+                    <div>
+                        <div data-aos="fade-in" className="insurance_gender">
+                            <div className="calculator_title2">Gender</div>
+                            <div className="insurance_choice">
+                                <div className="gender_male" onClick={() => switchingGender_Accident("accident_male", "accident_female", "male")}>
+                                    <i className="fa-solid fa-person" id="accident_male"></i>
+                                </div>
+                                <div className="gender_female" onClick={() => switchingGender_Accident("accident_female", "accident_male", "female")}>
+                                    <i className="fa-solid fa-person-dress" id="accident_female"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div data-aos="fade-in" className="insurance_age">
+                            <div className="calculator_title2">Age</div>
+                            <div className="insurance_data">
+                                <input type="number" onChange={(e) => {setInsuranceAge(e.target.value);}} value={insuranceAge} />
+                            </div>
+                            <div className="calculator_slider">
+                                <input type="range" min="18" max="65" value={insuranceAge} step="1"
+                                onChange={(e) => {setInsuranceAge(e.target.value);}} className="calculator_slider_range"/>
+                            </div>
+                            <div className="calculator_range_num">
+                                <div>18 Years Old</div>
+                                <div>65 Years Old</div>
+                            </div>
+                            <div data-aos="fade-in">
+                                <div className="calculator_title2">Annual Assured Amount (HKD)</div>
+                                <div className="insurance_data">
+                                    <input type="number" onChange={(e) => {setAccidentInsuranceAmount(e.target.value);}} value={accidentInsuranceAmount} />
+                                </div>
+                                <div className="calculator_slider">
+                                    <input type="range" min="10000" max="500000" value={accidentInsuranceAmount} step="10000"
+                                    onChange={(e) => {setAccidentInsuranceAmount(e.target.value);}} className="calculator_slider_range"/>
+                                </div>
+                                <div className="calculator_range_num">
+                                    <div>HKD 10,000</div>
+                                    <div>HKD 500,000</div>
+                                </div>
+                            </div>
+                            <div data-aos="fade-in">
+                                <div className="calculator_title2">Monthly Repayment</div>
+                                <div className="calculator_monthly_repayment">
+                                    HKD {Math.round(
+                                        ( (accidentInsuranceAmount * 1.025) * 0.0015 * Math.ceil((insuranceAge) / 10) + 1 ) * accidentBonus
+                                        )}
+                                </div>
+                            </div>
+                            <div data-aos="fade-in" className="loan_calculator_claim">
+                                ** The monthly repayment amount and the monthly repayment shown in the above calculation are for illustrative purpose only.
+                                The actual premiums are affected by time, inflation, underwriting, Insurance Authority levies and other factors. <br/>
+                                ** The above demo calculation method would be following the statistical data on the career preference by gender and the possibility of injury frequent by age.
+                            </div>
                         </div>
                     </div>
                     }
                 </div>
-                {insuranceChoice}
+                <div data-aos="zoom-in">
+                <button className="service_get_started">
+                    <a href="/insurance">Apply Now</a>
+                </button>
+                </div>
             </div>
         <Footer />
         </div>
