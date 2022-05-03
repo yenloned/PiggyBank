@@ -52,17 +52,6 @@ export default function Login(){
         })
     }
 
-    //JWT Token, will be implemented in the future
-    const userAuth = () => {
-        Axios.get("http://localhost:3005/account/auth", {
-            headers: {
-                "x-access-token" : localStorage.getItem("token")
-            }
-        }).then((response) => {
-            console.log (response.data);
-        })
-    }
-
     //check if the user has enabled 2FA
     const login_check_2FA_status = () => {
         //SELECT the 2FA status from database by user ID

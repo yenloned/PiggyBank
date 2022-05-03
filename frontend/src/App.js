@@ -49,15 +49,26 @@ function App() {
         .then((response) => {
               //store user login status into component, which is shared with other files
               setLoginStatus(response.data.loggedIn);
-            //if user is logined
-            if (response.data.user){
-              //store user login idenitity into component, which is shared with other files
-              setLoginID(response.data.user[0].user_id)
-            //if user is not logined
-            }else{
-              //store 0 as user login idenitity into component
-              setLoginID(0)
-            }
+              //check along with JWT
+              Axios.get("http://localhost:3005/account/auth", {
+              headers: {
+                  "x-access-token" : localStorage.getItem("token")
+                }
+              }).then((JWTresponse) => {
+                  //JWT and cookie both passed, then login success
+                  if (JWTresponse.data === "User authed" && response.data.user){
+                    setLoginID(response.data.user[0].user_id)
+                  //only cookie passed, then logout (destory the cookie)
+                  }else if (response.data.user){
+                    Axios.get("http://localhost:3005/account/logout")
+                    window.location.reload();
+                    window.location("/login");
+                    setLoginID(0)
+                  //both failed
+                  }else{
+                    setLoginID(0)
+                  }
+              })
         })
     })
 
