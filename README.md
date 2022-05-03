@@ -47,7 +47,7 @@ Open [http://localhost:3000](http://localhost:3000) and you will see the page ap
 * Account Termination
 * Transaction History
 * Credit Scoring
-* Interest / Loan Calculator
+* Insurance / Loan Calculator
 * Debt
 * FAQ Page
 
