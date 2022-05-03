@@ -18,6 +18,7 @@ import Footer from '../comps/Footer';
 
 const Home = () => {
 
+
     const {loginStatus} = useContext(LoginStatusContext);
     const {loginID} = useContext(LoginIDContext);
 
@@ -54,7 +55,7 @@ const Home = () => {
                     </div>
                     <div className="headertitle">
                         PIGGYBANK
-                        <div data-aos="fade-down" className="headertxt">
+                        <div className="headertxt">
                             <div className="headerline1">
                                 <i className="fas fa-coins"></i>Transaction and Withdrawal
                             </div>
@@ -71,14 +72,17 @@ const Home = () => {
                                 <i className="fas fa-mobile-alt"></i> Mobile Friendly
                             </div>
                         </div>
-                        {loginStatus ? (
-                        <a className="homeWelcome">
-                             Welcome! {userFirstName} {userLastName}
-                        </a>) :(
-                        <a className="startbutton" href="/login">
-                             Get Started
-                        </a>
-                        )}
+                        <div data-aos="fade-down" data-aos-duration="1200">
+                            {loginStatus ? (
+                            <a className="homeWelcome">
+                                Welcome Back! {userFirstName} {userLastName}
+                            </a>
+                            ) :(
+                            <a className="startbutton" href="/login">
+                                Get Started
+                            </a>
+                            )}
+                        </div>
                     </div>
                 </div>
             </div>
@@ -131,96 +135,108 @@ const Home = () => {
                 </div>
             </div>
             <div data-aos="fade-down" data-aos-once="true" className="homeContainer1">
-                <div className="homeDisplayBlock1">
-                    <div className="homeDisplayImg"><i className="fa-solid fa-money-bill-transfer"></i></div>
-                    <div className="homeDisplayTxt">
-                        <div className="homeDisplayHeader">
-                            Transaction
-                        </div>
-                        Instant Transaction without handling fee.
-                        <div className="homeDisplayQuote">
-                            -- Time to pay back your friend for that dinner.
-                        </div>
-                        <div className="homeDisplayLearnMore">
-                            Learn more <i className="fas fa-angle-double-right"></i>
-                        </div>
-                    </div>
-                </div>
-                <div className="homeDisplayBlock1">
-                    <div className="homeDisplayImg"><i className="fa-solid fa-sack-dollar"></i></div>
-                    <div className="homeDisplayTxt">
-                        <div className="homeDisplayHeader">
-                            Withdrawal
-                        </div>
-                        Easy steps to take out money from PiggyBank.
-                        <div className="homeDisplayQuote">
-                            -- Cash is King!
-                        </div>
-                        <div className="homeDisplayLearnMore">
-                            Learn more <i className="fas fa-angle-double-right"></i>
+                <a href="/service#operation">
+                    <div className="homeDisplayBlock1">
+                        <div className="homeDisplayImg"><i className="fa-solid fa-money-bill-transfer"></i></div>
+                        <div className="homeDisplayTxt">
+                            <div className="homeDisplayHeader">
+                                Transaction
+                            </div>
+                            Instant Transaction without handling fee.
+                            <div className="homeDisplayQuote">
+                                -- Time to pay back your friend for that dinner.
+                            </div>
+                            <div className="homeDisplayLearnMore">
+                                Learn more <i className="fas fa-angle-double-right"></i>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div className="homeDisplayBlock1">
-                    <div className="homeDisplayImg"><i className="fas fa-donate"></i></div>
-                    <div className="homeDisplayTxt">
-                        <div className="homeDisplayHeader">
-                            Deposit
-                        </div>
-                        Easy steps to save money into PiggyBank.
-                        <div className="homeDisplayQuote">
-                            -- That's why we called "PiggyBank", right?
-                        </div>
-                        <div className="homeDisplayLearnMore">
-                            Learn more <i className="fas fa-angle-double-right"></i>
-                        </div>
-                    </div>
-                </div>
-                <div className="homeDisplayBlock1">
-                    <div className="homeDisplayImg"><i className="fas fa-hand-holding-usd"></i></div>
-                    <div className="homeDisplayTxt">
-                        <div className="homeDisplayHeader">
-                            Loans
-                        </div>
-                        PiggyBank Loan is offered with a low rate of APR.
-                        <div className="homeDisplayQuote">
-                            -- For students, entrepreneurs, and gamblers.
-                        </div>
-                        <div className="homeDisplayLearnMore">
-                            Learn more <i className="fas fa-angle-double-right"></i>
+                </a>
+                <a href="/service#operation">
+                    <div className="homeDisplayBlock1">
+                        <div className="homeDisplayImg"><i className="fa-solid fa-sack-dollar"></i></div>
+                        <div className="homeDisplayTxt">
+                            <div className="homeDisplayHeader">
+                                Withdrawal
+                            </div>
+                            Easy steps to take out money from PiggyBank.
+                            <div className="homeDisplayQuote">
+                                -- Cash is King!
+                            </div>
+                            <div className="homeDisplayLearnMore">
+                                Learn more <i className="fas fa-angle-double-right"></i>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div className="homeDisplayBlock1">
-                    <div className="homeDisplayImg"><i className="fas fa-handshake"></i></div>
-                    <div className="homeDisplayTxt">
-                        <div className="homeDisplayHeader">
-                            Insurance
-                        </div>
-                        PiggyBank is here to protect you and your family.
-                        <div className="homeDisplayQuote">
-                            -- That's what people buy before extreme sports.
-                        </div>
-                        <div className="homeDisplayLearnMore">
-                            Learn more <i className="fas fa-angle-double-right"></i>
-                        </div>
-                    </div>
-                </div>
-                <div className="homeDisplayBlock1">
-                    <div className="homeDisplayImg"><i className="fa-solid fa-user-group"></i></div>
-                    <div className="homeDisplayTxt">
-                        <div className="homeDisplayHeader">
-                            Payee
-                        </div>
-                            High Efficiency and Convenience in Transaction.
-                        <div className="homeDisplayQuote">
-                            -- You do that when you don't remember their number.
-                        </div>
-                        <div className="homeDisplayLearnMore">
-                            Learn more <i className="fas fa-angle-double-right"></i>
+                </a>
+                <a href="/service#operation">
+                    <div className="homeDisplayBlock1">
+                        <div className="homeDisplayImg"><i className="fas fa-donate"></i></div>
+                        <div className="homeDisplayTxt">
+                            <div className="homeDisplayHeader">
+                                Deposit
+                            </div>
+                            Easy steps to save money into PiggyBank.
+                            <div className="homeDisplayQuote">
+                                -- That's why we called "PiggyBank", right?
+                            </div>
+                            <div className="homeDisplayLearnMore">
+                                Learn more <i className="fas fa-angle-double-right"></i>
+                            </div>
                         </div>
                     </div>
-                </div>
+                </a>
+                <a href="/service#loan">
+                    <div className="homeDisplayBlock1">
+                        <div className="homeDisplayImg"><i className="fas fa-hand-holding-usd"></i></div>
+                        <div className="homeDisplayTxt">
+                            <div className="homeDisplayHeader">
+                                Loans
+                            </div>
+                            PiggyBank Loan is offered with a low rate of APR.
+                            <div className="homeDisplayQuote">
+                                -- For students, entrepreneurs, and gamblers.
+                            </div>
+                            <div className="homeDisplayLearnMore">
+                                Learn more <i className="fas fa-angle-double-right"></i>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+                <a href="/service#insurance">
+                    <div className="homeDisplayBlock1">
+                        <div className="homeDisplayImg"><i className="fas fa-handshake"></i></div>
+                        <div className="homeDisplayTxt">
+                            <div className="homeDisplayHeader">
+                                Insurance
+                            </div>
+                            PiggyBank is here to protect you and your family.
+                            <div className="homeDisplayQuote">
+                                -- That's what people buy before extreme sports.
+                            </div>
+                            <div className="homeDisplayLearnMore">
+                                Learn more <i className="fas fa-angle-double-right"></i>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+                <a href="/feature#payee">
+                    <div className="homeDisplayBlock1">
+                        <div className="homeDisplayImg"><i className="fa-solid fa-user-group"></i></div>
+                        <div className="homeDisplayTxt">
+                            <div className="homeDisplayHeader">
+                                Payee
+                            </div>
+                                High Efficiency and Convenience in Transaction.
+                            <div className="homeDisplayQuote">
+                                -- You do that when you don't remember their number.
+                            </div>
+                            <div className="homeDisplayLearnMore">
+                                Learn more <i className="fas fa-angle-double-right"></i>
+                            </div>
+                        </div>
+                    </div>
+                </a>
             </div>
             
             <Footer />

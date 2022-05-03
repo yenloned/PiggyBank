@@ -1,19 +1,27 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import './support.css';
 import {highlightbtn} from './General';
 import {TransactionItem} from './FAQItem';
 
+import Footer from '../../comps/Footer';
+
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 const Transaction = () => {
 
-const [clicked, setClicked] = useState(false)
+    useEffect(() => {
+        AOS.init({duration: 900})
+    }, [])
 
-const toggle = (index) => {
-    if(clicked === index){
-        return setClicked(null)
+    const [clicked, setClicked] = useState(false)
+
+    const toggle = (index) => {
+        if(clicked === index){
+            return setClicked(null)
+        }
+        setClicked(index)
     }
-    setClicked(index)
-}
     return (
         <React.Fragment>
         <div className="supportheader">
@@ -39,13 +47,14 @@ const toggle = (index) => {
                     </div>
                     {clicked === index ? (
                     <div className="answersBar">
-                    <div className="answers">{item.answer}</div>
+                    <div data-aos="fade" className="answers">{item.answer}</div>
                     </div>
                     ) : null }
                     </>
                 )
             })}
         </div>
+        <Footer/>
         </React.Fragment>
     )
 }

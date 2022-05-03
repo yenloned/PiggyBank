@@ -2,6 +2,8 @@ import React from "react";
 import './support.css';
 import {highlightbtn} from './General'
 
+import Footer from '../../comps/Footer';
+
 const Development = () => {
     return (
         <React.Fragment>
@@ -21,6 +23,7 @@ const Development = () => {
         <h1>
             Development
         </h1>
+        <Footer/>
         </React.Fragment>
     )
 }

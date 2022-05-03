@@ -2,6 +2,8 @@ import React from "react";
 import './support.css';
 import {highlightbtn} from './General'
 
+import Footer from '../../comps/Footer';
+
 const Security = () => {
     return (
         <React.Fragment>
@@ -18,9 +20,10 @@ const Security = () => {
             <a className='security-btn' href='support=security' style={highlightbtn}> <i className="fas fa-lock"></i><div className="supportchoice"> Security</div></a>
         </div>
         </div>
-            <h1>
+        <h1>
             Security
-            </h1>
+        </h1>
+        <Footer/>
         </React.Fragment>
     )
 }

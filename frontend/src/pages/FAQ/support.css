@@ -18,6 +18,10 @@
     font-family: 'Hind', sans-serif;
 }
 
+.FAQContainer{
+    margin-bottom: 7.5rem;
+}
+
 .email{
     cursor: pointer;
     text-decoration-line: underline;
@@ -36,7 +40,6 @@
     margin-left: 12rem;
     margin-right: 12rem;
     background-color:rgb(15, 15, 15);
-    border-bottom: 2px groove rgb(255, 223, 79);
     border-radius: 20px;
 }
 
@@ -75,35 +78,33 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background-color: black;
+    background: linear-gradient(360deg, rgb(10, 10, 10) 0%, rgb(30, 30, 30) 100%);
     cursor: pointer;
     margin-left: 12rem;
     margin-right: 12rem;
     margin-top: 1.5rem;
-    padding:1rem 1rem 1rem 1.25rem;
-    border: 2px solid rgb(255, 223, 79);
+    padding:1rem 1rem 1rem 3.5vw;
+    border-radius: 35px 35px 0 0;
 }
 
 .questions{
     color:rgb(255, 223, 79);
-    font-size: calc(11.5px + 0.82vw);
+    font-size: calc(13px + 0.75vw);
     font-family: 'Hind', sans-serif;
 }
 
 .answersBar{
     align-items: center;
-    background-color: black;
-    padding:1.25rem;
-    border: 2px groove rgb(255, 216, 86);
+    background-color: rgb(10,10,10);
+    padding: 0.2rem 0 1.5rem 3.5vw;
     border-top: 0px;
-    border-radius: 0px 0px 0px 30px;
     margin-left: 12rem;
     margin-right: 12rem;
 }
 
 .answers{
-    color:rgb(220, 220, 228);
-    font-size: calc(10px + 0.7vw);
+    color:rgb(238, 238, 238);
+    font-size: calc(12px + 0.65vw);
     font-family: 'Heebo', sans-serif;
 }
 

@@ -137,15 +137,19 @@ html,body{
     padding-bottom: 2rem;
 }
 
+.homeContainer1 a{
+    text-decoration: none;
+}
+
 .homeDisplayBlock1{
-    background: linear-gradient(360deg, rgb(29, 29, 29) 0%, rgb(35, 35, 35) 100%);
+    background: linear-gradient(360deg, rgb(10, 10, 10) 0%, rgb(40, 40, 40) 100%);
     border-bottom: 2px solid rgb(255, 223, 79);
     margin: 0rem 0rem;
     transition: 250ms ease-in-out;
 }
 
 .homeDisplayBlock1:hover{
-    background: linear-gradient(360deg, rgb(29, 29, 29) 0%, rgb(50, 50, 50) 100%);
+    background: linear-gradient(360deg, rgb(20, 20, 20) 0%, rgb(45, 45, 45) 100%);
     cursor: pointer;
     transition: all 0.3s ease-out;
     box-shadow: 0px 0px 8px 16px rgb(20, 20, 20);

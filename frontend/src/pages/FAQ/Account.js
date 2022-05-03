@@ -1,9 +1,18 @@
-import React, {useState } from "react";
+import React, {useState, useEffect} from "react";
 import './support.css';
 import { highlightbtn } from './General'
 import { AccountItem } from "./FAQItem";
 
+import Footer from '../../comps/Footer';
+
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+
 const Account = () => {
+
+    useEffect(() => {
+        AOS.init({duration: 900})
+    }, [])
 
     const [clicked, setClicked] = useState(false)
 
@@ -32,20 +41,21 @@ const Account = () => {
         <div className='FAQContainer'>
             {AccountItem.map((item, index) => {
                 return(
-                    <>
+                    <div>
                     <div className="questionsBar" onClick={() => toggle(index)} key={index}>
                     <div className="questions">{item.question}</div>
                     <span>{clicked === index ? <div className="arrow"><i className="fas fa-chevron-up" /></div> : <div className="arrow"><i className="fas fa-chevron-down" /></div>}</span>
                     </div>
                     {clicked === index ? (
                     <div className="answersBar">
-                    <div className="answers">{item.answer}</div>
+                    <div data-aos="fade" className="answers">{item.answer}</div>
                     </div>
                     ) : null }
-                    </>
+                    </div>
                 )
             })}
         </div>
+        <Footer/>
         </React.Fragment>
     )
 }

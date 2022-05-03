@@ -140,7 +140,7 @@ const Service = () => {
             <div className="service_topic">
                 DISCOVER WHAT WE HAVE PROVIDED FOR YOU
             </div>
-            <div className="service_bank_operation">
+            <div className="service_bank_operation" id="operation">
                 <div className="service_title">
                     Bank Operation
                 </div>
@@ -192,7 +192,7 @@ const Service = () => {
                     </div>
                 </div>
             </div>
-            <div className="service_loan">
+            <div className="service_loan" id="loan">
                 <div className="service_title">
                     Loan
                 </div>
@@ -316,7 +316,7 @@ const Service = () => {
                     </button>
                 </div>
             </div>
-            <div className="service_insurance">
+            <div className="service_insurance" id="insurance">
                 <div className="service_title">
                     Insurance
                 </div>

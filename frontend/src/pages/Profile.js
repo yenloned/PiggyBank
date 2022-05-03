@@ -439,8 +439,7 @@ const Profile = () => {
                                         return(
                                             <div className="profile_billing_Row" key={key}>
                                                 <div className="profile_billing_data">
-                                                    HKD 
-                                                    {data.type == "Transfer" && data.fromwho == loginID
+                                                    HKD {data.type == "Transfer" && data.fromwho == loginID
                                                     ?
                                                     (-data.amount) : (data.amount)}</div>
                                                 <div className="profile_billing_data">{data.type}</div>

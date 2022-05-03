@@ -2,7 +2,9 @@ import React from "react";
 import './support.css';
 import {highlightbtn} from './General'
 
-const Loan = () => {
+import Footer from '../../comps/Footer';
+
+const InsuranceFAQ = () => {
     return (
         <React.Fragment>
         <div className="supportheader">
@@ -12,17 +14,18 @@ const Loan = () => {
             <a className='general-btn' href='support=general'> <i className="far fa-question-circle"></i><div className="supportchoice"> General</div></a>
             <a className='account-btn' href='support=account'> <i className="fas fa-user-circle"></i><div className="supportchoice"> Account</div></a>
             <a className='transfer-btn' href='support=transaction'> <i className="fas fa-donate"></i><div className="supportchoice"> Transaction</div></a>
-            <a className='loan-btn' href='support=loan' style={highlightbtn}> <i className="fas fa-hand-holding-usd"></i><div className="supportchoice"> Loan</div></a>
-            <a className='insurance-btn' href='support=insurance'> <i className="fas fa-user-shield"></i><div className="supportchoice"> Insurance</div></a>
+            <a className='loan-btn' href='support=loan'> <i className="fas fa-hand-holding-usd"></i><div className="supportchoice"> Loan</div></a>
+            <a className='insurance-btn' href='support=insurance' style={highlightbtn}> <i className="fas fa-user-shield"></i><div className="supportchoice"> Insurance</div></a>
             <a className='development-btn' href='support=development'> <i className="fas fa-file-code"></i><div className="supportchoice"> Development</div></a>
             <a className='security-btn' href='support=security'> <i className="fas fa-lock"></i><div className="supportchoice"> Security</div></a>
         </div>
         </div>
         <h1>
-        Loan
+            Insurance
         </h1>
+        <Footer/>
         </React.Fragment>
     )
 }
 
-export default Loan;
+export default InsuranceFAQ;

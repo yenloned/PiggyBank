@@ -18,8 +18,8 @@ import NotFound from './pages/NotFound';
 import Account from './pages/FAQ/Account';
 import Development from './pages/FAQ/Development';
 import General from './pages/FAQ/General';
-import Insurance from './pages/FAQ/Insurance';
-import Loan from './pages/FAQ/Loan';
+import InsuranceFAQ from './pages/FAQ/InsuranceFAQ';
+import LoanFAQ from './pages/FAQ/LoanFAQ';
 import Transaction from './pages/FAQ/Transaction';
 import Security from './pages/FAQ/Security';
 
@@ -28,6 +28,7 @@ import Debt from './pages/Debt';
 import Transfer from './function/Transfer';
 import Withdrawal from './function/Withdrawal';
 import Deposit from './function/Deposit';
+import Loan from './function/Loan'
 
 import {LoginStatusContext} from "./context/LoginContext";
 import {LoginIDContext} from "./context/LoginContext";
@@ -95,8 +96,8 @@ function App() {
               <Route path='/support=account' element={<Account />}/>
               <Route path='/support=development' element={<Development />}/>
               <Route path='/support=general' element={<General />}/>
-              <Route path='/support=insurance' element={<Insurance />}/>
-              <Route path='/support=loan' element={<Loan />}/>
+              <Route path='/support=insurance' element={<InsuranceFAQ />}/>
+              <Route path='/support=loan' element={<LoanFAQ />}/>
               <Route path='/support=transaction' element={<Transaction />}/>
               <Route path='/support=security' element={<Security />}/>
 
@@ -105,6 +106,7 @@ function App() {
               <Route path='/transfer' element={<Transfer />}/>
               <Route path='/withdrawal' element={<Withdrawal />}/>
               <Route path='/deposit' element={<Deposit />}/>
+              <Route path='/loan' element={<Loan />}/>
             </Routes>
             </userDebtContext.Provider>
           </userPayeeContext.Provider>
