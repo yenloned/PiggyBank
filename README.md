@@ -39,17 +39,18 @@ Open [http://localhost:3000](http://localhost:3000) and you will see the page ap
 * Loan
 * Insurance
 #### Features
+* JWT Token
 * Password Hashing
-* Forgot Password
+* Forgot Password (Email)
 * Two-Factor Authentication (Email)
+* FAQ Page
 * Payee Registration
-* Password Changing
-* Account Termination
+* Debt
 * Transaction History
 * Credit Scoring
-* Interest / Loan Calculator
-* Debt
-* FAQ Page
+* Insurance / Loan Calculator
+* Password Changing
+* Account Termination
 
 
 ## Preview
