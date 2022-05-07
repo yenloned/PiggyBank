@@ -10,7 +10,7 @@
 * [Functions](https://github.com/yenloned/PiggyBank#functions)
 * [Features](https://github.com/yenloned/PiggyBank#features)
 * [Preview](https://github.com/yenloned/PiggyBank#preview)
-* [Epilogue]
+* [Epilogue](https://github.com/yenloned/PiggyBank#epilogue)
 
 ## Introduction
 PiggyBank is a fully responsive web application, which operates and provides various bank functions by REST API and CRUD Operations. 
