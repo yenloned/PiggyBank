@@ -1,17 +1,20 @@
+# PIGGYBANK
+
 ## Table of Contents
 * [Introduction](https://github.com/yenloned/PiggyBank#introduction)
 * [Live Demo](https://github.com/yenloned/PiggyBank#live-demo)
 * [Technologies](https://github.com/yenloned/PiggyBank#technologies)
 * [Getting Started](https://github.com/yenloned/PiggyBank#getting-started)
-* [Highlights](https://github.com/yenloned/PiggyBank#highlights)
-  - [Design and Architecture](https://github.com/yenloned/PiggyBank#design-and-architecture)
-  - [Functions](https://github.com/yenloned/PiggyBank#functions)
-  - [Features](https://github.com/yenloned/PiggyBank#features)
+* [Architectures](https://github.com/yenloned/PiggyBank#architectures)
+* [Design](https://github.com/yenloned/PiggyBank#design)
+* [Functions](https://github.com/yenloned/PiggyBank#functions)
+* [Features](https://github.com/yenloned/PiggyBank#features)
 * [Preview](https://github.com/yenloned/PiggyBank#preview)
 * [Reference](https://github.com/yenloned/PiggyBank#reference)
 
 ## Introduction
-PiggyBank is a fully responsive web application, which operates and provides various bank functions by REST API and CRUD Operations.
+PiggyBank is a fully responsive web application, which operates and provides various bank functions by REST API and CRUD Operations. 
+It does not involve any real currencies, trading, contracts, or agreements since this project is aimed to demo the web development technologies and practice.
 
 ## Live Demo
 This project is still on development status (7/5/2022). The website will be hosted after completion.
@@ -52,23 +55,27 @@ node index.js
 
 Open [http://localhost:3000](http://localhost:3000) and you will see the page appear.
 
-## Highlights
+## Architectures
+* Overview
+![OVERVIEW ARCHITECTURE](Preview/overview.png)
 
-### Design and Architecture
+## Design
 * Fully Responsive
   - _Make use of CSS breakpoints, to create scalable and user-friendly display sizes in all contents for any device's screen._
 * RESTful API
   - _Make use of Axios, creating different communication channels for data requests and responses with the defined endpoints._
 * CRUD Operation
   - _Make use of MySQL, which performs the operation of Create, Read, Update, and Delete as data management._
-### Functions
+
+## Functions
 * Account Register / Login
   - _Make use of database and cookie session, which performs the data creation (registration) and cookie value authentication (login)._
 * Transfer / Withdrawal / Deposit
   - _Make use of RESTful API and database, to update the user's balance data once the transfer request is received from users._
 * Loan
 * Insurance
-### Features
+
+## Features
 * JWT Token
   - _Enhance security by the authorization with JWT Token, preventing attacks like Cross-Site Scripting XSS and Session Hijacking._
 * Password Hashing
