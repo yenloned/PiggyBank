@@ -17,10 +17,23 @@ PiggyBank is a fully responsive web application, which operates and provides var
 It does not involve any real currencies, trading, contracts, or agreements since this project is aimed to demo the web development technologies and practice.
 
 ## Live Demo
-This project is still on development status (7/5/2022). The website will be hosted after completion.
+This project is still on development status (8/5/2022). The website will be hosted after completion.
 
 ## Technologies
-ReactJS, CSS, NodeJS, ExpressJS, MySQL, Axios, Bcrypt
+FrontEnd
+* ReactJS
+* CSS
+
+BackEnd
+* NodeJS
+* ExpressJS
+* MySQL
+
+Other Highlighted Libraries
+* Axios
+* JWT Token
+* Bcrypt
+* NodeMailer
 
 ## Getting Started
 
@@ -56,7 +69,7 @@ node index.js
 Open [http://localhost:3000](http://localhost:3000) and you will see the page appear.
 
 ## Architectures
-* Overview
+### Overview
 ![OVERVIEW ARCHITECTURE](Preview/overview.png)
 
 ## Design
@@ -81,9 +94,9 @@ Open [http://localhost:3000](http://localhost:3000) and you will see the page ap
 * Password Hashing
   - _Make use of Bcrypt, to ensure password confidentiality in the database by a strong one-way hashing algorithm._
 * Forgot Password (Email)
-  - _Make use of SMTP Server, sending a verification code to users who are required to reset their password._
+  - _Make use of SMTP Server and NodeMailer, sending a verification code to users who are required to reset their password._
 * Two-Factor Authentication (Email)
-  - _Once that user's account has enabled Two-Factor Authentication, a verification code will be sent through SMTP Server before every login._
+  - _Once that user's account has enabled Two-Factor Authentication, a verification code will be sent through SMTP Server by NodeMailer before every login._
 * Payee Registration
   - _Make use of RESTful API and database, create and read the payee list from the database whenever the user performs related operations (register payee/transfer money)._
 * Debt
@@ -124,4 +137,8 @@ To learn MySQL, check out the [MySQL documentation](https://dev.mysql.com/doc/).
 
 To learn Axios, check out the [Axios documentation](https://axios-http.com/docs/intro).
 
+To learn JSON Web Tokens, check out [JWT documentation](https://jwt.io/).
+
 To learn Bcrypt, check out the [Bcrypt documentation](https://www.npmjs.com/package/bcrypt).
+
+To learn NodeMailer, check out the [NodeMailer documentation](https://nodemailer.com/about/).
