@@ -23,7 +23,9 @@
     color: rgb(255, 223, 79);
     margin-left: 20px;
     cursor: pointer;
-    font-size: 22px;
+    font-size: 25px;
+    font-family: serif;
+    font-weight: bolder;
 }
 
 .navbar-logo a{

@@ -4,6 +4,11 @@ import Axios from "axios";
 import './profile.css';
 
 import no_history from "../material/pictures/no_history.png"
+import no_payee from "../material/pictures/no_payee.png"
+import transfer_icon from "../material/icons/transfer_icon.png"
+import withdrawal_icon from "../material/icons/withdrawal_icon.png"
+import deposit_icon from "../material/icons/deposit_icon.png"
+import logout_icon from "../material/icons/logout_icon.png"
 
 import {LoginStatusContext} from "../context/LoginContext";
 import {LoginIDContext} from "../context/LoginContext";
@@ -377,7 +382,7 @@ const Profile = () => {
                     </div>
                     <div className="ProfileTitle3">
                         <div className="fas fa-dollar-sign"></div> Savings
-                        <div className="profile_savings">HKD {userBalance}</div>
+                        <div className="profile_savings">HKD {userBalance.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</div>
                     </div>
                 </div>
 
@@ -441,7 +446,10 @@ const Profile = () => {
                                                 <div className="profile_billing_data">
                                                     HKD {data.type == "Transfer" && data.fromwho == loginID
                                                     ?
-                                                    (-data.amount) : (data.amount)}</div>
+                                                    ((-data.amount).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","))
+                                                    : 
+                                                    (data.amount).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+                                                    </div>
                                                 <div className="profile_billing_data">{data.type}</div>
                                                 <div className="profile_billing_data">{data.date.split(',')[0]}</div>
                                             </div>
@@ -466,7 +474,7 @@ const Profile = () => {
                         <div>
                             <div className="profile_information">
                                 <div className="profile_balance">Balance </div>
-                                <div className="profile_userdata">HKD {userBalance}</div>
+                                <div className="profile_userdata">HKD {userBalance.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</div>
                                 <div className="profile_debt">Debt </div>
                                 <div className="profile_debt_block">
                                     <div className="profile_userdata">HKD {userDebt}</div>
@@ -485,7 +493,7 @@ const Profile = () => {
                         /*  This is the Payee page.
                             Payee Registeration by map method and component render can be performed here
                             The change of component status will render what it display by the conditional statement*/
-                        <div id="payee">
+                        <div className="profile_payee_content" id="payee">
                             <div className="profile_payee_information">
                                 <div className="profile_payee_id">Payee ID</div>
                                 <div className="profile_payee_name">Payee Name</div>
@@ -517,6 +525,14 @@ const Profile = () => {
                                     <div className="payee_cancel_button" onClick={() => switch_payee_add()}>Cancel </div>
                                 </div>
                                 <div className="payee_add_msg">{payeeAdd_Msg}</div>
+                            </div>
+                            :""
+                            }
+                            {!payeeAdd && !userPayee.length ?
+                            <div className="profile_no_payee">
+                                <img src={no_payee} width='160' alt=""/>
+                                <div>You don't have any payee yet.</div>
+                                <div>Click <a>Add</a> to register one.</div>
                             </div>
                             :""
                             }
@@ -595,27 +611,27 @@ const Profile = () => {
                 <div className="AccountContainerRow4">
                     <div className="account_operation_title">Account Operation</div>
                     <div className="account_operation_container">
-                        <div className="account_operation_transaction" onClick={() => navigate("/transfer")}>
+                        <div className="account_operation_block" onClick={() => navigate("/transfer")}>
                             <div className="account_operation_Img">
-                                <i className="fa-solid fa-money-bill-transfer"></i>
+                                <img src={transfer_icon} width='96' alt=""/>
                             </div>
                             Transfer
                         </div>
-                        <div className="account_operation_withdrawl" onClick={() => navigate("/withdrawal")}>
+                        <div className="account_operation_block" onClick={() => navigate("/withdrawal")}>
                             <div className="account_operation_Img">
-                                <i className="fa-solid fa-sack-dollar"></i>
+                                <img src={withdrawal_icon} width='96' alt=""/>
                             </div>
                             Withdrawal
                         </div>
-                        <div className="account_operation_deposit" onClick={() => navigate("/deposit")}>
+                        <div className="account_operation_block" onClick={() => navigate("/deposit")}>
                             <div className="account_operation_Img">
-                                <i className="fas fa-donate"></i>
+                                <img src={deposit_icon} width='96' alt=""/>
                             </div>
                             Deposit
                         </div>
-                        <div className="account_operation_logout" onClick={logout}>
+                        <div className="account_operation_block" onClick={logout}>
                             <div className="account_operation_Img">
-                                <i className="fas fa-sign-out-alt"></i>
+                                <img src={logout_icon} width='96' alt=""/>
                             </div>
                             Logout
                         </div>

@@ -117,7 +117,7 @@ const Transfer = () =>{
             <div className="transfer_choice_container">
                 <div className="transfer_choice" onClick={(transfer_by_payee)}>
                     <div className="transfer_choice_icon">
-                        <img src={search_payee} width='120' alt=""/>
+                        <img src={search_payee} width='156' alt=""/>
                     </div>
                     <div className="transfer_choice_title">
                         Select Payee
@@ -125,7 +125,7 @@ const Transfer = () =>{
                 </div>
                 <div className="transfer_choice" onClick={transfer_by_id}>
                     <div className="transfer_choice_icon">
-                        <img src={search_id} width='120' alt=""/>
+                        <img src={search_id} width='156' alt=""/>
                     </div>
                     <div className="transfer_choice_title">
                         Select ID

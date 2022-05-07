@@ -198,28 +198,28 @@ const Service = () => {
                 </div>
                 <div className="service_loan_container">
                     <div className="service_loan_block">
-                        <div><img data-aos="zoom-in" src={low_interest} width='160' alt=""/></div>
+                        <div><img data-aos="zoom-in" data-aos-duration="800" src={low_interest} width='96' alt=""/></div>
                         <div className="service_block_title">Low Interest Rate</div>
                         <div className="service_loan_txt">
                             PiggyBank provides a low interest rate as APR <a>1.67%</a>.
                         </div>
                     </div>
                     <div className="service_loan_block">
-                        <div><img data-aos="zoom-in" src={high_amount} width='160' alt=""/></div>
+                        <div><img data-aos="zoom-in" data-aos-duration="800" src={high_amount} width='96' alt=""/></div>
                         <div className="service_block_title">High Loan Amount</div>
                         <div className="service_loan_txt">
                             A high loan amount which up to <a>HKD 1,500,000</a> could be loaned.
                         </div>
                     </div>
                     <div className="service_loan_block">
-                        <div><img data-aos="zoom-in" src={long_duration} width='160' alt=""/></div>
+                        <div><img data-aos="zoom-in" data-aos-duration="800" src={long_duration} width='96' alt=""/></div>
                         <div className="service_block_title">Long Repayment Tenor</div>
                         <div className="service_loan_txt">
                             Long repayment tenor up to <a>60 months</a> is provided.
                         </div>
                     </div>
                     <div className="service_loan_block">
-                        <div><img data-aos="zoom-in" src={no_fee} width='160' alt=""/></div>
+                        <div><img data-aos="zoom-in" data-aos-duration="800" src={no_fee} width='96' alt=""/></div>
                         <div className="service_block_title">Low Handling Fee</div>
                         <div className="service_loan_txt">
                             Only <a>0% to 1%</a> handling fee is charged in Piggybank Loan.
@@ -230,7 +230,7 @@ const Service = () => {
                     YOU CAN TRY OUR DEMO IN THE LOAN CALCULATOR BELOW.
                 </div>
                 <div className="service_loan_calculator">
-                    <div className="calculator_title">
+                    <div data-aos="fade-in" className="calculator_title">
                         Loan Calculator
                     </div>
                     <div data-aos="fade-in">
@@ -297,7 +297,7 @@ const Service = () => {
                                     ( ((1 + (calculatorAPR/1200))**calculatorTenor) - 1 ) / 
                                     ( (calculatorAPR/1200) * ((1+(calculatorAPR/1200))**calculatorTenor))
                                     )
-                                )}
+                                ).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
                             </div>
                         </div>
                     </div>
@@ -359,7 +359,7 @@ const Service = () => {
                     YOU CAN SELECT THE INSURANCE PLAN AND TRY OUR DEMO IN THE INSURANCE CALCULATOR BELOW.
                 </div>
                 <div className="service_insurance_calculator"> 
-                    <div className="calculator_title">
+                    <div data-aos="fade-in" className="calculator_title">
                         {insuranceChoice}
                     </div>
                     {insuranceChoice == "Accident Insurance" ? "" :
@@ -425,7 +425,7 @@ const Service = () => {
                             <div className="calculator_monthly_repayment">
                                 HKD {Math.round(
                                     (lifeInsuranceAmount * 1.025) * 0.000025 * insuranceBonus * ( ((insuranceAge) / 10) * Math.floor(Math.log(insuranceAge * 2) / Math.log(3-insuranceBonus) - 3) )
-                                    )}
+                                    ).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
                             </div>
                         </div>
                         <div data-aos="fade-in" className="loan_calculator_claim">
@@ -467,7 +467,7 @@ const Service = () => {
                                 (cancerInsuranceAmount * (cancerInsuranceAmount / 1250000 ) * 0.000025 * insuranceBonus * 
                                 (((insuranceAge) / 10)* Math.floor(Math.log(insuranceAge) / Math.log(3)) )
                                 ) * smokeCancerBonus
-                                )}
+                                ).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
                             </div>
                             :
                             <div className="calculator_monthly_repayment"> -- </div>
@@ -525,7 +525,7 @@ const Service = () => {
                                 <div className="calculator_monthly_repayment">
                                     HKD {Math.round(
                                         ( (accidentInsuranceAmount * 1.025) * 0.0015 * Math.ceil((insuranceAge) / 10) + 1 ) * accidentBonus
-                                        )}
+                                        ).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
                                 </div>
                             </div>
                             <div data-aos="fade-in" className="loan_calculator_claim">

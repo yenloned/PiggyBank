@@ -96,7 +96,8 @@ const Home = () => {
                             PiggyBank is always here
                         </div>
                         <div className="homeLeftGridBody">
-                            Unlike traditional banks, you can browse PiggyBank anytime you want. As PiggyBank is hosted online and running 24x7, the limitation brought by time and geography is broken. You can use our bank services anytime and anywhere you want. View more <a href="/about">About PiggyBank</a> here.
+                            Unlike traditional banks, you can browse PiggyBank anytime you want. As PiggyBank is hosted online and running 24x7, the limitation brought by time and geography is broken. 
+                            You can use our bank services anytime and anywhere you want. View more about <a href="/service">What PiggyBank provides</a> here.
                         </div>
                     </div>
                     <div data-aos="slide-right" data-aos-once="true" className="homeRightGridTxt">
@@ -104,7 +105,8 @@ const Home = () => {
                             More features, Less complex
                         </div>
                         <div className="homeRightGridBody">
-                            PiggyBank is the generation of creativity and innovation. We provide various helpful and special features, which improve the user experience and comprehensive function in different aspects. You can view more details of <a href="/feature">Feature</a> here.
+                            PiggyBank is the generation of creativity and innovation. We provide various helpful and special features, which improve the user experience and comprehensive function in different aspects. 
+                            You can view more details of <a href="/feature">Feature</a> here.
                         </div>
                     </div>
                     <div data-aos="slide-left" data-aos-once="true" className="homeRightGrid">
@@ -118,7 +120,9 @@ const Home = () => {
                             PiggyBank cares about you
                         </div>
                         <div className="homeLeftGridBody">
-                            At PiggyBank, we care about what you care about, especially your data security and privacy protection. Therefore, we developed a series of <a href="/feature#security">Security Controls</a> and <a href="/privacy">Privacy policies</a>, in order to provide the best and most reliable services.
+                            At PiggyBank, we care about what you care about, especially your data security and privacy protection. 
+                            Therefore, we developed a series of <a href="/feature#security">Security Controls</a> and <a href="/privacy">Privacy policies</a>, in order to provide the best and most reliable services. 
+                            Feel free to check out more <a href="/about">About PiggyBank</a> here.
                         </div>
                     </div>
                     <div data-aos="slide-right" data-aos-once="true" className="homeRightGridTxt">
@@ -126,7 +130,8 @@ const Home = () => {
                             Less confusion, More friendly
                         </div>
                         <div className="homeRightGridBody">
-                            To offer the best user experience, PiggyBank makes sure you have no difficulties and confusion during usage. You can visit our <a href="/support=general">FAQ Page</a> for a handy solution to any obstacles. We would wish you have an enjoyable experience here.
+                            To offer the best user experience, PiggyBank makes sure you have no difficulties and confusion during usage. 
+                            You can visit our <a href="/support=general">FAQ Page</a> for a handy solution to any obstacles. We would wish you have an enjoyable experience here.
                         </div>
                     </div>
                     <div data-aos="slide-left" data-aos-once="true" className="homeRightGrid">

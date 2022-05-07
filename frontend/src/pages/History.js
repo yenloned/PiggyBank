@@ -70,7 +70,7 @@ const History = () => {
                                         Type: <div className="history_data">{data.type}</div>
                                     </div>
                                     <div className="history_title">
-                                        HKD Amount: <div className="history_data">{data.amount}</div>
+                                        HKD Amount: <div className="history_data">{data.amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</div>
                                     </div>
                                 </div>
                                 <div className="history_date">

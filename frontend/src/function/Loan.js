@@ -23,10 +23,16 @@ const Loan = () => {
 
 
     return (
-        <h1>
-            Loan
+        <div className="loan">
+            <div className="loan_title">Loan</div>
+            <div className="loan_userinfo">
+
+            </div>
+            <div className="loan_props">
+                
+            </div>
             <Footer/>
-        </h1>
+        </div>
     )
 }
 

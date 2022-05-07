@@ -13,7 +13,7 @@ const LoginNavBar = () => {
 
     return(
         <nav className="navbar">
-                <div className="navbar-logo"><a className="fas fa-piggy-bank" href='/'>PiggyBank</a></div>
+                <div className="navbar-logo"><a href='/'><i className="fas fa-piggy-bank" /> PIGGYBANK</a></div>
                 <div className='menu-icon' onClick={handleClick}>
                     <i className={clicked ? 'fas fa-times' : 'fas fa-bars'}></i>
                 </div>

@@ -95,6 +95,20 @@ export default function Login(){
         })
     }
 
+    //check if the account existed or not first, then pass to check 2FA
+    const login_check_exist = () => {
+        Axios.post("http://localhost:3005/account/registered", {
+            cemail: email
+        }).then((response) =>{
+            if(response.data.length){
+                login_check_2FA_status()
+            }else{
+                setLoginDisplay("Email Address / Password does not exist")
+                setLoginStatus(false)
+            }
+        })
+    }
+
     //component for toggle the masking / showing of password text
     const [mask, setMask] = useState(true)
 
@@ -139,7 +153,7 @@ export default function Login(){
                     </div>
                     <div className="msg">{loginDisplay ? loginDisplay : ""}</div>
                 <div>
-                <button className="loginbutton" onClick={login_check_2FA_status}> Login </button>
+                <button className="loginbutton" onClick={login_check_exist}> Login </button>
                 </div>
                 <div>
                     <a className="go-register" href="/register">Don't have an account?</a>
