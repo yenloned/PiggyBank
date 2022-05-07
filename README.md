@@ -10,7 +10,7 @@
 * [Functions](https://github.com/yenloned/PiggyBank#functions)
 * [Features](https://github.com/yenloned/PiggyBank#features)
 * [Preview](https://github.com/yenloned/PiggyBank#preview)
-* [Reference](https://github.com/yenloned/PiggyBank#reference)
+* [Epilogue]
 
 ## Introduction
 PiggyBank is a fully responsive web application, which operates and provides various bank functions by REST API and CRUD Operations. 
@@ -20,20 +20,20 @@ It does not involve any real currencies, trading, contracts, or agreements since
 This project is still on development status (8/5/2022). The website will be hosted after completion.
 
 ## Technologies
-FrontEnd
-* ReactJS
-* CSS
+**FrontEnd**
+* [ReactJS](https://reactjs.org/)
+* [CSS](https://www.w3.org/Style/CSS/)
 
-BackEnd
-* NodeJS
-* ExpressJS
-* MySQL
+**BackEnd*
+* [NodeJS](https://nodejs.org/en/docs/)
+* [ExpressJS](https://expressjs.com/)
+* [MySQL](https://dev.mysql.com/doc/)
 
-Other Highlighted Libraries
-* Axios
-* JWT Token
-* Bcrypt
-* NodeMailer
+**Other Highlighted Libraries**
+* [Axios](https://axios-http.com/docs/intro)
+* [JSON Web Token](https://jwt.io/)
+* [Bcrypt](https://www.npmjs.com/package/bcrypt)
+* [NodeMailer](https://nodemailer.com/about/)
 
 ## Getting Started
 
@@ -112,9 +112,7 @@ Open [http://localhost:3000](http://localhost:3000) and you will see the page ap
 * Account Termination
   - _Make use of RESTful API and database, deleting all the data from that user once the request is received._
 
-
 ## Preview
-
 Desktop | Phone
 ----------------------------------------|--------------------------
 ![DESKTOP PREVIEW](Preview/preview1.png)   | ![PHONE PREVIEW](Preview/phone_preview1.png)
@@ -122,23 +120,6 @@ Desktop | Phone
 ![DESKTOP PREVIEW](Preview/preview3.png)   | ![PHONE PREVIEW](Preview/phone_preview3.png)
 ![DESKTOP PREVIEW](Preview/preview4.png)   | ![PHONE PREVIEW](Preview/phone_preview4.png)
 
-
-## Reference
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-To learn CSS, check out the [CSS documentation](https://www.w3.org/Style/CSS/).
-
-To learn NodeJS, check out the [NodeJS documentation](https://nodejs.org/en/docs/).
-
-To learn ExpressJS, check out the [ExpressJS documentation](https://expressjs.com/).
-
-To learn MySQL, check out the [MySQL documentation](https://dev.mysql.com/doc/).
-
-To learn Axios, check out the [Axios documentation](https://axios-http.com/docs/intro).
-
-To learn JSON Web Tokens, check out [JWT documentation](https://jwt.io/).
-
-To learn Bcrypt, check out the [Bcrypt documentation](https://www.npmjs.com/package/bcrypt).
-
-To learn NodeMailer, check out the [NodeMailer documentation](https://nodemailer.com/about/).
+## Epilogue
+Wow, you really read this to the end.<br>
+This was my very first full-stack web development project and I have learned a lot from it. Feel free to contact me for any discussion or suggestion. In the future, I will keep creating and developing new projects in order to further deepen my skills and knowledge.
