@@ -24,7 +24,7 @@ This project is still on development status (8/5/2022). The website will be host
 * [ReactJS](https://reactjs.org/)
 * [CSS](https://www.w3.org/Style/CSS/)
 
-**BackEnd*
+**BackEnd**
 * [NodeJS](https://nodejs.org/en/docs/)
 * [ExpressJS](https://expressjs.com/)
 * [MySQL](https://dev.mysql.com/doc/)
