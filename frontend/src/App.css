@@ -2,6 +2,10 @@
     box-sizing: border-box;
 }
 
+a{
+    color: rgb(255, 223, 79);
+}
+
 footer{
     padding: 3rem;
     background-color: rgb(0,0,0);
@@ -15,7 +19,7 @@ body::-webkit-scrollbar{
 }
 
 body::-webkit-scrollbar-thumb{
-    background-color:rgb(255, 223, 79);
+    background-color: rgb(255, 223, 79);
     border: 5px solid rgb(25, 25, 25);
     border-radius: 25px;
 }

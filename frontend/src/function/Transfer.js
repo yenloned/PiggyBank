@@ -58,7 +58,7 @@ const Transfer = () =>{
         payee_id_checkuser: transfer_payee
         }).then((checkuser_result) =>{
             //If it is existed, perform transfer_money
-            if(checkuser_result.data != ''){
+            if(checkuser_result.data !== ''){
                 transfer_money()
             //If no, update component to display the error message
             }else{
@@ -70,10 +70,10 @@ const Transfer = () =>{
     //transfer the money to target
     const transfer_money = () =>{
         //check if the transfer amount make sense before sending it to backend
-        if (transfer_payee == loginID){
+        if (transfer_payee === loginID){
             return setTransfer_Errormsg("You can not transfer money to yourself.")
         }
-        if (!transfer_amount || transfer_amount == 0){
+        if (!transfer_amount || transfer_amount === 0){
             return setTransfer_Errormsg("Invalid transfer amount.")
         }
         if (!transfer_payee){

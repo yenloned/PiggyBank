@@ -204,10 +204,10 @@ const Profile = () => {
     //Add payee by another user ID, checking input before sending the request into backend
     const add_payee = async() => {
         //check if the input make sense before sending into backend
-        if (payeeAdd_ID == ""){
+        if (payeeAdd_ID === ""){
             return setPayeeAdd_Msg("Payee ID can not be empty.")
         }
-        if (payeeAdd_ID == loginID){
+        if (payeeAdd_ID === loginID){
             return setPayeeAdd_Msg("You can not register yourself as payee.")
         }
         if (payeeAdd_Name.length > 20){
@@ -219,14 +219,14 @@ const Profile = () => {
             check_payee_id: payeeAdd_ID
         }).then((checkresult) =>{
             //If yes, update component to display the error message
-            if(checkresult.data != ''){
+            if(checkresult.data !== ''){
                 setPayeeAdd_Msg("Payee already registered on your list.")
             }else{
                 //If no, check if the payee (userID) really exist
                 Axios.post("http://localhost:3005/profile/check_user",{
                 payee_id_checkuser: payeeAdd_ID
                 }).then((checkuser_result) =>{
-                    if(checkuser_result.data != ''){
+                    if(checkuser_result.data !== ''){
                         //If yes, add it into the user information
                         Axios.post("http://localhost:3005/profile/add_payee",{
                             user_id_addpayee: loginID,
@@ -302,7 +302,7 @@ const Profile = () => {
     //changing password in user information
     const resetpassword = () =>{
         //check input if valid
-        if (userNewPassword != userConfirmNewPassword){
+        if (userNewPassword !== userConfirmNewPassword){
             return setResetPasswordMsg("Password and confirm password does not match.")
         }
         if (userNewPassword.length < 8){
@@ -341,7 +341,7 @@ const Profile = () => {
             if (response_deleteaccount.data === "Check Password Passed"){
                 //check confirmation input
                 //If incorrect, update component to display error message
-                if (userTerminateConfirm != "terminate my account"){
+                if (userTerminateConfirm !== "terminate my account"){
                     return setUserTerminateMsg('Incorrect verification by input "terminate my account".')
                 }else{
                     //terminate account by delete row in database
@@ -388,12 +388,18 @@ const Profile = () => {
 
                 <div className="profile_Row2_Row3">
                     <div className="AccountContainerRow2">
-                        <button className="information_button" onClick={() => set_profile_button("information")}>Information</button>
-                        <button className="billing_button" onClick={switch_billing}>Billing</button>
-                        <button className="balance_button" onClick={() => set_profile_button("balance")}>Balance</button>
-                        <button className="payee_button" onClick={switch_payee}>Payee</button>
-                        <button className="security_button" onClick={switch_security}>Security</button>
-                        <button className="dangerzone_button" onClick={switch_dangerzone}>Danger Zone</button>
+                        <button className={profile_button === "information" ? "profile_page_button_active" : "profile_page_button"} 
+                        onClick={() => set_profile_button("information")}>Information</button>
+                        <button className={profile_button === "billing" ? "profile_page_button_active" : "profile_page_button"} 
+                        onClick={switch_billing}>Billing</button>
+                        <button className={profile_button === "balance" ? "profile_page_button_active" : "profile_page_button"} 
+                        onClick={() => set_profile_button("balance")}>Balance</button>
+                        <button className={profile_button === "payee" ? "profile_page_button_active" : "profile_page_button"} 
+                        onClick={switch_payee}>Payee</button>
+                        <button className={profile_button === "security" ? "profile_page_button_active" : "profile_page_button"} 
+                        onClick={switch_security}>Security</button>
+                        <button className={profile_button === "dangerzone" ? "profile_page_button_active" : "profile_page_button"} 
+                        onClick={switch_dangerzone}>Danger Zone</button>
                     </div>
                     
                     <div className="AccountContainerRow3">
@@ -430,7 +436,7 @@ const Profile = () => {
                             </div>
                             <div className="profile_billing_history">
                                 <div className="profile_billing_topic" onClick={() => navigate("/history") }>
-                                    <a>Transaction History <i className="fa-solid fa-arrow-right-long"></i></a>
+                                    Transaction History <i className="fa-solid fa-arrow-right-long"></i>
                                 </div>
                                 {userHistory.length ?
                                 <div>
@@ -444,7 +450,7 @@ const Profile = () => {
                                         return(
                                             <div className="profile_billing_Row" key={key}>
                                                 <div className="profile_billing_data">
-                                                    HKD {data.type == "Transfer" && data.fromwho == loginID
+                                                    HKD {data.type === "Transfer" && data.fromwho === loginID
                                                     ?
                                                     ((-data.amount).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","))
                                                     : 
@@ -498,7 +504,7 @@ const Profile = () => {
                                 <div className="profile_payee_id">Payee ID</div>
                                 <div className="profile_payee_name">Payee Name</div>
                                 <div className="profile_payee_edit" onClick={() => switch_payee_add()}>
-                                    <div className="profile_payee_edittxt">Add </div><i className="fas fa-plus-square"></i>
+                                    <div className="profile_payee_edittxt">Add </div><i className="fas fa-plus-square" />
                                 </div>
                             </div>
                             {userPayee.map((data, key) => {
@@ -532,7 +538,7 @@ const Profile = () => {
                             <div className="profile_no_payee">
                                 <img src={no_payee} width='160' alt=""/>
                                 <div>You don't have any payee yet.</div>
-                                <div>Click <a>Add</a> to register one.</div>
+                                <div>Click <b onClick={() => switch_payee_add()}>Add</b><i className="fas fa-plus-square" onClick={() => switch_payee_add()}/> to register one.</div>
                             </div>
                             :""
                             }

@@ -11,7 +11,8 @@
     padding: 8px 20px;
     transition: all 0.25s ease-out;
     transition: 250ms;
-    font-size: 25px;
+    border: 2px solid rgb(230,230,248);
+    color: rgb(230,230,248);
 }
 
 .btn--primary{

@@ -142,7 +142,7 @@ const Service = () => {
             </div>
             <div className="service_bank_operation" id="operation">
                 <div className="service_title">
-                    Bank Operation
+                    Bank Operations
                 </div>
                 <div data-aos="zoom-in" className="service_operation_container">
                     <div  className="service_operation_block">

@@ -113,12 +113,23 @@ Open [http://localhost:3000](http://localhost:3000) and you will see the page ap
   - _Make use of RESTful API and database, deleting all the data from that user once the request is received._
 
 ## Preview
-Desktop | Phone
-----------------------------------------|--------------------------
-![DESKTOP PREVIEW](Preview/preview1.png)   | ![PHONE PREVIEW](Preview/phone_preview1.png)
-![DESKTOP PREVIEW](Preview/preview2.png)   | ![PHONE PREVIEW](Preview/phone_preview2.png)
-![DESKTOP PREVIEW](Preview/preview3.png)   | ![PHONE PREVIEW](Preview/phone_preview3.png)
-![DESKTOP PREVIEW](Preview/preview4.png)   | ![PHONE PREVIEW](Preview/phone_preview4.png)
+
+### <p align="center">Desktop View</p>
+||
+|----------------------------------------|
+|![DESKTOP PREVIEW](Preview/preview1.png)|
+|![DESKTOP PREVIEW](Preview/preview2.png)|
+|![DESKTOP PREVIEW](Preview/preview3.png)|
+|![DESKTOP PREVIEW](Preview/preview4.png)|
+
+### <p align="center">Phone View</p>
+| | | | |
+|-------------------------------|-------------------------------|-------------------------------|-------------------------------|
+|![](Preview/phone_preview1.png)|![](Preview/phone_preview2.png)|![](Preview/phone_preview3.png)|![](Preview/phone_preview4.png)|
+
+
+
+
 
 ## Epilogue
 Wow, you really read this to the end.<br>

@@ -20,7 +20,7 @@
 }
 
 .profile_name, .profile_piggybankid, .profile_savings{
-    color:rgb(220, 220, 228);
+    color:rgb(228, 228, 232);
     font-family: 'Hind', sans-serif;
     border-top: 2px solid rgb(255, 223, 79);
     border-radius: 10px;
@@ -36,7 +36,7 @@
     gap: 1rem;
 }
 
-.information_button, .billing_button, .balance_button, .payee_button, .security_button, .dangerzone_button{
+.profile_page_button, .profile_page_button_active{
     cursor: pointer;
     background-color: black;
     color: rgb(255, 223, 79);
@@ -44,7 +44,14 @@
     border-bottom-color: black;
     padding: 0 0.5vw;
     border-radius: 5px 5px 0px 0px;
-    font-size: calc(13.5px + 0.65vw);
+    font-size: calc(13.5px + 0.7vw);
+}
+
+.profile_page_button_active{
+    color: rgb(232, 232, 242);
+    font-size: calc(13px + 0.68vw);
+    border: 2px solid rgb(238, 238, 248);
+    border-bottom-color: black;
 }
 
 .profile_no_history{
@@ -205,7 +212,8 @@
     text-align: center;
 }
 
-.profile_no_payee a{
+.profile_no_payee b, .profile_no_payee i{
+    cursor: pointer;
     color: rgb(80, 223, 52);
 }
 
@@ -321,7 +329,6 @@
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     justify-content: space-around;
-    column-gap: 5rem;
     margin: 0 10rem;
 }
 
@@ -342,12 +349,13 @@
     padding: 2vw 1vw;
     cursor: pointer;
     font-family: 'PT Sans', sans-serif;
-    transition: all 0.1s ease-out;
+    transition: all 0.2s ease-out;
 }
 
 .account_operation_block:hover{
-    border-bottom: 2px solid rgb(255, 205, 40);
+    box-shadow: 4px 4px 4px 3px rgb(30,30,30);
     color: rgb(255,220,80);
+    transform: translateY(-2%);
 }
 
 .profile_verify_terminate, .profile_verify_terminate1{
@@ -361,7 +369,7 @@
 
 @media screen and (max-width: 1450px) {
     .account_operation_container{
-        column-gap: 5rem;
+        margin: 0 6rem;
     }
     .Profile{
         margin: 2rem 6rem;
@@ -369,9 +377,6 @@
 }
 
 @media screen and (max-width: 1275px) {
-    .account_operation_container{
-        column-gap: 3rem;
-    }
     .Profile{
         margin: 2rem 2rem;
         padding: 2rem 3.5rem;
@@ -417,7 +422,7 @@
     .profile_no_payee img{
         width: 128px;
     }
-    .information_button, .billing_button, .balance_button, .payee_button, .security_button, .dangerzone_button{
+    .profile_page_button, .profile_page_button_active{
         border: none;
         text-align: left;
     }
@@ -426,7 +431,6 @@
         border-bottom: 2px solid;
     }
     .account_operation_container{
-        column-gap: 5rem;
         grid-template-columns: 1fr 1fr;
     }
     
@@ -454,6 +458,9 @@
         padding: 2rem 1rem;
     }
     .profile_payee_edittxt{
+        display: none;
+    }
+    .profile_no_payee b{
         display: none;
     }
 }

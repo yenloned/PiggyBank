@@ -1,5 +1,13 @@
 .notfound{
+    color: rgb(255, 223, 79);
+    font-size: calc(15px + 1vw);
     overflow-x: hidden;
+    text-align: center;
+    font-family: 'Hind', sans-serif;
+}
+
+.notfound_header{
+    margin: 2rem 0;
 }
 .homebutton{
     background-color: black;
@@ -7,14 +15,13 @@
     border: 3px solid;
     border-radius: 6px;
     cursor: pointer;
-    font-size: 28px;
-    padding: 1px 10px;
+    font-size: calc(12px + 0.9vw);
+    padding: 0 10px;
     color: rgb(220, 220, 228);
 }
 
-.homebutton:hover{
-    font-size: 30px;
-
+.homebutton:hover, .supportbutton:hover{
+    font-size: 25px;
 }
 
 .supportbutton{
@@ -23,28 +30,13 @@
     border: 3px solid;
     border-radius: 6px;
     cursor: pointer;
-    font-size: 28px;
-    padding: 1px 10px;
+    font-size: calc(12px + 0.9vw);
+    padding: 0 10px;
     color: rgb(220, 220, 228);
 }
 
-
-h1{
-    display: block;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    color: rgb(255, 223, 79);
-    margin-top: 2rem;
-}
-
-a{
-    color: rgb(255, 223, 79);
-}
-
 .gethelp{
-    margin-left: 6rem;
-    margin-right: 6rem;
+    margin-top: 3rem;
     padding-top: 0rem;
     padding-bottom: 1rem;
     border-bottom: 2px solid rgb(255, 223, 79);

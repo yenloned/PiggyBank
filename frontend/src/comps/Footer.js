@@ -6,7 +6,7 @@ const Footer = () =>{
     return(
         <div className="footer">
         <div className='footer_icon'>
-          <a className="fas fa-piggy-bank" href='/'>PiggyBank</a>
+          <a href='/'><i className="fas fa-piggy-bank" /> PIGGYBANK</a>
         </div>
         <div className='footer_service'>
             <div className="footer_header">
@@ -41,10 +41,10 @@ const Footer = () =>{
                 Connect
             </div>
             <div className="footer_connect">
-                <a target="_blank" href="https://www.linkedin.com/in/rudy-yen-5b3173208/"><i className="fa-brands fa-linkedin"></i></a>
-                <a target="_blank" href="https://github.com/yenloned"><i className="fa-brands fa-github"></i></a>
-                <a target="_blank" href="https://reurl.cc/Np23Ek"><i className="fa-brands fa-instagram"></i></a>
-                <a target="_blank" href="https://reurl.cc/Np23Ek"><i className="fa-brands fa-facebook"></i></a>
+                <a target="_blank" rel="noopener noreferrer" href="https://www.linkedin.com/in/rudy-yen-5b3173208/"><i className="fa-brands fa-linkedin"></i></a>
+                <a target="_blank" rel="noopener noreferrer" href="https://github.com/yenloned"><i className="fa-brands fa-github"></i></a>
+                <a target="_blank" rel="noopener noreferrer" href="https://reurl.cc/Np23Ek"><i className="fa-brands fa-instagram"></i></a>
+                <a target="_blank" rel="noopener noreferrer" href="https://reurl.cc/Np23Ek"><i className="fa-brands fa-facebook"></i></a>
             </div>
         </div>
         <div className="footer_copyright">

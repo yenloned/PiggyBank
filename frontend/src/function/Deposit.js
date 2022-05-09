@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import Axios from "axios";
 import './function.css';
 
-import cash_deposit from "../material/pictures/cash_deposit.png";
+import deposit_icon2 from "../material/icons/deposit_icon2.png";
 
 import {LoginStatusContext} from "../context/LoginContext";
 import {LoginIDContext} from "../context/LoginContext";
@@ -50,12 +50,12 @@ const Deposit = () => {
     return (
         <div className="deposit">
             <div className="transfer_container">
-                <div className="transfer_goback"><a className="fas fa-arrow-alt-circle-left" href="/profile"></a></div>
+                <div className="transfer_goback"><a href="/profile"><i className="fas fa-arrow-alt-circle-left" /></a></div>
                 <div className="transfer_payee_choice">
                     Deposit
                 </div>
                 <div className="transfer_choice_icon">
-                    <img src={cash_deposit} width='120' alt=""/>
+                    <img src={deposit_icon2} width='120' alt=""/>
                 </div>
                 <div className="transfer_amount">
                     <div>HKD Amount</div>

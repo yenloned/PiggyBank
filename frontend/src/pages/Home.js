@@ -74,7 +74,7 @@ const Home = () => {
                         </div>
                         <div data-aos="fade-down" data-aos-duration="1200">
                             {loginStatus ? (
-                            <a className="homeWelcome">
+                            <a className="homeWelcome" href="profile">
                                 Welcome Back! {userFirstName} {userLastName}
                             </a>
                             ) :(

@@ -9,6 +9,10 @@
     padding: 5rem 0;
 }
 
+.footer_icon {
+    font-weight: bolder;
+}
+
 .footer_icon a, .footer_service a, .footer_knowmore a, .footer_support a, .footer_connect a{
     text-decoration: none;
     color: rgb(220, 220, 228);

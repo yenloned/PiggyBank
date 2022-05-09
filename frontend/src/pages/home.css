@@ -34,7 +34,7 @@ html,body{
 }
 
 .headertxt{
-    font-size: calc(10px + 1.2vw);
+    font-size: calc(13px + 1vw);
     text-align: left;
     margin-left: auto;
     margin-right: auto;
@@ -105,7 +105,7 @@ html,body{
 }
 
 .homeLeftGridBody{
-    font-size: calc(12px + 0.5vw);
+    font-size: calc(12.5px + 0.5vw);
     font-family: 'Heebo', sans-serif;
     color:rgb(220, 220, 228);
     padding: 0rem 20rem 0rem 2.5rem;
@@ -121,7 +121,7 @@ html,body{
 }
 
 .homeRightGridBody{
-    font-size: calc(12px + 0.5vw);
+    font-size: calc(12.5px + 0.5vw);
     font-family: 'Heebo', sans-serif;
     color:rgb(220, 220, 228);
     padding: 0rem 2.5rem 0rem 20rem;
@@ -164,7 +164,7 @@ html,body{
 }
 
 .homeDisplayHeader{
-    font-size: calc(13.5px + 1.2vw);
+    font-size: calc(14px + 1.12vw);
     text-align: center;
     margin-bottom: 10px;
     padding-top: 2rem;
@@ -173,14 +173,14 @@ html,body{
 
 .homeDisplayTxt{
     font-family: 'Hind', sans-serif;
-    font-size: calc(12px + 0.7vw);
+    font-size: calc(13px + 0.6vw);
     color: rgb(255, 223, 79);
     text-align: center;
 }
 
 .homeDisplayQuote{
     font-style: italic;
-    font-size: calc(10.5px + 0.65vw);
+    font-size: calc(12px + 0.55vw);
     font-family: 'Heebo', sans-serif;
     color:rgb(220, 220, 228);
     padding-bottom: 2rem;

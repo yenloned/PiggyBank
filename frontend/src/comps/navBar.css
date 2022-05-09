@@ -51,7 +51,8 @@
 }
 
 .nav-links:hover{
-    border-bottom: 2px solid rgb(255, 223, 79);
+    color: rgb(230,230,248);
+    transition: 100ms;
 }
 
 .fa-bars {
@@ -68,7 +69,7 @@
 /*  hidden the elements shown on the right side of navigation bar, display the menu button.
     In this point, the navigation bar will be displayed for phone user.
     The elements get from NavItem.js will now only display after clicking the menu button. */
-@media screen and (max-width:1014px) {
+@media screen and (max-width:1075px) {
     .navbar {
         position: sticky;
         position: -webkit-sticky;

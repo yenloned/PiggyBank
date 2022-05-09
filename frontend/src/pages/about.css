@@ -14,8 +14,9 @@
     padding-top: 20vh;
     padding-left: 8vw;
     font-size: calc(30px + 1vw);
-    color:rgb(220, 220, 228);
-
+    color:rgb(238, 238, 242);
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: bolder;
 }
 
 .about_header_txt2{
