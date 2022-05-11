@@ -8,7 +8,7 @@ const NotFound = () => {
     return (
         <div className="notfound">
             <div className="notfound_header">
-                I don't think there is what you are asking for...<br/>
+                I don't think there is what you are looking for...<br/>
                 Why are you here anyway?<br/>
             </div>
             <img src={notfound} alt="" width='300px' /><br/>

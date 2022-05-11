@@ -45,21 +45,23 @@
 
 .service_operation_block:hover{
     transition: all 0.3s ease-out;
-    box-shadow: 12px 12px 12px rgb(18, 18, 18);
+    box-shadow: 12px 12px 12px rgb(15, 15, 15);
     transform: translateY(-6.5%);
 }
 
 .service_insurance_block:hover{
     border-top: none;
     transition: all 0.3s ease-out;
-    box-shadow: 8px 8px 8px 6px rgb(15, 15, 15);
+    box-shadow: 10px 10px 10px 8px rgb(12, 12, 12);
     transform: translateY(-8%);
 }
 
 .service_block_title{
     margin-top: 1.5rem;
-    font-family: 'Hind', sans-serif;
+    font-family: 'Fira Sans', sans-serif;
     font-size: calc(16px + 0.8vw);
+    font-weight: bold;
+    margin-bottom: 0.5rem;
 }
 
 .service_block_list{
@@ -69,11 +71,11 @@
     position: absolute;
     width: 80%;
     transition: ease-in 200ms;
-    color: rgb(230,230,240);
+    color: rgb(225,225,235);
 }
 
 .service_block_list i{
-    color: rgb(255, 223, 79);
+    color: rgb(233,233,242);
     font-size: calc(12px + 0.5vw);
 }
 
@@ -143,6 +145,7 @@
 .calculator_title2{
     color: rgb(255, 223, 79);
     font-size: calc(16px + 0.75vw);
+    margin-top: 0.5rem;
 }
 
 .calculator_content{
@@ -264,21 +267,20 @@
     font-size: calc(16.5px + 0.6vw);
     border-radius: 20px;
     margin: 3rem;
-    background: linear-gradient(360deg, rgb(50, 50, 50) 0%, rgb(150, 150, 150) 100%);
+    background: linear-gradient(360deg, rgb(40, 40, 40) 0%, rgb(120, 120, 120) 100%);
     padding: 0 0.8rem;
     cursor: pointer;
 }
 
 .service_get_started a {
-    color: rgb(230,230,230);
+    color: rgb(245,245,252);
     text-decoration: none;
 }
 
 .service_get_started:hover{
-    border: 5px solid rgb(0, 0, 0);
-    background: linear-gradient(360deg, rgb(80, 80, 80) 0%, rgb(150, 150, 150) 100%);
+    background: linear-gradient(360deg, rgb(55, 55, 55) 0%, rgb(120, 120, 120) 100%);
     transition: 100ms ease-in-out;
-    font-size: calc(15px + 0.6vw);
+    font-size: calc(16px + 0.6vw);
 }
 
 .service_insurance_subtitle{
@@ -296,8 +298,7 @@
 .service_insurance_block{
     background: linear-gradient(360deg, rgb(10, 10, 10) 0%, rgb(40, 40, 40) 100%);
     padding: 1.5rem;
-    border-top: 2px solid rgb(255, 223, 79);
-    border-radius: 30px 30px 4px 4px;
+    border-radius: 15px 15px 4px 4px;
     cursor: pointer;
 }
 

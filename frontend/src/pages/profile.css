@@ -96,6 +96,10 @@
     cursor: pointer;
 }
 
+.profile_billing_history .profile_billing_topic div{
+    cursor: pointer;
+}
+
 .profile_billing_history_block{
     overflow-y: auto;
     height: calc(100px + 5vh);

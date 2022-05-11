@@ -16,7 +16,7 @@ export const GeneralItem = [
     answer: "PiggyBank will use HKD as all base calculation and function."
 },
 {
-    question: "How do PiggyBank works?",
+    question: "How does PiggyBank work?",
     answer: "PiggyBank does not invovle any real value since it only used as education demo."
 },
 {

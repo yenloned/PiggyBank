@@ -39,6 +39,7 @@
 }
 
 .debt_notexist{
+    margin-top: 2rem;
     text-align: center;
 }
 
@@ -49,15 +50,26 @@
 }
 
 .debt_notexist_goback button{
-    font-size: calc(12px + 0.45vw);
+    font-size: calc(13.5px + 0.35vw);
     background-color: rgb(220, 220, 228);
+    border-radius: 20px;
     cursor: pointer;
     font-family: 'Hind', sans-serif;
     font-weight: bold;
-    padding: 0.2rem;
+    padding: 0.2rem 0.8rem;
 }
 
 .debt_notexist_goback a{
     color:rgb(0, 0, 0);
     text-decoration: none;
+}
+
+.debt_notexist_goback button:hover{
+    background-color: rgb(200, 200, 208);
+}
+
+@media screen and (max-width:600px) {
+    .debt_notexist_png img{
+        width: 180px;
+    }
 }

@@ -90,7 +90,7 @@ const Debt = () => {
         {loginStatus && userDebt ? (
             <div>
             <div className="debt_topic">
-                <i className="fas fa-arrow-alt-circle-left" onClick={()=> navigate("/profile")}></i> Debt
+                <a href="/profile"><i className="fas fa-arrow-alt-circle-left" /></a> Debt
             </div>
             {userDebt.length ? 
             <div>
@@ -120,13 +120,13 @@ const Debt = () => {
             :
             <div className="debt_notexist">
                 <div className="debt_notexist_png">
-                    <img loading="lazy" src={without_debt} width='300' alt=""/>
+                    <img loading="lazy" src={without_debt} width='240' alt=""/>
                 </div>
                 <div className="debt_notexist_txt">
-                    Well, look like you don't have any Debt so far.
+                    You do not have any Debt in current.
                 </div>
                 <div className="debt_notexist_goback">
-                    <button><a href="/profile">Back to Profile</a></button>
+                    <button><a href="/loan">Check out PiggyBank Loan</a></button>
                 </div>
             </div>
             }

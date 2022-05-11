@@ -303,7 +303,12 @@ router.get('/logout', function(req, res) {
     const searchingRef = req.body.searchingRef
     const searchingID = req.body.searchingID
 
+    //setting timezone
+    let ts = Date.now();
+    let time = new Date(ts).toLocaleString("en-US", { timeZone: "Asia/Hong_Kong" });
 
+    db_user.query("INSERT INTO history (fromwho, towho, type, amount, date) VALUES (?,?,?,?,?);",
+    [searchingID, searchingID, "Pay Off", debtAmount, time])
     db_user.query("UPDATE user SET balance = balance - ? WHERE user_id = ?;",
     [debtAmount, searchingID])
     db_user.query("DELETE FROM debt WHERE ref = ?;", searchingRef, (err, result) => {

@@ -88,7 +88,7 @@ const History = () => {
                         <img loading="lazy" src={no_history_detail} width='300' alt=""/>
                     </div>
                     <div className="debt_notexist_txt">
-                        Well, look like you don't have any Transaction History so far.
+                        Literally Nothing Here
                     </div>
                     <div className="debt_notexist_goback">
                         <button><a href="/profile">Back to Profile</a></button>

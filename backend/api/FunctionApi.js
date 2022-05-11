@@ -89,4 +89,25 @@ router.post("/deposit", (req, res) =>{
     [deposit_userid, deposit_userid, "Deposit", deposit_amount, time])
 })
 
+//loan
+router.post("/loan", (req, res) =>{
+    const loan_userid = req.body.loan_userid
+    const loan_amount = req.body.amount
+    const loan_tenor = req.body.tenor
+    const loan_repay = req.body.repay
+
+    //setting timezone
+    let ts = Date.now();
+    let time = new Date(ts).toLocaleString("en-US", { timeZone: "Asia/Hong_Kong" });
+
+    db_user.query("UPDATE user SET balance = balance + ? WHERE user_id = ?;",
+    [loan_amount, loan_userid])
+
+    db_user.query("INSERT INTO debt (user_id, total, monthly, tenor, type, date) VALUES (?,?,?,?,?,?);",
+    [loan_userid, loan_repay*loan_tenor, loan_repay, loan_tenor, "Loan", time])
+
+    db_user.query("INSERT INTO history (fromwho, towho, type, amount, date) VALUES (?,?,?,?,?);",
+    [loan_userid, loan_userid, "Loan", loan_amount, time])
+})
+
 module.exports = router

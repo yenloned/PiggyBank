@@ -436,7 +436,7 @@ const Profile = () => {
                             </div>
                             <div className="profile_billing_history">
                                 <div className="profile_billing_topic" onClick={() => navigate("/history") }>
-                                    Transaction History <i className="fa-solid fa-arrow-right-long"></i>
+                                    <div>Transaction History <i className="fa-solid fa-arrow-right-long"></i></div>
                                 </div>
                                 {userHistory.length ?
                                 <div>
@@ -483,7 +483,7 @@ const Profile = () => {
                                 <div className="profile_userdata">HKD {userBalance.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</div>
                                 <div className="profile_debt">Debt </div>
                                 <div className="profile_debt_block">
-                                    <div className="profile_userdata">HKD {userDebt}</div>
+                                    <div className="profile_userdata">HKD {userDebt.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</div>
                                     <div className="profile_debtview" onClick={() => navigate('/debt')}>View Detail</div>
                                 </div>
                                 <div className="profile_credit">Credit Rating <i className="fas fa-info-circle" onClick={() => set_credit_button(!credit_button)}/></div>

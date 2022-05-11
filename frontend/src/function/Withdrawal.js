@@ -1,5 +1,4 @@
 import React, {useContext, useLayoutEffect, useState} from "react";
-import { useNavigate } from "react-router-dom";
 import Axios from "axios";
 import './function.css';
 
@@ -10,7 +9,6 @@ import {LoginIDContext} from "../context/LoginContext";
 
 const Withdrawal = () => {
     Axios.defaults.withCredentials = true;
-    const navigate = useNavigate()
 
     const {loginStatus} = useContext(LoginStatusContext);
     const {loginID} = useContext(LoginIDContext);
@@ -51,7 +49,7 @@ const Withdrawal = () => {
 
     useLayoutEffect(() => {
         if (!loginStatus){
-            navigate('/login')
+            window.location.replace('/login')
         }
     })
 

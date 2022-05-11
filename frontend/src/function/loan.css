@@ -1,0 +1,241 @@
+.loan{
+    overflow-x: hidden;
+    color: rgb(255, 223, 79);
+    font-family: 'Hind', sans-serif;
+}
+
+.loan_form{
+    margin: 3vw 5vw;
+    background: linear-gradient(360deg, rgb(5, 5, 5) 0%, rgb(30, 30, 30) 100%);
+    border-radius: 30px;
+    padding: 2vw 4vw;
+}
+
+.loan_subtitle{
+    font-size: calc(18px + 1vw);
+    padding-bottom: 0.2rem;
+    border-bottom: 2px solid;
+}
+
+.loan_userinfo{
+    padding: 1.5vw 6vw;
+    display: grid;
+    grid-template-columns: auto auto;
+    justify-content: space-around;
+}
+
+.loan_userinfo_block{
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1.5rem;
+}
+
+.loan_info_topic{
+    font-family: 'Fira Sans', sans-serif;
+    font-size: calc(15px + 0.6vw);
+}
+
+.loan_info_data input{
+    text-align: center;
+    background: linear-gradient(360deg, rgb(32, 32, 32) 5%, rgb(52, 52, 52) 100%);
+    color: rgb(232,232,232);
+    font-size: calc(14px + 0.5vw);
+    padding: 0.2rem 0;
+    border: none;
+    border-radius: 8px;
+    border-bottom: 2px solid rgb(192, 192, 198);
+    min-width: 350px;
+}
+
+.loan_info_quote{
+    font-size: calc(12px + 0.4vw);
+    color: rgb(202,202,202);
+}
+
+.loan_credit{
+    text-align: center;
+}
+
+.loan_credit_rate{
+    font-size: calc(20px + 0.5vw);
+    font-family: 'Hind', sans-serif;
+    color: rgb(232, 232, 242);
+}
+
+.loan_choice{
+    padding: 2rem 0;
+    display: flex;
+    justify-content: space-around;
+}
+
+.loan_choice_block, .loan_choice_block_active{
+    cursor: pointer;
+    min-width: 400px;
+    padding: calc(1rem + 0.5vw);
+    color: rgb(228, 228, 232);
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    font-size: calc(24px + 0.5vw);
+    background: linear-gradient(360deg, rgb(18, 18, 18) 0%, rgb(35, 35, 35) 100%);
+}
+
+.loan_choice_block_active{
+    background: linear-gradient(360deg, rgb(25, 25, 25) 0%, rgb(75, 75, 75) 100%);
+}
+
+.loan_choice_block img, .loan_choice_block_active img {
+    margin: auto auto;
+}
+
+.loan_choice_block:hover{
+    transition: all 0.1s ease-out;
+    background: linear-gradient(360deg, rgb(22, 22, 22) 0%, rgb(48, 48, 48) 100%);
+}
+
+.loan_typetitle{
+    text-align: center;
+    font-size: calc(18px + 1vw);
+    margin-bottom: 0.5rem;
+}
+
+.loan_notyet_choose{
+    text-align: center;
+    font-size: calc(15px + 0.75vw);
+}
+
+.loan_personal{
+    text-align: center;
+}
+
+.loan_range{
+    color: rgb(238,238,245);
+}
+
+.loan_range_result input{
+    -moz-appearance: textfield;
+    color: rgb(233, 233, 238);
+    text-align: center;
+    font-size: calc(16px + 0.6vw);
+    background-color: rgb(25,25,25);
+    padding: 0.3rem;
+    border: 1px solid;
+    margin-bottom: 1.5rem;
+    min-width: 8rem;
+    max-width: 10rem;
+    font-weight: bold;
+}
+
+.loan_range_result input::-webkit-inner-spin-button, 
+.loan_range_result input::-webkit-outer-spin-button{ 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
+
+.loan_apply{
+    margin-top: 1vw;
+}
+
+.loan_apply button{
+    font-size: calc(15px + 0.55vw);
+    padding: 0.2rem 1rem;
+    border-radius: 20px;
+    color: rgb(246, 246, 252);
+    background: linear-gradient(360deg, rgb(32, 32, 32) 0%, rgb(52, 52, 52) 100%);
+    border: 2px solid rgb(202, 202, 192);
+    cursor: pointer;
+}
+
+.loan_apply button:hover{
+    background: linear-gradient(360deg, rgb(38, 38, 38) 0%, rgb(75, 75, 75) 100%);
+}
+
+.loan_statement{
+    padding-top: 2rem;
+    margin: 0 15vw;
+    text-align: justify;
+    font-size: calc(13px + 0.25vw);
+    color: rgb(228, 228, 232);
+}
+
+.mortgage_address input, .credit_card_security input{
+    background: linear-gradient(360deg, rgb(32, 32, 32) 5%, rgb(52, 52, 52) 100%);
+    color: rgb(232,232,232);
+    font-size: calc(14px + 0.5vw);
+    padding: 0.2rem 0;
+    border: none;
+    border-radius: 4px 4px 0 0;
+    border-bottom: 2px solid rgb(192, 192, 198);
+    min-width: 600px;
+    text-align: center;
+}
+
+.credit_card_security input{
+    min-width: 180px;
+    width: 180px;
+}
+
+.missing_credit{
+    margin: 3.5rem 0;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    color: rgb(232,232,232);
+    font-size: calc(14px + 0.5vw);
+}
+
+.missing_credit img {
+    margin: 1.5rem auto;
+}
+
+.loan_msg{
+    margin-top: 1rem;
+    font-size: calc(12.5px + 0.2vw);
+    color: rgb(253, 46, 46);
+}
+
+@media screen and (max-width: 1450px) {
+    .loan_choice{
+        flex-direction: column;
+        gap: 2rem;
+        align-items: center;
+    }
+}
+
+@media screen and (max-width: 1000px){
+    .loan_userinfo{
+        grid-template-columns: auto;
+    }
+}
+@media screen and (max-width: 900px){
+    .loan_range{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+@media screen and (max-width: 750px) {
+    .loan_choice_block img, .loan_choice_block_active img{
+        width: 144px;
+    }
+    .mortgage_address input{
+        min-width: 350px;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .loan_choice_block img, .loan_choice_block_active img{
+        width: 108px;
+    }
+    .loan_choice_block, .loan_choice_block_active{
+        min-width: 250px;
+    }
+    .loan_info_data input{
+        min-width: 250px;
+    }
+    .mortgage_address input{
+        min-width: 220px;
+    }
+}

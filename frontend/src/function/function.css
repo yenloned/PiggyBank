@@ -106,9 +106,6 @@
     border-radius: 20px;
 }
 
-/* Loan */
-
-
 @media screen and (max-width:1050px) {
     .by_payee{
         grid-template-columns: auto;

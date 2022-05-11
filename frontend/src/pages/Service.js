@@ -312,7 +312,7 @@ const Service = () => {
                 </div>
                 <div data-aos="zoom-in">
                     <button className="service_get_started">
-                        <a href="/loan">Apply Now</a>
+                        <a href="/loan">Check Out More</a>
                     </button>
                 </div>
             </div>
@@ -356,7 +356,7 @@ const Service = () => {
                     </div>
                 </div>
                 <div data-aos="zoom-in" className="service_demotxt">
-                    YOU CAN SELECT THE INSURANCE PLAN AND TRY OUR DEMO IN THE INSURANCE CALCULATOR BELOW.
+                    YOU CAN SUBSCRIBE OUR INSURANCE PLAN WITH THE INSURANCE CALCULATOR BELOW.
                 </div>
                 <div className="service_insurance_calculator"> 
                     <div data-aos="fade-in" className="calculator_title">
