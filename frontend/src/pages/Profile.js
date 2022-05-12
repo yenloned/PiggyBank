@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import Axios from "axios";
 import './profile.css';
 
+import no_sub from "../material/pictures/no_sub.png"
 import no_history from "../material/pictures/no_history.png"
 import no_payee from "../material/pictures/no_payee.png"
 import transfer_icon from "../material/icons/transfer_icon.png"
@@ -38,6 +39,9 @@ const Profile = () => {
     const [payeeAdd_ID, setPayeeAdd_ID] = useState("")
     const [payeeAdd_Name, setPayeeAdd_Name] = useState("")
     const [payeeAdd_Msg, setPayeeAdd_Msg] = useState("")
+
+    //user subscription
+    const [userSub, setUserSub] = useState([])
 
     //user history
     const [userHistory, setUserHistory] = useState([])
@@ -102,6 +106,7 @@ const Profile = () => {
     const switch_billing = () =>{
         set_profile_button("billing")
         get_history()
+        get_sub()
     }
     //switching pages to payee by component state change
     const switch_payee = () =>{
@@ -184,6 +189,17 @@ const Profile = () => {
         })
     }
 
+    //get all subscription by user ID
+    const get_sub = async () => {
+        await Axios.post("http://localhost:3005/profile/get_sub",{
+        searchingID: loginID})
+        .then((subscription) => {
+            if (subscription.data.length){
+                setUserSub(subscription.data)
+            }
+        })
+    }
+
     //get all payee information by user ID
     const get_payee = () => {
         Axios.post("http://localhost:3005/profile/get_payee",{
@@ -198,8 +214,6 @@ const Profile = () => {
         setPayeeAdd_ID("")
         setPayeeAdd_Name("")
     }
-
-    //JWT Token will be checked for below actions
 
     //Add payee by another user ID, checking input before sending the request into backend
     const add_payee = async() => {
@@ -219,7 +233,7 @@ const Profile = () => {
             check_payee_id: payeeAdd_ID
         }).then((checkresult) =>{
             //If yes, update component to display the error message
-            if(checkresult.data !== ''){
+            if(checkresult.data.length){
                 setPayeeAdd_Msg("Payee already registered on your list.")
             }else{
                 //If no, check if the payee (userID) really exist
@@ -365,7 +379,7 @@ const Profile = () => {
         .then((err) => {
               console.log(err)
         })
-        navigate('/')
+        window.location.replace("/")
     }
 
     return (
@@ -428,11 +442,30 @@ const Profile = () => {
                         <div className="profile_billing">
                             <div className="profile_billing_plan">
                                 <div className="profile_billing_topic">Subscription</div>
-                                <div className="profile_billing_Row">
-                                    <div className="profile_plan_plan">Plan</div>
-                                    <div className="profile_plan_type">Type</div>
-                                    <div className="profile_plan_date">Date</div>
+                                {userSub.length ?
+                                <div>
+                                    <div className="profile_billing_Row">
+                                        <div className="profile_plan_plan">Plan</div>
+                                        <div className="profile_plan_type">Type</div>
+                                        <div className="profile_plan_date">Date</div>
+                                    </div>
+                                    {userSub.map((data, key) => {
+                                        return(
+                                            <div className="profile_billing_Row" key={key}>
+                                                <div className="profile_billing_data"> {data.plan} </div>
+                                                <div className="profile_billing_data"> {data.type} </div>
+                                                <div className="profile_billing_data"> {data.date.split(',')[0]} </div>
+                                            </div>
+                                        )
+                                    })}
                                 </div>
+                                :
+                                <div className="profile_no_history">
+                                    <img loading="lazy" src={no_sub} width='128' alt=""/>
+                                    <div>You don't have any Subscription yet.</div>
+                                    <a href="/service#insurance">Browse Piggy Insurance</a>
+                                </div>
+                                }
                             </div>
                             <div className="profile_billing_history">
                                 <div className="profile_billing_topic" onClick={() => navigate("/history") }>
@@ -450,7 +483,7 @@ const Profile = () => {
                                         return(
                                             <div className="profile_billing_Row" key={key}>
                                                 <div className="profile_billing_data">
-                                                    HKD {data.type === "Transfer" && data.fromwho === loginID
+                                                    HKD {(data.type === "Transfer" && data.fromwho === loginID) || data.type === "Pay Off" || data.type === "Subscription"
                                                     ?
                                                     ((-data.amount).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","))
                                                     : 

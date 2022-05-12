@@ -58,7 +58,17 @@
     color: rgb(220, 220, 228);
     text-align: center;
     margin-top: 3rem;
-    font-size: calc(12px + 0.75vw);
+    font-size: calc(13px + 0.65vw);
+}
+
+.profile_no_history a{
+    text-decoration: none;
+    border-bottom: 2px solid;
+    font-size: calc(12px + 0.6vw);
+}
+
+.profile_no_history a:hover{
+    color: rgb(238,238,248);
 }
 
 .AccountContainerRow3{

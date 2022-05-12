@@ -321,6 +321,10 @@ router.get('/logout', function(req, res) {
      const user_id_delteaccount = req.body.user_id_deleteaccount
 
      db_user.query("DELETE FROM user WHERE user_id = ?;",user_id_delteaccount)
+     db_user.query("DELETE FROM debt WHERE user_id = ?;",user_id_delteaccount)
+     db_user.query("DELETE FROM history WHERE fromwho = ?;",user_id_delteaccount)
+     db_user.query("DELETE FROM payee WHERE user_id = ?;",user_id_delteaccount)
+     db_user.query("DELETE FROM subscription WHERE user_id = ?;",user_id_delteaccount)
  })
 
 module.exports = router

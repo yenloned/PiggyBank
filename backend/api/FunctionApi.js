@@ -110,4 +110,25 @@ router.post("/loan", (req, res) =>{
     [loan_userid, loan_userid, "Loan", loan_amount, time])
 })
 
+//insurance
+router.post("/insurance", (req, res) =>{
+    const insurance_userid = req.body.insurance_userid
+    const plan_name = req.body.plan_name
+    const insurance_repay = req.body.insurance_repay
+    const insurance_amount = req.body.insurance_amount
+
+    //setting timezone
+    let ts = Date.now();
+    let time = new Date(ts).toLocaleString("en-US", { timeZone: "Asia/Hong_Kong" });
+
+    db_user.query("UPDATE user SET balance = balance - ? WHERE user_id = ?;",
+    [insurance_repay, insurance_userid])
+
+    db_user.query("INSERT INTO subscription (user_id, assure, repay, plan, type, date) VALUES (?,?,?,?);",
+    [insurance_userid, insurance_amount, insurance_repay, plan_name, "Insurance", time])
+
+    db_user.query("INSERT INTO history (fromwho, towho, type, amount, date) VALUES (?,?,?,?,?);",
+    [insurance_userid, insurance_userid, "Subscription", insurance_repay, time])
+})
+
 module.exports = router

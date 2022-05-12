@@ -49,7 +49,7 @@
     transform: translateY(-6.5%);
 }
 
-.service_insurance_block:hover{
+.service_insurance_block:hover, .service_insurance_block_active:hover{
     border-top: none;
     transition: all 0.3s ease-out;
     box-shadow: 10px 10px 10px 8px rgb(12, 12, 12);
@@ -101,7 +101,7 @@
     width: 350px;
 }
 
-.service_insurance_block{
+.service_insurance_block, .service_insurance_block_active{
     width: 420px;
 }
 
@@ -262,19 +262,20 @@
     margin: 0 8vw;
 }
 
+.service_get_started a{
+    color: rgb(245,245,252);
+    text-decoration: none;
+}
+
 .service_get_started{
     font-family: 'Hind', sans-serif;
     font-size: calc(16.5px + 0.6vw);
     border-radius: 20px;
-    margin: 3rem;
+    margin: 3rem 3rem 1.5rem 3rem;
     background: linear-gradient(360deg, rgb(40, 40, 40) 0%, rgb(120, 120, 120) 100%);
     padding: 0 0.8rem;
-    cursor: pointer;
-}
-
-.service_get_started a {
     color: rgb(245,245,252);
-    text-decoration: none;
+    cursor: pointer;
 }
 
 .service_get_started:hover{
@@ -295,11 +296,15 @@
     justify-content: space-around;
 }
 
-.service_insurance_block{
+.service_insurance_block, .service_insurance_block_active{
     background: linear-gradient(360deg, rgb(10, 10, 10) 0%, rgb(40, 40, 40) 100%);
     padding: 1.5rem;
     border-radius: 15px 15px 4px 4px;
     cursor: pointer;
+}
+
+.service_insurance_block_active{
+    background: linear-gradient(360deg, rgb(15, 15, 15) 0%, rgb(52, 52, 52) 100%);
 }
 
 .service_insurance_calculator{
@@ -357,11 +362,23 @@
     margin-bottom: 3rem;
 }
 
+.cancer_insurance_msg{
+    color: rgb(238, 238, 245);
+    font-size: calc(17.5px + 0.5vw);
+    margin-bottom: 1.5rem;
+}
+
+.insurance_msg{
+    font-size: calc(13.5px + 0.4vw);
+    color: rgb(255, 52, 52);
+    padding-bottom: 1.5rem;
+}
+
 @media screen and (max-width:1600px) {
     .service_insurance_choice{
         flex-direction: column;
     }
-    .service_insurance_block{
+    .service_insurance_block, .service_insurance_block_active{
         width: 100%;
         display: flex;
         gap: calc(2rem + 5vw);
@@ -439,12 +456,12 @@
         align-items: center;
         gap: 2.5rem;
     }
-    .service_insurance_block{
+    .service_insurance_block, .service_insurance_block_active{
         flex-direction: column;
         gap: 1rem;
         width: 330px;
     }
-    .service_insurance_block img{
+    .service_insurance_block img, .service_insurance_block_active img{
         width: 128px;
     }
     .cancer_insurance_choice{

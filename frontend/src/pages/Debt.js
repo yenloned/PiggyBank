@@ -120,13 +120,13 @@ const Debt = () => {
             :
             <div className="debt_notexist">
                 <div className="debt_notexist_png">
-                    <img loading="lazy" src={without_debt} width='240' alt=""/>
+                    <img loading="lazy" src={without_debt} width='192' alt=""/>
                 </div>
                 <div className="debt_notexist_txt">
                     You do not have any Debt in current.
                 </div>
                 <div className="debt_notexist_goback">
-                    <button><a href="/loan">Check out PiggyBank Loan</a></button>
+                    <a href="/loan">Check out PiggyBank Loan</a>
                 </div>
             </div>
             }

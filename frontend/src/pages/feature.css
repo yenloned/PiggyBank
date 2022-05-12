@@ -1,0 +1,41 @@
+.feature{
+    overflow-x: hidden;
+    color: rgb(255, 223, 79);
+    font-family: 'Hind', sans-serif;
+}
+
+.feature_topic_container{
+    display: flex;
+    justify-content: space-evenly;
+    margin-bottom: 2.5rem;
+}
+
+.feature_topic_block{
+    text-align: center;
+    width: 380px;
+}
+
+.feature_topic{
+    font-size: calc(20px + 0.6vw);
+    margin-bottom: 0.5rem;
+    font-family: 'Fira Sans', sans-serif;
+    font-weight: bold;
+}
+
+.feature_topic_quote{
+    color: rgb(228,228,234);
+    font-size: calc(14.5px + 0.5vw);
+    font-family: 'Heebo', sans-serif;
+    font-weight: bold;
+}
+
+.feature_container{
+    display: grid;
+    grid-template-columns: auto auto;
+    justify-content: space-evenly;
+}
+
+.feature_block{
+    width: 180px;
+    text-align: center;
+}

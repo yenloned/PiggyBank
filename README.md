@@ -86,7 +86,9 @@ Open [http://localhost:3000](http://localhost:3000) and you will see the page ap
 * Transfer / Withdrawal / Deposit
   - _Make use of RESTful API and database, to update the user's balance data once the transfer request is received from users._
 * Loan
+  - _Make use of RESTful API and database, to update the user's balance and debt data once the loan application request is received from users._
 * Insurance
+  - _Make use of RESTful API and database, to update the user's balance and subscription data once the insurance application request is received from users._
 
 ## Features
 * JWT Token

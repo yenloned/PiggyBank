@@ -90,7 +90,7 @@ const History = () => {
                     <div className="debt_notexist_txt">
                         Literally Nothing Here
                     </div>
-                    <div className="debt_notexist_goback">
+                    <div className="hisotry_notexist_goback">
                         <button><a href="/profile">Back to Profile</a></button>
                     </div>
                 </div>

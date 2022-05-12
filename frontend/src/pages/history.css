@@ -17,6 +17,18 @@
     font-size: calc(16.5px + 0.85vw);
 }
 
+.hisotry_notexist_goback a{
+    color: black;
+    background-color: rgb(233,233,242);
+    text-decoration: none;
+    font-size: calc(14.5px + 0.3vw);
+    padding: 0.1rem 0.5rem;
+}
+
+.hisotry_notexist_goback a:hover{
+    background-color: rgb(253,253,255);
+}
+
 @media screen and (max-width:500px) {
     .history_row1, .history_row2{
         flex-direction: column;

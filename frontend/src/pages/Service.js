@@ -1,5 +1,7 @@
-import React, {useState, useEffect} from "react";
+import React, {useState, useEffect, useContext} from "react";
 import './service.css';
+
+import Axios from "axios";
 
 import AOS from 'aos';
 import 'aos/dist/aos.css';
@@ -17,8 +19,15 @@ import cancer_insurance from "../material/pictures/cancer_insurance.png"
 import life_insurance from "../material/pictures/life_insurance.png"
 
 import Footer from '../comps/Footer';
+import {LoginIDContext} from "../context/LoginContext";
+import {LoginStatusContext} from "../context/LoginContext";
 
 const Service = () => {
+
+    Axios.defaults.withCredentials = true;
+
+    const {loginID} = useContext(LoginIDContext);
+    const {loginStatus} = useContext(LoginStatusContext);
     
     //loan
     const [calculatorAmount, setCalculatorAmount] = useState(10000)
@@ -43,6 +52,12 @@ const Service = () => {
     const [accidentGender, setAccidentGender] = useState("male")
     const [accidentBonus, setAccidentBonus] = useState(1)
 
+    const [insuranceMsg, setInsuranceMsg] = useState("")
+
+    const switch_insurance = (plan) => {
+        setInsuranceChoice(plan)
+        setInsuranceMsg("")
+    }
 
     const switchingGender = (switchID, disableID, gender) => {
         const turnOn = document.getElementById(switchID)
@@ -75,7 +90,7 @@ const Service = () => {
     }
 
     useEffect( () => {
-        AOS.init({duration: 600})
+        AOS.init({duration: 650})
         setCalculatorAmount(Math.floor(calculatorAmount))
         setCalculatorTenor(Math.floor(calculatorTenor))
         setCalculatorMFR(Math.floor(calculatorAPR/(calculatorTenor*1.9) * 100) / 100)
@@ -134,6 +149,28 @@ const Service = () => {
             setAccidentBonus(1)
         }
     })
+
+    const apply_insurance = (type, repay, amount) => {
+        if (!loginStatus){
+            window.location.replace("/login")
+        }else{
+            Axios.post("http://localhost:3005/profile/check_sub",{
+                searchingID: loginID
+            }).then((result) => {
+                if (!result.data.length){
+                    Axios.post("http://localhost:3005/function/insurance",{
+                        insurance_userid: loginID,
+                        insurance_repay: repay,
+                        insurance_amount: amount,
+                        plan_name: type
+                    })
+                    window.location.replace("/history")
+                }else{
+                    setInsuranceMsg("You have already subscribed to this plan.")
+                }
+            })
+        }
+    }
 
     return (
         <div className="service">
@@ -324,7 +361,7 @@ const Service = () => {
                     PiggyBank provides 3 major fields of Insurance to guard your wealth, health, and family.
                 </div>
                 <div className="service_insurance_choice">
-                    <div className="service_insurance_block" onClick={() => setInsuranceChoice("Life Term Insurance")}>
+                    <div className={insuranceChoice === "Life Term Insurance" ? "service_insurance_block_active" : "service_insurance_block"} onClick={() => switch_insurance("Life Term Insurance")}>
                         <div><img data-aos="zoom-in" src={life_insurance} width='192' alt=""/></div>
                         <div className="insurance_block_content">
                             <div className="service_block_title">Life Term Insurance</div>
@@ -334,7 +371,7 @@ const Service = () => {
                             </div>
                         </div>
                     </div>
-                    <div className="service_insurance_block" onClick={() => setInsuranceChoice("Cancer Insurance")}>
+                    <div className={insuranceChoice === "Cancer Insurance" ? "service_insurance_block_active" : "service_insurance_block"} onClick={() => switch_insurance("Cancer Insurance")}>
                         <div><img data-aos="zoom-in" src={cancer_insurance} width='192' alt=""/></div>
                         <div className="insurance_block_content">
                             <div className="service_block_title">Cancer Insurance</div>
@@ -344,7 +381,7 @@ const Service = () => {
                             </div>
                         </div>
                     </div>
-                    <div className="service_insurance_block" onClick={() => setInsuranceChoice("Accident Insurance")}>
+                    <div className={insuranceChoice === "Accident Insurance" ? "service_insurance_block_active" : "service_insurance_block"} onClick={() => switch_insurance("Accident Insurance")}>
                         <div><img data-aos="zoom-in" src={accident_insurance} width='192' alt=""/></div>
                         <div className="insurance_block_content">
                             <div className="service_block_title">Accident Insurance</div>
@@ -362,7 +399,7 @@ const Service = () => {
                     <div data-aos="fade-in" className="calculator_title">
                         {insuranceChoice}
                     </div>
-                    {insuranceChoice == "Accident Insurance" ? "" :
+                    {insuranceChoice === "Accident Insurance" ? "" :
                     <div>
                         <div data-aos="fade-in" className="calculator_info">
                             <div className="insurance_gender">
@@ -433,6 +470,14 @@ const Service = () => {
                             The actual premiums are affected by time, inflation, underwriting, Insurance Authority levies and other factors. <br/>
                             ** The above demo calculation method would be following the statistical data on the age of death in gender and smoking population.
                         </div>
+                        <div data-aos="zoom-in">
+                            <button className="service_get_started" onClick={() => apply_insurance("Life Term Insurance", Math.round((lifeInsuranceAmount * 1.025) * 0.000025 * insuranceBonus * ( ((insuranceAge) / 10) * Math.floor(Math.log(insuranceAge * 2) / Math.log(3-insuranceBonus) - 3) )), lifeInsuranceAmount )}>
+                                Apply Now
+                            </button>
+                        </div>
+                        <div className="insurance_msg">
+                            {insuranceMsg}
+                        </div>
                     </div>
                     }
                     {insuranceChoice === "Cancer Insurance" && 
@@ -470,17 +515,28 @@ const Service = () => {
                                 ).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
                             </div>
                             :
-                            <div className="calculator_monthly_repayment"> -- </div>
+                            <div className="cancer_insurance_msg"> Please select the Assured Amount Options </div>
                             }
                             <div className="loan_calculator_claim">
                                 ** The monthly repayment amount and the monthly repayment shown in the above calculation are for illustrative purpose only.
                                 The actual premiums are affected by time, inflation, underwriting, Insurance Authority levies and other factors. <br/>
                                 ** The above demo calculation method would be following the statistical data on the age of cancer in gender and smoking population.
                             </div>
+                            { cancerInsuranceAmount ?
+                            <div data-aos="zoom-in">
+                                <button className="service_get_started" onClick={() => apply_insurance("Cancer Insurance", Math.round((cancerInsuranceAmount * (cancerInsuranceAmount / 1250000 ) * 0.000025 * insuranceBonus * (((insuranceAge) / 10)* Math.floor(Math.log(insuranceAge) / Math.log(3)) )) * smokeCancerBonus), cancerInsuranceAmount )}>
+                                    Apply Now
+                                </button>
+                                <div className="insurance_msg">
+                                    {insuranceMsg}
+                                </div>
+                            </div>
+                            :
+                            ""}
                         </div>
                     </div>
                     }
-                    {insuranceChoice == "Accident Insurance" &&
+                    {insuranceChoice === "Accident Insurance" &&
                     <div>
                         <div data-aos="fade-in" className="insurance_gender">
                             <div className="calculator_title2">Gender</div>
@@ -534,13 +590,16 @@ const Service = () => {
                                 ** The above demo calculation method would be following the statistical data on the career preference by gender and the possibility of injury frequent by age.
                             </div>
                         </div>
+                        <div data-aos="zoom-in" onClick={() => apply_insurance("Accident Insurance", Math.round(((accidentInsuranceAmount * 1.025) * 0.0015 * Math.ceil((insuranceAge) / 10) + 1 ) * accidentBonus), accidentInsuranceAmount) }>
+                            <button className="service_get_started">
+                                Apply Now
+                            </button>
+                        </div>
+                        <div className="insurance_msg">
+                            {insuranceMsg}
+                        </div>
                     </div>
                     }
-                </div>
-                <div data-aos="zoom-in">
-                <button className="service_get_started">
-                    <a href="/insurance">Apply Now</a>
-                </button>
                 </div>
             </div>
         <Footer />

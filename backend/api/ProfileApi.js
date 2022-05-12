@@ -55,6 +55,26 @@ router.post("/get_history", (req, res) =>{
     })
 })
 
+//get subscription
+router.post("/get_sub", (req, res) =>{
+    const searchingID = req.body.searchingID
+
+    db_user.query("SELECT * FROM subscription WHERE user_id = ? ORDER BY ref DESC;",
+    searchingID, (err, result) => {
+        res.send(result)
+    })
+})
+
+//check subscription existed
+router.post("/check_sub", (req, res) =>{
+    const searchingID = req.body.searchingID
+
+    db_user.query("SELECT plan FROM subscription WHERE user_id = ?;",
+    searchingID, (err, result) => {
+        res.send(result)
+    })
+})
+
 //get debt
 router.post("/get_debt", (req,res) => {
     const searchingID = req.body.searchingID
