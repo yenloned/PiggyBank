@@ -69,9 +69,12 @@ const Profile = () => {
 
     //redirect user if not login
     useLayoutEffect(() => {
-        if (!loginStatus){
-            navigate('/login')
-        }
+        Axios.get("https://piggbank-backend-api.herokuapp.com/account/loggedin")
+        .then((response) => {
+            if (!response.data.loggedIn){
+                navigate('/login')
+            }
+        })
     })
 
     

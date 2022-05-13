@@ -32,7 +32,7 @@ const jwt = require('jsonwebtoken');
 //app use
 router.use(express.json());
 router.use(cors({
-    origin: "*",
+    origin: "https://piggybank-web.netlify.app",
     methods: ["GET", "POST", "DELETE", "PUT"],
     credentials: true
 }));
