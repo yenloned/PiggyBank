@@ -56,7 +56,7 @@ function App() {
               }).then((JWTresponse) => {
                   //JWT and cookie both passed, then login success
                   if (JWTresponse.data === "User authed" && response.data.user){
-                    setLoginID(response.data.user[0].user_id)
+                    setLoginID(response.data.user.substring(0, 5))
                   //only cookie passed, then logout (destory the cookie)
                   }else if (response.data.user){
                     Axios.get("https://piggbank-backend-api.herokuapp.com/account/logout")

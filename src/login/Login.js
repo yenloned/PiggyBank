@@ -24,12 +24,12 @@ export default function Login(){
     const [loginAuth, setLoginAuth] = useState(false);
     const [login2FAMsg, setLogin2FAMsg] = useState("")
 
-    /* useLayoutEffect(() => {
+    useLayoutEffect(() => {
         if (loginStatus){
             navigate('/profile')
             window.location.reload()
         }
-    }) */
+    })
 
     const createCookieInHour = (cookieName, cookieValue, hourToExpire) => {
         let date = new Date();
@@ -49,7 +49,6 @@ export default function Login(){
                 //change share component status
                 setLoginStatus(true)
                 //jwt token store in localStorage
-                console.log(response.data)
                 localStorage.setItem("token", response.data.token)
                 createCookieInHour('user', response.data.result, 2)
             //If login fail, display error message by component render
