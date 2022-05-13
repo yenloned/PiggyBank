@@ -101,7 +101,7 @@ const Loan = () => {
             setUserIncome(500000)
         }
         if (!userFirstName && !userLastName && !userCredit){
-            Axios.post("http://localhost:3005/profile/get_info",{
+            Axios.post("https://piggbank-backend-api.herokuapp.com/profile/get_info",{
             searchingID: loginID})
             .then((response) => {
                 if (response.data){
@@ -145,7 +145,7 @@ const Loan = () => {
 
     const applyLoan = (amount, tenor, repay) => {
         if (userFirstName.length && userLastName.length && userAddress.length  && userJob.length && userNumber.length && userPhone.length){
-            Axios.post("http://localhost:3005/function/loan",{
+            Axios.post("https://piggbank-backend-api.herokuapp.com/function/loan",{
             loan_userid: loginID,
             amount: amount,
             tenor: tenor,

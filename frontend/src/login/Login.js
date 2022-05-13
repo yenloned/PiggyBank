@@ -33,7 +33,7 @@ export default function Login(){
 
     //login
     const login_post = () => {
-        Axios.post('http://localhost:3005/account/login', {
+        Axios.post('https://piggbank-backend-api.herokuapp.com/account/login', {
             email: email, 
             password: password,
         //the login prcoess in real case will be creating cookie and session, which will be performed in backend
@@ -55,7 +55,7 @@ export default function Login(){
     //check if the user has enabled 2FA
     const login_check_2FA_status = () => {
         //SELECT the 2FA status from database by user ID
-        Axios.post("http://localhost:3005/account/check_2FA", {
+        Axios.post("https://piggbank-backend-api.herokuapp.com/account/check_2FA", {
             user_email: email
         }).then((result) =>{
             //If the 2FA status is True, which means it is enabled
@@ -63,11 +63,11 @@ export default function Login(){
                 //change the useState component in order to render the page (code Verification)
                 setLoginAuth(true)
                 //generate random code in backend and store it in database
-                Axios.post('http://localhost:3005/account/store_code', {
+                Axios.post('https://piggbank-backend-api.herokuapp.com/account/store_code', {
                     storeEmail: email
                 }).then (() => {
                     //SELECT the verification code and send it to Email (registered one)
-                    Axios.post("http://localhost:3005/email/reset_email", {
+                    Axios.post("https://piggbank-backend-api.herokuapp.com/email/reset_email", {
                         targetemail: email,
                     })
                 })
@@ -80,7 +80,7 @@ export default function Login(){
 
     //check if the user input match the verification code stored in database
     const login_check_2FA = () => {
-        Axios.post("http://localhost:3005/account/check_code", {
+        Axios.post("https://piggbank-backend-api.herokuapp.com/account/check_code", {
             code: code,
             user_email: email
         }).then((response) => {
@@ -97,7 +97,7 @@ export default function Login(){
 
     //check if the account existed or not first, then pass to check 2FA
     const login_check_exist = () => {
-        Axios.post("http://localhost:3005/account/registered", {
+        Axios.post("https://piggbank-backend-api.herokuapp.com/account/registered", {
             cemail: email
         }).then((response) =>{
             if(response.data.length){

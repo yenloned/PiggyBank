@@ -30,7 +30,7 @@ const History = () => {
 
     useEffect(async () => {
         if (!userHistory.length){
-            await Axios.post("http://localhost:3005/profile/get_history",{
+            await Axios.post("https://piggbank-backend-api.herokuapp.com/profile/get_history",{
             searchingID: loginID})
             .then((history) => {
                 if (history.data.length){

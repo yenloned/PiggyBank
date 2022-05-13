@@ -44,12 +44,12 @@ function App() {
 
     useEffect(()=> {
       //check if user have logined (by cookie session)
-        Axios.get("http://localhost:3005/account/loggedin")
+        Axios.get("https://piggbank-backend-api.herokuapp.com/account/loggedin")
         .then((response) => {
               //store user login status into component, which is shared with other files
               setLoginStatus(response.data.loggedIn);
               //check along with JWT
-              Axios.get("http://localhost:3005/account/auth", {
+              Axios.get("https://piggbank-backend-api.herokuapp.com/account/auth", {
               headers: {
                   "x-access-token" : localStorage.getItem("token")
                 }
@@ -59,7 +59,7 @@ function App() {
                     setLoginID(response.data.user[0].user_id)
                   //only cookie passed, then logout (destory the cookie)
                   }else if (response.data.user){
-                    Axios.get("http://localhost:3005/account/logout")
+                    Axios.get("https://piggbank-backend-api.herokuapp.com/account/logout")
                     window.location.reload();
                     window.location("/login");
                     setLoginID(0)

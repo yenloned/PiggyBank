@@ -3,6 +3,8 @@
 require('dotenv').config();
 const dbpassword = process.env.DBPASSWORD
 const dbuser = process.env.DBUSER
+const dbhost = process.env.DBHOST
+const dbname = process.env.DBNAME
 const session_secret = process.env.SESSIONSECRET
 const jwt_secret = process.env.JWTTOKEN
 const saltRoute = parseInt(process.env.SALT)
@@ -52,9 +54,9 @@ router.use(session({
 //mysql connection
 const db_user = mysql.createConnection({
     user: dbuser,
-    host: "localhost",
+    host: dbhost,
     password: dbpassword,
-    database: "user"
+    database: dbname
 });
 
 

@@ -29,13 +29,13 @@ const Withdrawal = () => {
             return setWithdrawal_Msg("Withdrawal amount should be the multiple of HKD100")
         }
         //check if user have enough money to perform withdrawal
-        Axios.post("http://localhost:3005/profile/check_balance",{
+        Axios.post("https://piggbank-backend-api.herokuapp.com/profile/check_balance",{
         payerID: loginID,
         check_amount: withdrawal_amount})
         .then((response) =>{
             //If yes, perform withdrawal
             if (response.data.length > 0){
-                Axios.post("http://localhost:3005/function/withdrawal",{
+                Axios.post("https://piggbank-backend-api.herokuapp.com/function/withdrawal",{
                 withdrawal_userid: loginID,
                 withdrawal_amount: withdrawal_amount})
                 //redirect user to transaction history page after the withdrawal

@@ -34,7 +34,7 @@ const ResetPassword = () => {
     const SendEmail = async () => {
         try{
         //check if the Email Address is registered in database
-        await Axios.post('http://localhost:3005/account/registered',{
+        await Axios.post('https://piggbank-backend-api.herokuapp.com/account/registered',{
             cemail: email
         }).then((response) =>{
             //If yes, the SELECT result will have length that > 0
@@ -44,11 +44,11 @@ const ResetPassword = () => {
                 //set the useState component for page rendering to next page (code Verification)
                 setEmailSent(true);
                 //let backend generate the verification code and store it in database
-                Axios.post('http://localhost:3005/account/store_code', {
+                Axios.post('https://piggbank-backend-api.herokuapp.com/account/store_code', {
                     storeEmail: email
                 }).then (() => {
                     //SELECT the verification code from database and send it with Email
-                    Axios.post("http://localhost:3005/email/reset_email", {
+                    Axios.post("https://piggbank-backend-api.herokuapp.com/email/reset_email", {
                         targetemail: email,
                     })
                 })
@@ -65,7 +65,7 @@ const ResetPassword = () => {
 
     const checkCode = () => {
         //check if the code user inputted is the same as the database stored
-        Axios.post('http://localhost:3005/account/check_code',{
+        Axios.post('https://piggbank-backend-api.herokuapp.com/account/check_code',{
         code: code,
         user_email: email
         }).then((response) => {
@@ -89,13 +89,13 @@ const ResetPassword = () => {
             return setChangePasswordMsg("New Password should be at least 8characters long.")
         }
         //update password in database
-        Axios.post("http://localhost:3005/account/change_password",{
+        Axios.post("https://piggbank-backend-api.herokuapp.com/account/change_password",{
             targetEmail: email,
             newpassword: newpassword
             }).then((response) =>{
                 if (response){
                     //sending a notification email to the Email Address for security alert
-                    Axios.post("http://localhost:3005/email/notice_email",{
+                    Axios.post("https://piggbank-backend-api.herokuapp.com/email/notice_email",{
                     noticeEmail: email,
                     })
                     navigate('/login')

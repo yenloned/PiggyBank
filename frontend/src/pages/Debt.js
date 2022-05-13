@@ -26,7 +26,7 @@ const Debt = () => {
 
     //get all debt information of that user from database
     const GetDebt = () => {
-        Axios.post("http://localhost:3005/profile/get_debt", {
+        Axios.post("https://piggbank-backend-api.herokuapp.com/profile/get_debt", {
             searchingID: loginID
         }).then((response) => {
             if (response.data.length){
@@ -53,17 +53,17 @@ const Debt = () => {
     //paying the debt, take reference number as parameter
     const paydebt = (ref) => {
         //every debt information would have a reference number, select them by the reference number
-        Axios.post("http://localhost:3005/account/get_debt_byref", {
+        Axios.post("https://piggbank-backend-api.herokuapp.com/account/get_debt_byref", {
             searchingRef: ref
         }).then((debt) => {
             //check if user have enough balance to pay the debt
-            Axios.post("http://localhost:3005/profile/check_balance", {
+            Axios.post("https://piggbank-backend-api.herokuapp.com/profile/check_balance", {
                 payerID: loginID,
                 check_amount: debt.data.total
             }).then((canPay) => {
                 //If yes, pay the debt by sending the request to backend
                 if(canPay.data.length){
-                    Axios.post("http://localhost:3005/account/pay_debt", {
+                    Axios.post("https://piggbank-backend-api.herokuapp.com/account/pay_debt", {
                         debtAmount: debt.data.total,
                         searchingRef: ref,
                         searchingID: loginID

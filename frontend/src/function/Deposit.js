@@ -32,7 +32,7 @@ const Deposit = () => {
             return setDeposit_Msg("Deposit amount is too large")
         }
         //deposit money into user account
-        Axios.post("http://localhost:3005/function/deposit",{
+        Axios.post("https://piggbank-backend-api.herokuapp.com//function/deposit",{
         deposit_userid: loginID,
         deposit_amount: deposit_amount})
         //redirect user to transaction history page after the deposit

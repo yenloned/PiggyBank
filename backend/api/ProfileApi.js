@@ -3,6 +3,8 @@
 require('dotenv').config();
 const dbpassword = process.env.DBPASSWORD
 const dbuser = process.env.DBUSER
+const dbhost = process.env.DBHOST
+const dbname = process.env.DBNAME
 
 //api require
 const express = require("express");
@@ -29,10 +31,11 @@ router.use(bodyParser.urlencoded({ extended: true}));
 //mysql connection
 const db_user = mysql.createConnection({
     user: dbuser,
-    host: "localhost",
+    host: dbhost,
     password: dbpassword,
-    database: "user"
+    database: dbname
 });
+
 
 //get all info
 router.post("/get_info", (req,res) => {

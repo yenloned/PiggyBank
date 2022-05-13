@@ -44,7 +44,7 @@ const Register = () => {
         setConfirmPasswordMsg("")
 
         //check if the account(Email) is already registered
-        Axios.post('http://localhost:3005/account/registered',{
+        Axios.post('https://piggbank-backend-api.herokuapp.com/account/registered',{
             cemail: emailReg
         }).then((response) =>{
             //If yes, update component to display error message
@@ -81,7 +81,7 @@ const Register = () => {
     //acount register
     const register_post = () => {
         //input the user information to register account
-        Axios.post('http://localhost:3005/account/register', {
+        Axios.post('https://piggbank-backend-api.herokuapp.com/account/register', {
             email: emailReg, 
             password: passwordReg,
             firstname: firstnameReg,

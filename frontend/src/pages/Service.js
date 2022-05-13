@@ -154,11 +154,11 @@ const Service = () => {
         if (!loginStatus){
             window.location.replace("/login")
         }else{
-            Axios.post("http://localhost:3005/profile/check_sub",{
+            Axios.post("https://piggbank-backend-api.herokuapp.com/profile/check_sub",{
                 searchingID: loginID
             }).then((result) => {
                 if (!result.data.length){
-                    Axios.post("http://localhost:3005/function/insurance",{
+                    Axios.post("https://piggbank-backend-api.herokuapp.com/function/insurance",{
                         insurance_userid: loginID,
                         insurance_repay: repay,
                         insurance_amount: amount,

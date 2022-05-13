@@ -10,7 +10,7 @@ const cors = require("cors");
 const nodemailer = require("nodemailer");
 
 const SMTP_host = process.env.SMTP_HOST
-const SMTP_port = process.env.SMTP_PORT
+const SMTP_port = parseInt(process.env.SMTP_PORT)
 const SMTP_username = process.env.SMTP_USER
 const SMTP_password = process.env.SMTP_PASSWORD
 
@@ -36,11 +36,14 @@ router.use(cors({
 const mysql = require("mysql");
 const dbpassword = process.env.DBPASSWORD
 const dbuser = process.env.DBUSER
+const dbhost = process.env.DBHOST
+const dbname = process.env.DBNAME
+
 const db_user = mysql.createConnection({
     user: dbuser,
-    host: "localhost",
+    host: dbhost,
     password: dbpassword,
-    database: "user"
+    database: dbname
 });
 
 //Since the database is stored with the random code, now it will be sent to user's inputted Email Address

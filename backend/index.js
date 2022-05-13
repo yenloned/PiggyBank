@@ -17,6 +17,6 @@ app.get("/", (req, res) =>{
     res.send("<h1>PIGGYBANK's Backend Site</h1>")
 })
 
-app.listen(PORT, () =>{
+app.listen(process.env.PORT || PORT, () =>{
     console.log(`server running on ${PORT}`)
 })

@@ -29,7 +29,7 @@ const Home = () => {
         AOS.init({duration: 800})
         //get user information
         async function GetInformation(){
-        await Axios.post("http://localhost:3005/profile/get_info",{
+        await Axios.post("https://piggbank-backend-api.herokuapp.com/profile/get_info",{
         searchingID: loginID})
         .then((response) => {
             if (response.data){
