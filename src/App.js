@@ -48,7 +48,7 @@ function App() {
         .then((response) => {
               //store user login status into component, which is shared with other files
               setLoginStatus(response.data.loggedIn);
-              if (response.data.user.length){
+              if (response.data.user){
               setLoginID(response.data.user[0].user_id);
               }
               //check along with JWT
