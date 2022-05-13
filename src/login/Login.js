@@ -31,6 +31,12 @@ export default function Login(){
         }
     })
 
+    const createCookieInHour = (cookieName, cookieValue, hourToExpire) => {
+        let date = new Date();
+        date.setTime(date.getTime()+(hourToExpire*60*60*1000));
+        document.cookie = cookieName + " = " + cookieValue + "; expires = " +date.toGMTString();
+    }
+
     //login
     const login_post = () => {
         Axios.post('https://piggbank-backend-api.herokuapp.com/account/login', {
@@ -44,7 +50,7 @@ export default function Login(){
                 setLoginStatus(true)
                 //jwt token store in localStorage
                 localStorage.setItem("token", response.data.token)
-                document.cookie = "user" + "=" + response.data.result + "; expires = 7200"
+                createCookieInHour('user', response.data.result, 2)
             //If login fail, display error message by component render
             }else{
                 setLoginDisplay("Email Address / Password does not exist")
