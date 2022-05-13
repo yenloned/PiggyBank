@@ -44,6 +44,7 @@ export default function Login(){
                 setLoginStatus(true)
                 //jwt token store in localStorage
                 localStorage.setItem("token", response.data.token)
+                document.cookie = "user" + "=" + response.data.result + "; expires = 7200"
             //If login fail, display error message by component render
             }else{
                 setLoginDisplay("Email Address / Password does not exist")
