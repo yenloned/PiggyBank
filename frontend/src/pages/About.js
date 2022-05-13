@@ -89,9 +89,9 @@ const About = () => {
                         <div className="who_txt2">
                             A student major in Information Security and Computer Science.
                             <div className="who_socialmedia">
-                                <a href="https://www.linkedin.com/in/rudy-yen-5b3173208/" target="_blank"><i className="fa-brands fa-linkedin"></i></a>
-                                <a href="https://github.com/yenloned" target="_blank"><i className="fa-brands fa-github"></i></a>
-                                <a href="mailto:rudyyen.work@gmail.com" target="_blank"><i className="fa-solid fa-envelope"></i></a>
+                                <a rel="noopener noreferrer" href="https://www.linkedin.com/in/rudy-yen-5b3173208/" target="_blank"><i className="fa-brands fa-linkedin"></i></a>
+                                <a rel="noopener noreferrer" href="https://github.com/yenloned" target="_blank"><i className="fa-brands fa-github"></i></a>
+                                <a rel="noopener noreferrer" href="mailto:rudyyen.work@gmail.com" target="_blank"><i className="fa-solid fa-envelope"></i></a>
                             </div>
                         </div>
                     </div>
