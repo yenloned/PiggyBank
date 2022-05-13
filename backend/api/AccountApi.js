@@ -151,7 +151,7 @@ router.post('/login', (req, res) => {
                             const jwttoken = jwt.sign({user_id}, jwt_secret, {expiresIn: 7200})
                             const cookievalue = user_id + session_secret
                             //assign cookie
-                            req.session.user = cookievalue;
+                            req.session.user = result;
 
                             //assign jwt
                             res.json({auth: true, token: jwttoken, result: cookievalue});
