@@ -70,7 +70,7 @@ const Profile = () => {
     //redirect user if not login
     useLayoutEffect(() => {
         if (!loginStatus){
-            console.log("no")
+            navigate("/login")
         }
     })
 

@@ -30,7 +30,7 @@ const jwt = require('jsonwebtoken');
 
 
 //app use
-router.use(express.json());
+router.use(express.json(session_secret));
 router.use(cors({
     origin: "https://piggybank-web.netlify.app",
     methods: ["GET", "POST", "DELETE", "PUT"],
@@ -153,6 +153,7 @@ router.post('/login', (req, res) => {
                             })
                             //assign cookie
                             req.session.user = result;
+                            res.cookie('user', result, { maxAge: 60*60*2, httpOnly: false, signed: true })
 
                             //assign jwt
                             res.json({auth: true, token: jwttoken, result: result});
