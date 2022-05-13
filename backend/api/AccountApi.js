@@ -93,8 +93,8 @@ router.post('/registered', (req,res) => {
 })
 
 
-//JWT
-const verifyJWT = (req, res, next) => {
+//verifying the JWT Token
+router.get("/auth", (req, res) => {
     const token = req.headers["x-access-token"]
     if (!token){
         res.send("Missing Token.")
@@ -104,14 +104,9 @@ const verifyJWT = (req, res, next) => {
                 res.json({auth: false, message: "Auth Failed"})
             }else{
                 res.user_id = decoded.id
-                next()
             }
         })
     }
-}
-//verifying the JWT Token
-router.get("/auth", verifyJWT, (req, res) => {
-    res.send("User authed")
 })
 
 const verifyLogin = (req, res, next) => {
