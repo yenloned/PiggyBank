@@ -93,8 +93,8 @@ router.post('/registered', (req,res) => {
 })
 
 
-//verifying the JWT Token
-router.get("/auth", (req, res) => {
+//JWT
+const verifyJWT = (req, res, next) => {
     const token = req.headers["x-access-token"]
     if (!token){
         res.send("Missing Token.")
@@ -104,24 +104,24 @@ router.get("/auth", (req, res) => {
                 res.json({auth: false, message: "Auth Failed"})
             }else{
                 res.user_id = decoded.id
+                next()
             }
         })
     }
-})
-
-const verifyLogin = (req, res, next) => {
-    const {cookies} = req
-    if ("user" in cookies && cookies.user === session_secret) {
-        next()
-    }else{
-        res.send({loggedIn: false})
-    }
 }
+//verifying the JWT Token
+router.get("/auth", verifyJWT, (req, res) => {
+    res.send("User authed")
+})
 
 
 //check if logged in
-router.get("/loggedin", verifyLogin, (req, res) => {
-    res.send({loggedIn: true, user: req.session.user})
+router.get("/loggedin", (req, res) => {
+    if (req.session.user){
+        res.send({loggedIn: true, user: req.session.user})
+    }else{
+        res.send({loggedIn: false})
+    }
 })
 
 //login
@@ -148,12 +148,14 @@ router.post('/login', (req, res) => {
                         if (comparedresult){
 
                             const user_id = result[0].user_id
-                            const jwttoken = jwt.sign({user_id}, jwt_secret, {expiresIn: 7200})
+                            const jwttoken = jwt.sign({user_id}, jwt_secret, {
+                                expiresIn: 7200,
+                            })
                             //assign cookie
                             req.session.user = result;
-                            res.cookie('user', result)
+
                             //assign jwt
-                            res.json({auth: true, token: jwttoken, result: session_secret});
+                            res.json({auth: true, token: jwttoken, result: result});
                         //If fail, response as authenication fail
                         }else{
                             res.json({auth: false});
