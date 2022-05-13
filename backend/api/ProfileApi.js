@@ -19,7 +19,7 @@ const cookieParser = require('cookie-parser');
 const router = express.Router()
 router.use(express.json());
 router.use(cors({
-    origin: ["http://localhost:3000"],
+    origin: ["https://piggybank-web.netlify.app/"],
     methods: ["GET", "POST", "DELETE", "PUT"],
     credentials: true
 }));
