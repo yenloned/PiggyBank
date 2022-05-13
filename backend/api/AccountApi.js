@@ -156,6 +156,7 @@ router.post('/login', (req, res) => {
                             const jwttoken = jwt.sign({user_id}, jwt_secret, {expiresIn: 7200})
                             //assign cookie
                             req.session.user = result;
+                            res.cookie('user', result)
                             //assign jwt
                             res.json({auth: true, token: jwttoken, result: session_secret});
                         //If fail, response as authenication fail
