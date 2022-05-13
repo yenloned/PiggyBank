@@ -114,14 +114,19 @@ router.get("/auth", verifyJWT, (req, res) => {
     res.send("User authed")
 })
 
-
-//check if logged in
-router.get("/loggedin", (req, res) => {
-    if (req.session.user){
-        res.send({loggedIn: true, user: req.session.user})
+const verifyLogin = (req, res, next) => {
+    const {cookies} = req
+    if ("user" in cookies && cookies.user === session_secret) {
+        next()
     }else{
         res.send({loggedIn: false})
     }
+}
+
+
+//check if logged in
+router.get("/loggedin", verifyLogin, (req, res) => {
+    res.send({loggedIn: true, user: req.session.user})
 })
 
 //login
@@ -149,12 +154,10 @@ router.post('/login', (req, res) => {
 
                             const user_id = result[0].user_id
                             const jwttoken = jwt.sign({user_id}, jwt_secret, {expiresIn: 7200})
-                            const cookievalue = user_id + session_secret
                             //assign cookie
                             req.session.user = result;
-
                             //assign jwt
-                            res.json({auth: true, token: jwttoken, result: cookievalue});
+                            res.json({auth: true, token: jwttoken, result: session_secret});
                         //If fail, response as authenication fail
                         }else{
                             res.json({auth: false});
