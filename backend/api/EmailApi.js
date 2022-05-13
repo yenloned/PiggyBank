@@ -27,7 +27,7 @@ router.use(bodyParser.urlencoded({ extended: true}));
 router.use(bodyParser.json());
 
 router.use(cors({
-    origin: "https://piggybank-web.netlify.app/",
+    origin: "*",
     methods: ["GET", "POST", "DELETE", "PUT"],
     credentials: true
 }));
