@@ -2,23 +2,23 @@
 
 ##front end##
 # dependencies
-/frontend/node_modules
-/frontend/.pnp
+node_modules
+.pnp
 .pnp.js
 
 # testing
-/frontend/coverage
+coverage
 
 # production
-/frontend/build
+build
 
 # misc
-/frontend/.env
-/frontend/.DS_Store
-/frontend/.env.local
-/frontend/.env.development.local
-/frontend/.env.test.local
-/frontend/.env.production.local
+.env
+.DS_Store
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
 
 ## backend ##
 /backend/node_modules
