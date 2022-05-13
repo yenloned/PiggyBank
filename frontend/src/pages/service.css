@@ -98,7 +98,7 @@
 }
 
 .service_loan_block{
-    width: 350px;
+    min-width: 350px;
 }
 
 .service_insurance_block, .service_insurance_block_active{

@@ -18,8 +18,6 @@ import NotFound from './pages/NotFound';
 import Account from './pages/FAQ/Account';
 import Development from './pages/FAQ/Development';
 import General from './pages/FAQ/General';
-import InsuranceFAQ from './pages/FAQ/InsuranceFAQ';
-import LoanFAQ from './pages/FAQ/LoanFAQ';
 import Transaction from './pages/FAQ/Transaction';
 import Security from './pages/FAQ/Security';
 
@@ -96,8 +94,6 @@ function App() {
               <Route path='/support=account' element={<Account />}/>
               <Route path='/support=development' element={<Development />}/>
               <Route path='/support=general' element={<General />}/>
-              <Route path='/support=insurance' element={<InsuranceFAQ />}/>
-              <Route path='/support=loan' element={<LoanFAQ />}/>
               <Route path='/support=transaction' element={<Transaction />}/>
               <Route path='/support=security' element={<Security />}/>
 

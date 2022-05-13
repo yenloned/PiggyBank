@@ -32,8 +32,8 @@ const Footer = () =>{
                 Support
             </div>
             <a className="footer_list" href='/support=general'>FAQ</a>
-            <a className="footer_list" href='/privacy'>Privacy</a>
-            <a className="footer_list" href='/cookie'>Cookie</a>
+            <a className="footer_list" target="_blank" rel="noopener noreferrer" href='https://bit.ly/the-power-of-link'>Privacy</a>
+            <a className="footer_list" target="_blank" rel="noopener noreferrer" href='https://bit.ly/the-power-of-link'>Cookie</a>
             <a className="footer_list" href='/about#contact'>Contact us</a>
         </div>
         <div className='footer_link'>

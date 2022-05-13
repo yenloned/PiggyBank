@@ -41,25 +41,35 @@ const About = () => {
                 <div data-aos="zoom-out" data-aos-once="true" className="dev_showitem">
                     <div>
                         <div className="dev_react">
-                            <img src={react} width='150' alt=""/>
+                            <a target="_blank" rel="noopener noreferrer" href="https://reactjs.org/">
+                                <img src={react} width='150' alt=""/>
+                            </a>
                         </div>
                         <div className="dev_css">
-                            <img src={css} width='150' alt=""/>
+                            <a target="_blank" rel="noopener noreferrer" href="https://www.w3.org/Style/CSS/">
+                                <img src={css} width='150' alt=""/>
+                            </a>
                         </div>
                     </div>
                     <div>
                         <div/>
-                        <div className="dev_nodejs">
-                            <img src={nodejs} width='150' alt=""/>
-                        </div>
+                            <div className="dev_nodejs">
+                            <a target="_blank" rel="noopener noreferrer" href="https://nodejs.org/en/docs/">
+                                <img src={nodejs} width='150' alt=""/>
+                            </a>
+                            </div>
                         <div/>
                     </div>
                     <div>
                         <div className="dev_expressjs">
+                        <a target="_blank" rel="noopener noreferrer" href="https://expressjs.com/">
                             <img src={expressjs} width='150' alt=""/>
+                        </a>
                         </div>
                         <div className="dev_mysql">
-                            <img src={mysql} width='150' alt=""/>
+                            <a target="_blank" rel="noopener noreferrer" href="https://dev.mysql.com/doc/">
+                                <img src={mysql} width='150' alt=""/>
+                            </a>
                         </div>
                     </div>
                 </div>

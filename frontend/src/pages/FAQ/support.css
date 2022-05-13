@@ -41,6 +41,7 @@
     margin-right: 12rem;
     background-color:rgb(15, 15, 15);
     border-radius: 20px;
+    justify-content: space-evenly;
 }
 
 .supportbar::-webkit-scrollbar{
@@ -147,6 +148,9 @@
 @media screen and (max-width:970px) {
     .supportchoice{
         display: none;
+    }
+    .supportbar{
+        justify-content:left;
     }
     .supportbar a{
         font-size: 25px;
