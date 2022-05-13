@@ -148,14 +148,14 @@ router.post('/login', (req, res) => {
                         if (comparedresult){
 
                             const user_id = result[0].user_id
-                            const jwttoken = jwt.sign({user_id}, jwt_secret, {expiresIn: 7200})
-
+                            const jwttoken = jwt.sign({user_id}, jwt_secret, {
+                                expiresIn: 7200,
+                            })
                             //assign cookie
                             req.session.user = result;
 
                             //assign jwt
                             res.json({auth: true, token: jwttoken, result: result});
-                            
                         //If fail, response as authenication fail
                         }else{
                             res.json({auth: false});

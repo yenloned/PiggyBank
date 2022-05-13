@@ -34,7 +34,7 @@ export default function Login(){
     const createCookieInHour = (cookieName, cookieValue, hourToExpire) => {
         let date = new Date();
         date.setTime(date.getTime()+(hourToExpire*60*60*1000));
-        document.cookie = cookieName + " = " + cookieValue + "; expires = " +date.toGMTString();
+        document.cookie = cookieName + " = " + cookieValue + "; expires = " + date.toGMTString();
     }
 
     //login
@@ -49,6 +49,7 @@ export default function Login(){
                 //change share component status
                 setLoginStatus(true)
                 //jwt token store in localStorage
+                console.log(response.data)
                 localStorage.setItem("token", response.data.token)
                 createCookieInHour('user', response.data.result, 2)
             //If login fail, display error message by component render
