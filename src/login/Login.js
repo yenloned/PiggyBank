@@ -24,12 +24,12 @@ export default function Login(){
     const [loginAuth, setLoginAuth] = useState(false);
     const [login2FAMsg, setLogin2FAMsg] = useState("")
 
-    useLayoutEffect(() => {
+    /* useLayoutEffect(() => {
         if (loginStatus){
             navigate('/profile')
             window.location.reload()
         }
-    })
+    }) */
 
     const createCookieInHour = (cookieName, cookieValue, hourToExpire) => {
         let date = new Date();
