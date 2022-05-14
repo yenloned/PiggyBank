@@ -71,7 +71,7 @@ const Transfer = () =>{
         if (transfer_payee === loginID){
             return setTransfer_Errormsg("You can not transfer money to yourself.")
         }
-        if (!transfer_amount || transfer_amount === 0){
+        if (!transfer_amount || transfer_amount <= 0){
             return setTransfer_Errormsg("Invalid transfer amount.")
         }
         if (!transfer_payee){
@@ -87,7 +87,6 @@ const Transfer = () =>{
         .then((response) =>{
             //If yes, do the transfer
             if (response.data.length > 0){
-                console.log("OK")
                 Axios.post("https://piggbank-backend-api.herokuapp.com/function/transfer",{
                 transfer_payerID: loginID,
                 transfer_amount: transfer_amount,

@@ -76,7 +76,7 @@ router.post('/register', (req, res) => {
         }
         //insert the hashed password instead of the password input from parameter
         db_user.query("INSERT INTO user (email, password, firstname, lastname) VALUES (?,?,?,?)", 
-            [email, hashedpw, firstname, lastname], (err, result) => {
+            [email, hashedpw, firstname, lastname], (err) => {
                 res.send(err);
         })
     })
@@ -88,6 +88,9 @@ router.post('/registered', (req,res) => {
 
     db_user.query("SELECT email FROM user WHERE email = ?;",
     cemail, (err, result) => {
+        if (err){
+            res.send(err)
+        }
         res.send(result)
     })
 })
@@ -171,6 +174,7 @@ router.post('/login', (req, res) => {
 //logout
 router.get('/logout', function(req, res) {
     req.session.destroy()
+    res.send("OK")
  });
 
 //store verification code
@@ -182,6 +186,9 @@ router.get('/logout', function(req, res) {
     //store the generated random code into the database's user column
     db_user.query("UPDATE user SET verification = ? WHERE email = ?;", 
     [storeCode, storeEmail], (err, result) => {
+        if (err){
+            res.send(err)
+        }
         res.send(result);
     })
 })
@@ -193,6 +200,9 @@ router.get('/logout', function(req, res) {
 
     db_user.query("SELECT verification FROM user WHERE email = ?;", 
     check_target, (err, result) => {
+        if (err){
+            res.send(err)
+        }
         if (code == result[0]["verification"]){
             res.send(true)
         }else{
@@ -213,6 +223,9 @@ router.get('/logout', function(req, res) {
         }else{
         db_user.query("UPDATE user SET password = ? WHERE email = ?;", 
             [hash, targetEmail], (err, result) => {
+                if (err){
+                    res.send(err)
+                }
                 res.send(result);
             })
         }
@@ -226,6 +239,9 @@ router.get('/logout', function(req, res) {
 
     db_user.query("SELECT password FROM user WHERE user_id = ?;", 
     user_id, (err, result) => {
+        if (err){
+            res.send(err)
+        }
         bcrypt.compare(input_password, result[0].password, (err,comparedresult) =>{
             if (comparedresult){
                 res.send("Check Password Passed")
@@ -243,6 +259,9 @@ router.get('/logout', function(req, res) {
     
     db_user.query("SELECT 2FA FROM user WHERE email = ?;",
     user_email, (err, result) =>{
+        if (err){
+            res.send(err)
+        }
         if (result[0]["2FA"]){
             res.send(true)
         }else{
@@ -287,7 +306,13 @@ router.get('/logout', function(req, res) {
     const credit = req.body.credit
 
     db_user.query("UPDATE user SET credit = ? WHERE user_id = ?;",
-    [credit, searchingID])
+    [credit, searchingID], (err, result) =>{
+        if (err){
+            res.send(err)
+        }
+        res.send(result)
+    })
+    
  })
 
  //get debt by ref
@@ -295,6 +320,9 @@ router.get('/logout', function(req, res) {
     const searchingRef = req.body.searchingRef
 
     db_user.query("SELECT total FROM debt WHERE ref = ?;", searchingRef, (err, debt) => {
+        if (err){
+            res.send(err)
+        }
         res.send(debt[0])
     })
  })
@@ -310,23 +338,23 @@ router.get('/logout', function(req, res) {
     let time = new Date(ts).toLocaleString("en-US", { timeZone: "Asia/Hong_Kong" });
 
     db_user.query("INSERT INTO history (fromwho, towho, type, amount, date) VALUES (?,?,?,?,?);",
-    [searchingID, searchingID, "Pay Off", debtAmount, time])
+    [searchingID, searchingID, "Pay Off", debtAmount, time], (err) => {if (err){res.send(err)}})
     db_user.query("UPDATE user SET balance = balance - ? WHERE user_id = ?;",
-    [debtAmount, searchingID])
-    db_user.query("DELETE FROM debt WHERE ref = ?;", searchingRef, (err, result) => {
-        return res.send(true)
-    })
+    [debtAmount, searchingID], (err) => {if (err){res.send(err)}})
+    db_user.query("DELETE FROM debt WHERE ref = ?;", searchingRef, (err) => {if (err){res.send(err)}})
+    return res.send(true)
  })
 
  //delete account
  router.post("/delete_account", (req, res) =>{
      const user_id_delteaccount = req.body.user_id_deleteaccount
 
-     db_user.query("DELETE FROM user WHERE user_id = ?;",user_id_delteaccount)
-     db_user.query("DELETE FROM debt WHERE user_id = ?;",user_id_delteaccount)
-     db_user.query("DELETE FROM history WHERE fromwho = ?;",user_id_delteaccount)
-     db_user.query("DELETE FROM payee WHERE user_id = ?;",user_id_delteaccount)
-     db_user.query("DELETE FROM subscription WHERE user_id = ?;",user_id_delteaccount)
+     db_user.query("DELETE FROM user WHERE user_id = ?;",user_id_delteaccount, (err) => {if (err){res.send(err)}})
+     db_user.query("DELETE FROM debt WHERE user_id = ?;",user_id_delteaccount, (err) => {if (err){res.send(err)}})
+     db_user.query("DELETE FROM history WHERE fromwho = ?;",user_id_delteaccount, (err) => {if (err){res.send(err)}})
+     db_user.query("DELETE FROM payee WHERE user_id = ?;",user_id_delteaccount, (err) => {if (err){res.send(err)}})
+     db_user.query("DELETE FROM subscription WHERE user_id = ?;",user_id_delteaccount, (err) => {if (err){res.send(err)}})
+     res.send("OK")
  })
 
 module.exports = router

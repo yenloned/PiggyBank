@@ -43,6 +43,7 @@ router.post("/get_info", (req,res) => {
 
     db_user.query("SELECT * FROM user WHERE user_id = ?;",
     searchingID, (err, result) => {
+        if (err){res.send(err)}
         res.send(result)
     })
 })
@@ -54,6 +55,7 @@ router.post("/get_history", (req, res) =>{
     //descending order by reference number, which display as First In Last Out
     db_user.query("SELECT * FROM history WHERE fromwho = ? OR towho = ? ORDER BY ref DESC;",
     [searchingID, searchingID], (err, result) =>{
+        if (err){res.send(err)}
         res.send(result)
     })
 })
@@ -64,6 +66,7 @@ router.post("/get_sub", (req, res) =>{
 
     db_user.query("SELECT * FROM subscription WHERE user_id = ? ORDER BY ref DESC;",
     searchingID, (err, result) => {
+        if (err){res.send(err)}
         res.send(result)
     })
 })
@@ -74,6 +77,7 @@ router.post("/check_sub", (req, res) =>{
 
     db_user.query("SELECT plan FROM subscription WHERE user_id = ?;",
     searchingID, (err, result) => {
+        if (err){res.send(err)}
         res.send(result)
     })
 })
@@ -84,6 +88,7 @@ router.post("/get_debt", (req,res) => {
 
     db_user.query("SELECT * FROM debt WHERE user_id = ?;",
     searchingID, (err,result) => {
+        if (err){res.send(err)}
         res.send(result)
     })
 })
@@ -94,6 +99,7 @@ router.post("/get_payee", (req, res) =>{
 
     db_user.query("SELECT payee_id, payee_name FROM payee WHERE user_id = ?;",
     searchingID, (err, result) =>{
+        if (err){res.send(err)}
         res.send(result)
     })
 })
@@ -105,6 +111,7 @@ router.post("/check_payee", (req, res) =>{
 
     db_user.query("SELECT payee_id FROM payee WHERE (user_id = ?) AND (payee_id = ?);",
     [user_id_checkpayee, check_payee_id], (err, result) =>{
+        if (err){res.send(err)}
         res.send(result)
     })
 })
@@ -116,7 +123,8 @@ router.post("/add_payee", (req,res) =>{
     const add_payee_name = req.body.add_payee_name
 
     db_user.query("INSERT INTO payee (user_id, payee_id, payee_name) VALUES (?,?,?);",
-    [user_id_addpayee, add_payee_id, add_payee_name])
+    [user_id_addpayee, add_payee_id, add_payee_name], (err) => {if (err){res.send(err)}})
+    res.send("OK")
 })
 
 //delete payee
@@ -126,6 +134,7 @@ router.post("/delete_payee", (req, res) =>{
 
     db_user.query("DELETE FROM payee WHERE `payee_id` = ? AND `user_id` = ?;",
     [payee_id, user_id_deletepayee], (err, result) =>{
+        if (err){res.send(err)}
         res.send(result)
     })
 })
@@ -136,6 +145,7 @@ router.post("/check_user", (req, res) =>{
 
     db_user.query("SELECT user_id FROM user WHERE user_id = ?;",
     payee_id_checkuser, (err,result) =>{
+        if (err){res.send(err)}
         res.send(result)
     })
     
@@ -144,13 +154,15 @@ router.post("/check_user", (req, res) =>{
 //enable 2FA
 router.post("/enable_2FA", (req, res) => {
     const user_id_enable2FA = req.body.user_id_enable2FA
-    db_user.query("UPDATE user SET `2FA` = 1 WHERE user_id = ?;", user_id_enable2FA)
+    db_user.query("UPDATE user SET `2FA` = 1 WHERE user_id = ?;", user_id_enable2FA, (err) => {if (err){res.send(err)}})
+    res.send("OK")
 })
 
 //disable 2FA
 router.post("/disable_2FA", (req, res) => {
     const user_id_disable2FA = req.body.user_id_disable2FA
-    db_user.query("UPDATE user SET `2FA` = 0 WHERE user_id = ?;", user_id_disable2FA)
+    db_user.query("UPDATE user SET `2FA` = 0 WHERE user_id = ?;", user_id_disable2FA, (err) => {if (err){res.send(err)}})
+    res.send("OK")
 })
 
 //check balance
@@ -160,10 +172,9 @@ router.post("/check_balance", (req, res) => {
     db_user.query("SELECT balance FROM user WHERE user_id = ? AND balance >= ?;",
     [user_id_checkbalance, checked_balance], (err, result) => {
         if (err){
-            return
-        }else{
-            res.send(result)
+            res.send(err)
         }
+        res.send(result)
     })
 })
 

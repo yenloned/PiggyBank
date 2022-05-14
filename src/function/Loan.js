@@ -138,7 +138,7 @@ const Loan = () => {
     })
 
     useLayoutEffect(() => {
-        if (!loginStatus){
+        if (!loginStatus && loginID) {
             navigate('/login')
         }
     })

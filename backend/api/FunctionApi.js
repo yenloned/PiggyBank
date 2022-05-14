@@ -48,13 +48,14 @@ router.post("/transfer", (req, res) =>{
 
     //update balance for transfer (increase for payee, decrease for payer)
     db_user.query("UPDATE user SET balance = balance + ? WHERE user_id = ?;",
-    [transfer_amount, transfer_payeeID])
+    [transfer_amount, transfer_payeeID], (err) => {if (err){res.send(err)}})
     db_user.query("UPDATE user SET balance = balance - ? WHERE user_id = ?;",
-    [transfer_amount, transfer_payerID])
+    [transfer_amount, transfer_payerID], (err) => {if (err){res.send(err)}})
 
     //transaction history
     db_user.query("INSERT INTO history (fromwho, towho, type, amount, date) VALUES (?,?,?,?,?);",
-    [transfer_payerID, transfer_payeeID, "Transfer", transfer_amount, time])
+    [transfer_payerID, transfer_payeeID, "Transfer", transfer_amount, time], (err) => {if (err){res.send(err)}})
+    res.send("OK")
 })
 
 //withdrawal
@@ -68,10 +69,11 @@ router.post("/withdrawal", (req, res) =>{
 
     //update balance for withdrawal (decrease)
     db_user.query("UPDATE user SET balance = balance - ? WHERE user_id = ?;",
-    [withdrawal_amount, withdrawal_userid])
+    [withdrawal_amount, withdrawal_userid], (err) => {if (err){res.send(err)}})
     //transaction history
     db_user.query("INSERT INTO history (fromwho, towho, type, amount, date) VALUES (?,?,?,?,?);",
-    [withdrawal_userid, withdrawal_userid, "Withdrawal", -withdrawal_amount, time])
+    [withdrawal_userid, withdrawal_userid, "Withdrawal", -withdrawal_amount, time], (err) => {if (err){res.send(err)}})
+    res.send("OK")
 })
 
 //deposit
@@ -85,10 +87,11 @@ router.post("/deposit", (req, res) =>{
 
     //update balance for deposit (increase)
     db_user.query("UPDATE user SET balance = balance + ? WHERE user_id = ?;",
-    [deposit_amount, deposit_userid])
+    [deposit_amount, deposit_userid], (err) => {if (err){res.send(err)}})
     //transaction history
     db_user.query("INSERT INTO history (fromwho, towho, type, amount, date) VALUES (?,?,?,?,?);",
-    [deposit_userid, deposit_userid, "Deposit", deposit_amount, time])
+    [deposit_userid, deposit_userid, "Deposit", deposit_amount, time], (err) => {if (err){res.send(err)}})
+    res.send("OK")
 })
 
 //loan
@@ -103,13 +106,14 @@ router.post("/loan", (req, res) =>{
     let time = new Date(ts).toLocaleString("en-US", { timeZone: "Asia/Hong_Kong" });
 
     db_user.query("UPDATE user SET balance = balance + ? WHERE user_id = ?;",
-    [loan_amount, loan_userid])
+    [loan_amount, loan_userid], (err) => {if (err){res.send(err)}})
 
     db_user.query("INSERT INTO debt (user_id, total, monthly, tenor, type, date) VALUES (?,?,?,?,?,?);",
-    [loan_userid, loan_repay*loan_tenor, loan_repay, loan_tenor, "Loan", time])
+    [loan_userid, loan_repay*loan_tenor, loan_repay, loan_tenor, "Loan", time], (err) => {if (err){res.send(err)}})
 
     db_user.query("INSERT INTO history (fromwho, towho, type, amount, date) VALUES (?,?,?,?,?);",
-    [loan_userid, loan_userid, "Loan", loan_amount, time])
+    [loan_userid, loan_userid, "Loan", loan_amount, time], (err) => {if (err){res.send(err)}})
+    res.send("OK")
 })
 
 //insurance
@@ -124,13 +128,14 @@ router.post("/insurance", (req, res) =>{
     let time = new Date(ts).toLocaleString("en-US", { timeZone: "Asia/Hong_Kong" });
 
     db_user.query("UPDATE user SET balance = balance - ? WHERE user_id = ?;",
-    [insurance_repay, insurance_userid])
+    [insurance_repay, insurance_userid], (err) => {if (err){res.send(err)}})
 
     db_user.query("INSERT INTO subscription (user_id, assure, repay, plan, type, date) VALUES (?,?,?,?);",
-    [insurance_userid, insurance_amount, insurance_repay, plan_name, "Insurance", time])
+    [insurance_userid, insurance_amount, insurance_repay, plan_name, "Insurance", time], (err) => {if (err){res.send(err)}})
 
     db_user.query("INSERT INTO history (fromwho, towho, type, amount, date) VALUES (?,?,?,?,?);",
-    [insurance_userid, insurance_userid, "Subscription", insurance_repay, time])
+    [insurance_userid, insurance_userid, "Subscription", insurance_repay, time], (err) => {if (err){res.send(err)}})
+    res.send("OK")
 })
 
 module.exports = router

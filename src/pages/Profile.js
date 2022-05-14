@@ -146,7 +146,8 @@ const Profile = () => {
                 //with balance and total debt, send them to backend to perform credit calculation
                 Axios.post("https://piggbank-backend-api.herokuapp.com/account/credit_scoring", {
                 balance: balance,
-                debt: response.data[0].total})
+                debt: response.data[0].total,
+                searchingID: loginID})
                 .then((credit) => {
                     //update credit in component
                     setUserCredit(credit.data)

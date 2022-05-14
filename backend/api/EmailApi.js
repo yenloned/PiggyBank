@@ -53,6 +53,9 @@ router.post("/reset_email", cors(), (req,res) => {
     //take the verification code from database
     db_user.query("SELECT verification FROM user WHERE email = ?", 
     targetemail, (err, result) => {
+        if (err){
+            res.send(err)
+        }
         const randomcode = result[0]["verification"]
         //send it through SMTP Server by nodemailer
         transport.sendMail({
@@ -65,6 +68,7 @@ router.post("/reset_email", cors(), (req,res) => {
             <h4>Any question, please contact rudyyen.work@gmail.com</h4>`
         })
     })
+    res.send("OK")
 })
 
 router.post("/notice_email", cors(), async (req,res) => {
@@ -80,6 +84,7 @@ router.post("/notice_email", cors(), async (req,res) => {
         <h4>Please do not reply to this email.</h4>
         <br/><h4>PiggyBank</h4>`
     })
+    res.send("OK")
 })
 
 module.exports = router
