@@ -67,7 +67,6 @@ function App() {
                     window.location("/login");
                     setLoginID(0)
                     setLoginStatus(false)
-                  //both failed
                   }
               })
         })

@@ -1,4 +1,5 @@
 import React, { useState, useContext, useLayoutEffect} from "react";
+import {LoginIDContext} from "./context/LoginContext";
 import { LoginStatusContext } from "../context/LoginContext";
 import { useNavigate } from "react-router-dom";
 
@@ -19,6 +20,7 @@ export default function Login(){
     const [password, setPassword] = useState('');
     const [code, setCode] = useState("")
 
+    const {setLoginID} = useContext(LoginStatusContext);
     const {loginStatus, setLoginStatus} = useContext(LoginStatusContext);
     const [loginDisplay, setLoginDisplay] = useState("");
     const [loginAuth, setLoginAuth] = useState(false);
