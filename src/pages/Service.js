@@ -101,6 +101,11 @@ const Service = () => {
         }else{
             setInsuranceHighest(10000000)
         }
+        if (insuranceAge > 65){
+            setInsuranceAge(65)
+        }else if (insuranceAge > 18){
+            setInsuranceAge(18)
+        }
         if (calculatorAmount < 10000){
             setCalculatorAmount(10000)
         }else if(calculatorAmount > 1500000){

@@ -17,7 +17,7 @@ PiggyBank is a fully responsive web application, which operates and provides var
 It does not involve any real currencies, trading, contracts, or agreements since this project is aimed to demo the web development technologies and practice.
 
 ## Live Demo
-This project is still on development status (8/5/2022). The website will be hosted after completion.
+[https://piggybank-web.netlify.app/](https://piggybank-web.netlify.app/)
 
 ## Technologies
 **FrontEnd**
