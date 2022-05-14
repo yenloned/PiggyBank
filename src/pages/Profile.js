@@ -87,12 +87,12 @@ const Profile = () => {
             })
         }
 
-        if (loginStatus){
+        if (loginStatus && userFirstName === ""){
             console.log(loginID)
             GetInformation()
             get_payee()
         }
-    }, [])
+    })
 
     //Some components in page need to be reset back to default
 
