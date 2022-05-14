@@ -92,7 +92,7 @@ const Profile = () => {
             GetInformation()
             get_payee()
         }
-    })
+    }, [])
 
     //Some components in page need to be reset back to default
 
