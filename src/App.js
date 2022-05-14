@@ -63,8 +63,8 @@ function App() {
                   //only cookie passed, then logout (destory the cookie)
                   }else{
                     //Axios.get("https://piggbank-backend-api.herokuapp.com/account/logout")
-                    window.location.reload();
-                    window.location("/login");
+                    //window.location.reload();
+                    //window.location("/login");
                     setLoginID(0)
                     setLoginStatus(false)
                   }
