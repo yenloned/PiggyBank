@@ -369,10 +369,7 @@ const Profile = () => {
     const logout = () => {
         setLoginStatus(false)
         setLoginID(0)
-        Axios.get("https://piggbank-backend-api.herokuapp.com/account/logout")
-        .then((err) => {
-              console.log(err)
-        })
+        localStorage.removeItem("token");
         window.location.replace("/")
     }
 
