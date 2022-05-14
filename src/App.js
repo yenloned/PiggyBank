@@ -61,16 +61,13 @@ function App() {
                     setLoginID(JWTresponse.data.userid)
                     setLoginStatus(true)
                   //only cookie passed, then logout (destory the cookie)
-                  }else if (response.data.user){
+                  }else{
                     //Axios.get("https://piggbank-backend-api.herokuapp.com/account/logout")
                     window.location.reload();
                     window.location("/login");
                     setLoginID(0)
                     setLoginStatus(false)
                   //both failed
-                  }else{
-                    setLoginID(0)
-                    setLoginStatus(false)
                   }
               })
         })
