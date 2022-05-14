@@ -36,7 +36,7 @@ import {userDebtContext} from "./context/UserContext";
 function App() {
 
   const [loginStatus, setLoginStatus] = useState(false);
-  const [loginID, setLoginID] = useState(null);
+  const [loginID, setLoginID] = useState(0);
   const [userPayee, setUserPayee] = useState([]);
   const [userDebt, setUserDebt] = useState([]);
 
@@ -60,6 +60,7 @@ function App() {
                   console.log(JWTresponse)
                   //JWT and cookie both passed, then login success
                   if (JWTresponse.data.auth){
+                    console.log(JWTresponse.data.userid)
                     setLoginID(JWTresponse.data.userid)
                     setLoginStatus(true)
                   //only cookie passed, then logout (destory the cookie)
