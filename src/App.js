@@ -56,6 +56,7 @@ function App() {
                   "x-access-token" : localStorage.getItem("token")
                 }
               }).then((JWTresponse) => {
+                  console.log(JWTresponse)
                   //JWT and cookie both passed, then login success
                   if (JWTresponse.data.userid){
                     setLoginID(JWTresponse.data.userid)
