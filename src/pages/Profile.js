@@ -1,4 +1,4 @@
-import React, {useContext, useLayoutEffect, useEffect, useState} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import { useNavigate } from "react-router-dom";
 import Axios from "axios";
 import './profile.css';
@@ -67,13 +67,6 @@ const Profile = () => {
 
     const navigate = useNavigate()
 
-    //redirect user if not login
-    useLayoutEffect(() => {
-        if (!loginStatus){
-            navigate("/login")
-        }
-    })
-
     
     useEffect( () => {
         //get user information by useEffect, then save them into accordance components
@@ -98,6 +91,8 @@ const Profile = () => {
             console.log(loginID)
             GetInformation()
             get_payee()
+        }else{
+            navigate("/login")
         }
     })
 
