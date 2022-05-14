@@ -91,8 +91,6 @@ const Profile = () => {
             console.log(loginID)
             GetInformation()
             get_payee()
-        }else{
-            navigate("/login")
         }
     })
 
