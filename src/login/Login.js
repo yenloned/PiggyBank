@@ -42,6 +42,7 @@ export default function Login(){
             if (response.data.auth) {
                 //change share component status
                 setLoginStatus(true)
+                setLoginID(response.data.result[0].user_id)
                 //jwt token store in localStorage
                 localStorage.setItem("token", response.data.token)
             //If login fail, display error message by component render

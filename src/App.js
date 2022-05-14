@@ -43,33 +43,37 @@ function App() {
   Axios.defaults.withCredentials = true;
 
     useEffect(()=> {
+      /*
       //check if user have logined (by cookie session)
         Axios.get("https://piggbank-backend-api.herokuapp.com/account/loggedin")
         .then((response) => {
               //store user login status into component, which is shared with other files
               setLoginStatus(response.data.loggedIn);
               //check along with JWT
+          */
               Axios.get("https://piggbank-backend-api.herokuapp.com/account/auth", {
               headers: {
                   "x-access-token" : localStorage.getItem("token")
                 }
               }).then((JWTresponse) => {
                   //JWT and cookie both passed, then login success
-                  if (JWTresponse.data === "User authed" && response.data.user){
-                    setLoginID(response.data.user[0].user_id)
+                  if (JWTresponse.data.userid){
+                    setLoginID(JWTresponse.data.userid)
+                    setLoginStatus(true)
                   //only cookie passed, then logout (destory the cookie)
                   }else if (response.data.user){
-                    Axios.get("https://piggbank-backend-api.herokuapp.com/account/logout")
+                    //Axios.get("https://piggbank-backend-api.herokuapp.com/account/logout")
                     window.location.reload();
                     window.location("/login");
                     setLoginID(0)
+                    setLoginStatus(false)
                   //both failed
                   }else{
                     setLoginID(0)
+                    setLoginStatus(false)
                   }
               })
         })
-    })
 
   return (
     /*It provides a router function for all the other files.

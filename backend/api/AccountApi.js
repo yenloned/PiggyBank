@@ -94,6 +94,8 @@ router.post('/registered', (req,res) => {
 
 
 //JWT
+
+
 const verifyJWT = (req, res, next) => {
     const token = req.headers["x-access-token"]
     if (!token){
@@ -103,7 +105,7 @@ const verifyJWT = (req, res, next) => {
             if(err){
                 res.json({auth: false, message: "Auth Failed"})
             }else{
-                res.user_id = decoded.id
+                req.user_id = decoded
                 next()
             }
         })
@@ -111,7 +113,7 @@ const verifyJWT = (req, res, next) => {
 }
 //verifying the JWT Token
 router.get("/auth", verifyJWT, (req, res) => {
-    res.send("User authed")
+    res.json({userid: req.user_id.userid})
 })
 
 
@@ -147,10 +149,8 @@ router.post('/login', (req, res) => {
                         //If success, cookie session and JWT token will be signed and assigned to user
                         if (comparedresult){
 
-                            const user_id = result[0].user_id
-                            const jwttoken = jwt.sign({user_id}, jwt_secret, {
-                                expiresIn: 7200,
-                            })
+                            const userid = result[0].user_id
+                            const jwttoken = jwt.sign({userid}, jwt_secret, { expiresIn: 7200})
                             //assign cookie
                             req.session.user = result;
 
