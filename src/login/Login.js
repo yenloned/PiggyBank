@@ -1,5 +1,4 @@
 import React, { useState, useContext, useLayoutEffect} from "react";
-import { LoginIDContext } from "../context/LoginContext";
 import { LoginStatusContext } from "../context/LoginContext";
 import { useNavigate } from "react-router-dom";
 
@@ -20,7 +19,6 @@ export default function Login(){
     const [password, setPassword] = useState('');
     const [code, setCode] = useState("")
 
-    const {setLoginID} = useContext(LoginIDContext);
     const {loginStatus, setLoginStatus} = useContext(LoginStatusContext);
     const [loginDisplay, setLoginDisplay] = useState("");
     const [loginAuth, setLoginAuth] = useState(false);
@@ -44,7 +42,6 @@ export default function Login(){
             if (response.data.auth) {
                 //change share component status
                 setLoginStatus(true)
-                setLoginID(response.data.result[0].user_id)
                 //jwt token store in localStorage
                 localStorage.setItem("token", response.data.token)
             //If login fail, display error message by component render

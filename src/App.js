@@ -58,7 +58,7 @@ function App() {
               }).then((JWTresponse) => {
                   console.log(JWTresponse)
                   //JWT and cookie both passed, then login success
-                  if (JWTresponse.data.userid){
+                  if (JWTresponse.data.auth){
                     setLoginID(JWTresponse.data.userid)
                     setLoginStatus(true)
                   //only cookie passed, then logout (destory the cookie)

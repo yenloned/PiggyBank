@@ -113,7 +113,7 @@ const verifyJWT = (req, res, next) => {
 }
 //verifying the JWT Token
 router.get("/auth", verifyJWT, (req, res) => {
-    res.json({userid: req.user_id.userid})
+    res.json({auth: true, userid: req.user_id.userid})
 })
 
 
