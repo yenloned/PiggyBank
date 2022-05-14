@@ -95,10 +95,11 @@ const Profile = () => {
         }
 
         if (!userEmail || !userFirstName || !userLastName){
+            console.log(loginID)
             GetInformation()
             get_payee()
         }
-    })
+    }, [])
 
     //Some components in page need to be reset back to default
 
