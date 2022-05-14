@@ -69,7 +69,7 @@ function App() {
                     setLoginStatus(false)
                   }
               })
-        })
+        }, [])
 
   return (
     /*It provides a router function for all the other files.
