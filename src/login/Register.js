@@ -88,10 +88,18 @@ const Register = () => {
             firstname: firstnameReg,
             lastname: lastnameReg,
         }).then((response) => {
-            if (!response.data){
+            // If response.data is null/undefined, registration was successful
+            if (!response.data || response.data === null) {
                 //redirect to Login page if success
                 navigate('/login')
+            } else {
+                // Handle error case
+                console.error('Registration failed:', response.data)
+                setEmailMsg("Registration failed. Please try again.")
             }
+        }).catch((error) => {
+            console.error('Registration error:', error)
+            setEmailMsg("Registration failed. Please try again.")
         })
     }
 
