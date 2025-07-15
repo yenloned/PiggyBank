@@ -60,7 +60,7 @@ export default function Login(){
             user_email: email
         }).then((result) =>{
             //If the 2FA status is True, which means it is enabled
-            if (result.data){
+            if (result.data && result.data.enabled === true){
                 //change the useState component in order to render the page (code Verification)
                 setLoginAuth(true)
                 //generate random code in backend and store it in database

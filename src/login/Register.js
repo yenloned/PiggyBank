@@ -88,8 +88,8 @@ const Register = () => {
             firstname: firstnameReg,
             lastname: lastnameReg,
         }).then((response) => {
-            // If response.data is null/undefined, registration was successful
-            if (!response.data || response.data === null) {
+            // Check if registration was successful based on new response format
+            if (response.data && response.data.success === true) {
                 //redirect to Login page if success
                 navigate('/login')
             } else {
