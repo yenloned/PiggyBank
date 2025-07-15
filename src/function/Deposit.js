@@ -1,6 +1,7 @@
 import React, {useContext, useLayoutEffect, useState} from "react";
 import Axios from "axios";
 import './function.css';
+import { API_BASE_URL, API_ENDPOINTS } from '../config/api';
 
 import deposit_icon2 from "../material/icons/deposit_icon2.png";
 
@@ -32,7 +33,7 @@ const Deposit = () => {
             return setDeposit_Msg("Deposit amount is too large")
         }
         //deposit money into user account
-        Axios.post("https://piggbank-backend-api.herokuapp.com/function/deposit",{
+        Axios.post(`${API_BASE_URL}${API_ENDPOINTS.DEPOSIT}`,{
         deposit_userid: loginID,
         deposit_amount: deposit_amount})
         //redirect user to transaction history page after the deposit

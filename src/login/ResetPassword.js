@@ -7,6 +7,7 @@ import postbox from "../material/pictures/postbox.png";
 
 import "./login.css";
 import "./register.css";
+import { API_BASE_URL, API_ENDPOINTS } from '../config/api';
 
 const ResetPassword = () => {
 
@@ -34,7 +35,7 @@ const ResetPassword = () => {
     const SendEmail = async () => {
         try{
         //check if the Email Address is registered in database
-        await Axios.post('https://piggbank-backend-api.herokuapp.com/account/registered',{
+        await Axios.post(`${API_BASE_URL}${API_ENDPOINTS.REGISTERED}`,{
             cemail: email
         }).then((response) =>{
             //If yes, the SELECT result will have length that > 0
@@ -44,11 +45,11 @@ const ResetPassword = () => {
                 //set the useState component for page rendering to next page (code Verification)
                 setEmailSent(true);
                 //let backend generate the verification code and store it in database
-                Axios.post('https://piggbank-backend-api.herokuapp.com/account/store_code', {
+                Axios.post(`${API_BASE_URL}${API_ENDPOINTS.STORE_CODE}`, {
                     storeEmail: email
                 }).then (() => {
                     //SELECT the verification code from database and send it with Email
-                    Axios.post("https://piggbank-backend-api.herokuapp.com/email/reset_email", {
+                    Axios.post(`${API_BASE_URL}${API_ENDPOINTS.RESET_EMAIL}`, {
                         targetemail: email,
                     })
                 })
@@ -65,7 +66,7 @@ const ResetPassword = () => {
 
     const checkCode = () => {
         //check if the code user inputted is the same as the database stored
-        Axios.post('https://piggbank-backend-api.herokuapp.com/account/check_code',{
+        Axios.post(`${API_BASE_URL}${API_ENDPOINTS.CHECK_CODE}`,{
         code: code,
         user_email: email
         }).then((response) => {
@@ -89,13 +90,13 @@ const ResetPassword = () => {
             return setChangePasswordMsg("New Password should be at least 8characters long.")
         }
         //update password in database
-        Axios.post("https://piggbank-backend-api.herokuapp.com/account/change_password",{
+        Axios.post(`${API_BASE_URL}${API_ENDPOINTS.CHANGE_PASSWORD}`,{
             targetEmail: email,
             newpassword: newpassword
             }).then((response) =>{
                 if (response){
                     //sending a notification email to the Email Address for security alert
-                    Axios.post("https://piggbank-backend-api.herokuapp.com/email/notice_email",{
+                    Axios.post(`${API_BASE_URL}${API_ENDPOINTS.NOTICE_EMAIL}`,{
                     noticeEmail: email,
                     })
                     navigate('/login')

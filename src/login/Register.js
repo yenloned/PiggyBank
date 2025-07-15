@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Axios from 'axios';
 import { useNavigate } from "react-router-dom";
 import './register.css';
+import { API_BASE_URL, API_ENDPOINTS } from '../config/api';
 
 import user from "../material/icons/user.png"
 import corporate from "../material/icons/corporate.png"
@@ -44,7 +45,7 @@ const Register = () => {
         setConfirmPasswordMsg("")
 
         //check if the account(Email) is already registered
-        Axios.post('https://piggbank-backend-api.herokuapp.com/account/registered',{
+        Axios.post(`${API_BASE_URL}${API_ENDPOINTS.REGISTERED}`,{
             cemail: emailReg
         }).then((response) =>{
             //If yes, update component to display error message
@@ -81,7 +82,7 @@ const Register = () => {
     //acount register
     const register_post = () => {
         //input the user information to register account
-        Axios.post('https://piggbank-backend-api.herokuapp.com/account/register', {
+        Axios.post(`${API_BASE_URL}${API_ENDPOINTS.REGISTER}`, {
             email: emailReg, 
             password: passwordReg,
             firstname: firstnameReg,

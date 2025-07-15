@@ -1,6 +1,7 @@
 import React, {useContext, useEffect, useLayoutEffect, useState} from "react";
 import { useNavigate } from "react-router-dom";
 import Axios from "axios";
+import { API_BASE_URL, API_ENDPOINTS } from '../config/api';
 import './loan.css';
 import '../pages/service.css'
 import Footer from '../comps/Footer';
@@ -101,7 +102,7 @@ const Loan = () => {
             setUserIncome(500000)
         }
         if (!userFirstName && !userLastName && !userCredit){
-            Axios.post("https://piggbank-backend-api.herokuapp.com/profile/get_info",{
+            Axios.post(`${API_BASE_URL}${API_ENDPOINTS.GET_INFO}`,{
             searchingID: loginID})
             .then((response) => {
                 if (response.data){
@@ -145,7 +146,7 @@ const Loan = () => {
 
     const applyLoan = (amount, tenor, repay) => {
         if (userFirstName.length && userLastName.length && userAddress.length  && userJob.length && userNumber.length && userPhone.length){
-            Axios.post("https://piggbank-backend-api.herokuapp.com/function/loan",{
+            Axios.post(`${API_BASE_URL}${API_ENDPOINTS.LOAN}`,{
             loan_userid: loginID,
             amount: amount,
             tenor: tenor,

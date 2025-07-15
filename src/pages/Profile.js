@@ -2,6 +2,7 @@ import React, {useContext, useEffect, useState} from "react";
 import { useNavigate } from "react-router-dom";
 import Axios from "axios";
 import './profile.css';
+import { API_BASE_URL, API_ENDPOINTS } from '../config/api';
 
 import no_sub from "../material/pictures/no_sub.png"
 import no_history from "../material/pictures/no_history.png"
@@ -71,7 +72,7 @@ const Profile = () => {
     useEffect( () => {
         //get user information by useEffect, then save them into accordance components
         const GetInformation = async () =>{
-            await Axios.post("https://piggbank-backend-api.herokuapp.com/profile/get_info",{
+            await Axios.post(`${API_BASE_URL}${API_ENDPOINTS.GET_INFO}`,{
             searchingID: loginID})
             .then((response) => {
                 if (response.data){
@@ -137,14 +138,14 @@ const Profile = () => {
     //update credit by calculation in backend site, take balance as parameter
     const UpdateCredit = async (balance) =>{
         //check the total debt of user
-        await Axios.post("https://piggbank-backend-api.herokuapp.com/profile/get_debt",{
+        await Axios.post(`${API_BASE_URL}${API_ENDPOINTS.GET_DEBT}`,{
         searchingID: loginID})
         .then((response) => {
             //If user has any debt
             if (response.data[0]){
                 setUserDebt(response.data.reduce((prev, cur) => prev + cur.total, 0));
                 //with balance and total debt, send them to backend to perform credit calculation
-                Axios.post("https://piggbank-backend-api.herokuapp.com/account/credit_scoring", {
+                Axios.post(`${API_BASE_URL}${API_ENDPOINTS.CREDIT_SCORING}`, {
                 balance: balance,
                 debt: response.data[0].total,
                 searchingID: loginID})
@@ -152,20 +153,20 @@ const Profile = () => {
                     //update credit in component
                     setUserCredit(credit.data)
                     //update credit in database
-                    Axios.post("https://piggbank-backend-api.herokuapp.com/account/update_credit", {
+                    Axios.post(`${API_BASE_URL}${API_ENDPOINTS.UPDATE_CREDIT}`, {
                     searchingID: loginID, credit: credit.data})
                 })
             }else{
                 //If user has no debt, the debt input will be 0
                 //Send them to backend calculation
-                Axios.post("https://piggbank-backend-api.herokuapp.com/account/credit_scoring", {
+                Axios.post(`${API_BASE_URL}${API_ENDPOINTS.CREDIT_SCORING}`, {
                 balance: balance,
                 debt: 0})
                 .then((credit) => {
                     //update credit in component
                     setUserCredit(credit.data)
                     //update credit in database
-                    Axios.post("https://piggbank-backend-api.herokuapp.com/account/update_credit", {
+                    Axios.post(`${API_BASE_URL}${API_ENDPOINTS.UPDATE_CREDIT}`, {
                     searchingID: loginID, credit: credit.data})
                 })
             }
@@ -174,7 +175,7 @@ const Profile = () => {
 
     //get all history information by user ID
     const get_history = async () => {
-        await Axios.post("https://piggbank-backend-api.herokuapp.com/profile/get_history",{
+        await Axios.post(`${API_BASE_URL}${API_ENDPOINTS.GET_HISTORY}`,{
         searchingID: loginID})
         .then((history) => {
             if (history.data.length){
@@ -186,7 +187,7 @@ const Profile = () => {
 
     //get all subscription by user ID
     const get_sub = async () => {
-        await Axios.post("https://piggbank-backend-api.herokuapp.com/profile/get_sub",{
+        await Axios.post(`${API_BASE_URL}${API_ENDPOINTS.GET_SUB}`,{
         searchingID: loginID})
         .then((subscription) => {
             if (subscription.data.length){
@@ -197,7 +198,7 @@ const Profile = () => {
 
     //get all payee information by user ID
     const get_payee = () => {
-        Axios.post("https://piggbank-backend-api.herokuapp.com/profile/get_payee",{
+        Axios.post(`${API_BASE_URL}${API_ENDPOINTS.GET_PAYEE}`,{
         searchingID: loginID})
         .then((response) => {
             if (response.data){
@@ -223,7 +224,7 @@ const Profile = () => {
             return setPayeeAdd_Msg("Payee Name is too long!")
         }
         //check if payee is already registered for user
-        await Axios.post("https://piggbank-backend-api.herokuapp.com/profile/check_payee",{
+        await Axios.post(`${API_BASE_URL}${API_ENDPOINTS.CHECK_PAYEE}`,{
             user_id_checkpayee: loginID,
             check_payee_id: payeeAdd_ID
         }).then((checkresult) =>{
@@ -232,12 +233,12 @@ const Profile = () => {
                 setPayeeAdd_Msg("Payee already registered on your list.")
             }else{
                 //If no, check if the payee (userID) really exist
-                Axios.post("https://piggbank-backend-api.herokuapp.com/profile/check_user",{
+                Axios.post(`${API_BASE_URL}${API_ENDPOINTS.CHECK_USER}`,{
                 payee_id_checkuser: payeeAdd_ID
                 }).then((checkuser_result) =>{
                     if(checkuser_result.data !== ''){
                         //If yes, add it into the user information
-                        Axios.post("https://piggbank-backend-api.herokuapp.com/profile/add_payee",{
+                        Axios.post(`${API_BASE_URL}${API_ENDPOINTS.ADD_PAYEE}`,{
                             user_id_addpayee: loginID,
                             add_payee_id: payeeAdd_ID,
                             add_payee_name: payeeAdd_Name
@@ -258,7 +259,7 @@ const Profile = () => {
     const delete_payee = (payeeID) => {
         var payee_ID = payeeID
         //perform DELETE in database row
-        Axios.post("https://piggbank-backend-api.herokuapp.com/profile/delete_payee", {
+        Axios.post(`${API_BASE_URL}${API_ENDPOINTS.DELETE_PAYEE}`, {
             user_id_deletepayee: loginID,
             payee_id: payee_ID})
         .then(() => {
@@ -270,14 +271,14 @@ const Profile = () => {
     //enable the 2FA status in user information
     const enable2FA = () => {
         //check if the password correct, before sending the request into backend
-        Axios.post("https://piggbank-backend-api.herokuapp.com/account/check_password",{
+        Axios.post(`${API_BASE_URL}${API_ENDPOINTS.CHECK_PASSWORD}`,{
             user_id_checkpassword: loginID,
             input_password: userCurrentPassword})
         .then((response_enable2FA) => {
             //If yes, the backend should response as "Check Password Passed"
             if (response_enable2FA.data === "Check Password Passed"){
                 //update database status of 2FA
-                Axios.post("https://piggbank-backend-api.herokuapp.com/profile/enable_2FA",{user_id_enable2FA: loginID})
+                Axios.post(`${API_BASE_URL}${API_ENDPOINTS.ENABLE_2FA}`,{user_id_enable2FA: loginID})
                 .then(setUser2FA(!user2FA)) //update component state for page rendering (display 2FA is enabled)
                 setcheckPasswordFailMsg("")
             //If no, update component status for displaying error message
@@ -290,14 +291,14 @@ const Profile = () => {
     //disable the 2FA in user information
     const disable2FA = () =>{
         //check if the password correct, before sending the request into backend
-        Axios.post("https://piggbank-backend-api.herokuapp.com/account/check_password",{
+        Axios.post(`${API_BASE_URL}${API_ENDPOINTS.CHECK_PASSWORD}`,{
             user_id_checkpassword: loginID,
             input_password: userCurrentPassword})
         .then((response_disable2FA) => {
             //If yes
             if (response_disable2FA.data === "Check Password Passed"){
                 //update database status of 2FA
-                Axios.post("https://piggbank-backend-api.herokuapp.com/profile/disable_2FA",{user_id_disable2FA: loginID})
+                Axios.post(`${API_BASE_URL}${API_ENDPOINTS.DISABLE_2FA}`,{user_id_disable2FA: loginID})
                 .then(setUser2FA(!user2FA))
                 //reset the error message
                 setcheckPasswordFailMsg("")
@@ -318,14 +319,14 @@ const Profile = () => {
             return setResetPasswordMsg("New Password should contain at least 8characters long.")
         }
         //check if the password correct, before sending the request into backend
-        Axios.post("https://piggbank-backend-api.herokuapp.com/account/check_password",{
+        Axios.post(`${API_BASE_URL}${API_ENDPOINTS.CHECK_PASSWORD}`,{
             user_id_checkpassword: loginID,
             input_password: userOldPassword})
             .then((response_resetpassword) => {
                 //If yes
                 if (response_resetpassword.data === "Check Password Passed"){
                     //update password
-                    Axios.post("https://piggbank-backend-api.herokuapp.com/account/change_password",{
+                    Axios.post(`${API_BASE_URL}${API_ENDPOINTS.CHANGE_PASSWORD}`,{
                         newpassword: userNewPassword,
                         targetEmail: userEmail
                     }).then(() => {
@@ -343,7 +344,7 @@ const Profile = () => {
     //terminate account
     const delete_account = () =>{
         //check if the password correct, before sending the request into backend
-        Axios.post("https://piggbank-backend-api.herokuapp.com/account/check_password",{
+        Axios.post(`${API_BASE_URL}${API_ENDPOINTS.CHECK_PASSWORD}`,{
             user_id_checkpassword: loginID,
             input_password: userTerminatePassword
         }).then((response_deleteaccount) => {
@@ -354,7 +355,7 @@ const Profile = () => {
                     return setUserTerminateMsg('Incorrect verification by input "terminate my account".')
                 }else{
                     //terminate account by delete row in database
-                    Axios.post("https://piggbank-backend-api.herokuapp.com/account/delete_account",{user_id_deleteaccount:loginID})
+                    Axios.post(`${API_BASE_URL}${API_ENDPOINTS.DELETE_ACCOUNT}`,{user_id_deleteaccount:loginID})
                     //alert user
                     window.alert("Account Terminated.\nAny problem, please contact: rudyyen.work@gmail.com")
                     //destory cookie

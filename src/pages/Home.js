@@ -13,6 +13,7 @@ import wecare from '../material/pictures/wecare.png';
 import tohelp from '../material/pictures/tohelp.png';
 import {LoginStatusContext} from "../context/LoginContext";
 import {LoginIDContext} from "../context/LoginContext";
+import { API_BASE_URL, API_ENDPOINTS } from '../config/api';
 
 import Footer from '../comps/Footer';
 
@@ -29,7 +30,7 @@ const Home = () => {
         AOS.init({duration: 800})
         //get user information
         async function GetInformation(){
-        await Axios.post("https://piggbank-backend-api.herokuapp.com/profile/get_info",{
+        await Axios.post(`${API_BASE_URL}${API_ENDPOINTS.GET_INFO}`,{
         searchingID: loginID})
         .then((response) => {
             if (response.data){

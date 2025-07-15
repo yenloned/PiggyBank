@@ -1,6 +1,7 @@
 import React, {useContext, useLayoutEffect, useState} from "react";
 import Axios from "axios";
 import './function.css';
+import { API_BASE_URL, API_ENDPOINTS } from '../config/api';
 
 import withdrawal_icon2 from "../material/icons/withdrawal_icon2.png";
 
@@ -29,13 +30,13 @@ const Withdrawal = () => {
             return setWithdrawal_Msg("Withdrawal amount should be the multiple of HKD100")
         }
         //check if user have enough money to perform withdrawal
-        Axios.post("https://piggbank-backend-api.herokuapp.com/profile/check_balance",{
+        Axios.post(`${API_BASE_URL}${API_ENDPOINTS.CHECK_BALANCE}`,{
         payerID: loginID,
         check_amount: withdrawal_amount})
         .then((response) =>{
             //If yes, perform withdrawal
             if (response.data.length > 0){
-                Axios.post("https://piggbank-backend-api.herokuapp.com/function/withdrawal",{
+                Axios.post(`${API_BASE_URL}${API_ENDPOINTS.WITHDRAWAL}`,{
                 withdrawal_userid: loginID,
                 withdrawal_amount: withdrawal_amount})
                 //redirect user to transaction history page after the withdrawal

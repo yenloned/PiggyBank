@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 
 import {LoginStatusContext} from "../context/LoginContext";
 import {LoginIDContext} from "../context/LoginContext";
+import { API_BASE_URL, API_ENDPOINTS } from '../config/api';
 
 import no_history_detail from "../material/pictures/no_history_detail.png"
 
@@ -30,7 +31,7 @@ const History = () => {
 
     useEffect(async () => {
         if (!userHistory.length){
-            await Axios.post("https://piggbank-backend-api.herokuapp.com/profile/get_history",{
+            await Axios.post(`${API_BASE_URL}${API_ENDPOINTS.GET_HISTORY}`,{
             searchingID: loginID})
             .then((history) => {
                 if (history.data.length){

@@ -7,6 +7,7 @@ import login from "../material/pictures/login.png"
 
 import Axios from 'axios';
 import './login.css';
+import { API_BASE_URL, API_ENDPOINTS } from '../config/api';
 
 
 
@@ -33,7 +34,7 @@ export default function Login(){
 
     //login
     const login_post = () => {
-        Axios.post('https://piggbank-backend-api.herokuapp.com/account/login', {
+        Axios.post(`${API_BASE_URL}${API_ENDPOINTS.LOGIN}`, {
             email: email, 
             password: password,
         //the login prcoess in real case will be creating cookie and session, which will be performed in backend
@@ -55,7 +56,7 @@ export default function Login(){
     //check if the user has enabled 2FA
     const login_check_2FA_status = () => {
         //SELECT the 2FA status from database by user ID
-        Axios.post("https://piggbank-backend-api.herokuapp.com/account/check_2FA", {
+        Axios.post(`${API_BASE_URL}${API_ENDPOINTS.CHECK_2FA}`, {
             user_email: email
         }).then((result) =>{
             //If the 2FA status is True, which means it is enabled
@@ -63,11 +64,11 @@ export default function Login(){
                 //change the useState component in order to render the page (code Verification)
                 setLoginAuth(true)
                 //generate random code in backend and store it in database
-                Axios.post('https://piggbank-backend-api.herokuapp.com/account/store_code', {
+                Axios.post(`${API_BASE_URL}${API_ENDPOINTS.STORE_CODE}`, {
                     storeEmail: email
                 }).then (() => {
                     //SELECT the verification code and send it to Email (registered one)
-                    Axios.post("https://piggbank-backend-api.herokuapp.com/email/reset_email", {
+                    Axios.post(`${API_BASE_URL}${API_ENDPOINTS.RESET_EMAIL}`, {
                         targetemail: email,
                     })
                 })
@@ -80,7 +81,7 @@ export default function Login(){
 
     //check if the user input match the verification code stored in database
     const login_check_2FA = () => {
-        Axios.post("https://piggbank-backend-api.herokuapp.com/account/check_code", {
+        Axios.post(`${API_BASE_URL}${API_ENDPOINTS.CHECK_CODE}`, {
             code: code,
             user_email: email
         }).then((response) => {
@@ -97,7 +98,7 @@ export default function Login(){
 
     //check if the account existed or not first, then pass to check 2FA
     const login_check_exist = () => {
-        Axios.post("https://piggbank-backend-api.herokuapp.com/account/registered", {
+        Axios.post(`${API_BASE_URL}${API_ENDPOINTS.REGISTERED}`, {
             cemail: email
         }).then((response) =>{
             if(response.data.length){

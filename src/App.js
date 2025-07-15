@@ -4,6 +4,7 @@ import './App.css';
 import Navbar from './comps/NavBar';
 import LoginNavbar from './comps/LoginNavBar';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { API_BASE_URL, API_ENDPOINTS } from './config/api';
 
 import Home from './pages/Home';
 import About from './pages/About';
@@ -51,7 +52,7 @@ function App() {
               setLoginStatus(response.data.loggedIn);
               //check along with JWT
           */
-              Axios.get("https://piggbank-backend-api.herokuapp.com/account/auth", {
+              Axios.get(`${API_BASE_URL}${API_ENDPOINTS.AUTH}`, {
               headers: {
                   "x-access-token" : localStorage.getItem("token")
                 }

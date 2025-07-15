@@ -3,6 +3,7 @@ import {LoginIDContext} from "../context/LoginContext";
 import {LoginStatusContext} from "../context/LoginContext";
 import { useNavigate } from "react-router-dom";
 import Axios from "axios";
+import { API_BASE_URL, API_ENDPOINTS } from '../config/api';
 
 import {userDebtContext} from "../context/UserContext";
 
@@ -26,7 +27,7 @@ const Debt = () => {
 
     //get all debt information of that user from database
     const GetDebt = () => {
-        Axios.post("https://piggbank-backend-api.herokuapp.com/profile/get_debt", {
+        Axios.post(`${API_BASE_URL}${API_ENDPOINTS.GET_DEBT}`, {
             searchingID: loginID
         }).then((response) => {
             if (response.data.length){
@@ -53,17 +54,17 @@ const Debt = () => {
     //paying the debt, take reference number as parameter
     const paydebt = (ref) => {
         //every debt information would have a reference number, select them by the reference number
-        Axios.post("https://piggbank-backend-api.herokuapp.com/account/get_debt_byref", {
+        Axios.post(`${API_BASE_URL}${API_ENDPOINTS.GET_DEBT_BYREF}`, {
             searchingRef: ref
         }).then((debt) => {
             //check if user have enough balance to pay the debt
-            Axios.post("https://piggbank-backend-api.herokuapp.com/profile/check_balance", {
+            Axios.post(`${API_BASE_URL}${API_ENDPOINTS.CHECK_BALANCE}`, {
                 payerID: loginID,
                 check_amount: debt.data.total
             }).then((canPay) => {
                 //If yes, pay the debt by sending the request to backend
                 if(canPay.data.length){
-                    Axios.post("https://piggbank-backend-api.herokuapp.com/account/pay_debt", {
+                    Axios.post(`${API_BASE_URL}${API_ENDPOINTS.PAY_DEBT}`, {
                         debtAmount: debt.data.total,
                         searchingRef: ref,
                         searchingID: loginID

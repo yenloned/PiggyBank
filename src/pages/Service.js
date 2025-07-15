@@ -2,6 +2,7 @@ import React, {useState, useEffect, useContext} from "react";
 import './service.css';
 
 import Axios from "axios";
+import { API_BASE_URL, API_ENDPOINTS } from '../config/api';
 
 import AOS from 'aos';
 import 'aos/dist/aos.css';
@@ -159,11 +160,11 @@ const Service = () => {
         if (!loginStatus){
             window.location.replace("/login")
         }else{
-            Axios.post("https://piggbank-backend-api.herokuapp.com/profile/check_sub",{
+            Axios.post(`${API_BASE_URL}${API_ENDPOINTS.CHECK_SUB}`,{
                 searchingID: loginID
             }).then((result) => {
                 if (!result.data.length){
-                    Axios.post("https://piggbank-backend-api.herokuapp.com/function/insurance",{
+                    Axios.post(`${API_BASE_URL}${API_ENDPOINTS.INSURANCE}`,{
                         insurance_userid: loginID,
                         insurance_repay: repay,
                         insurance_amount: amount,

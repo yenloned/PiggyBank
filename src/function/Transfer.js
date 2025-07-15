@@ -1,6 +1,7 @@
 import React, {useContext, useLayoutEffect, useState} from "react";
 import Axios from "axios";
 import './function.css';
+import { API_BASE_URL, API_ENDPOINTS } from '../config/api';
 
 import search_payee from "../material/pictures/search_payee.png";
 import search_id from "../material/pictures/search_id.png";
@@ -28,7 +29,7 @@ const Transfer = () =>{
 
     //get Payee Information by user ID
     const get_payee = () => {
-        Axios.post("https://piggbank-backend-api.herokuapp.com/profile/get_payee",{
+        Axios.post(`${API_BASE_URL}${API_ENDPOINTS.GET_PAYEE}`,{
         searchingID: loginID})
         .then((response) => {
             if (response.data){
@@ -52,7 +53,7 @@ const Transfer = () =>{
 
     //check if user exist before performing the money transfer
     const check_user = () =>{
-        Axios.post("https://piggbank-backend-api.herokuapp.com/profile/check_user",{
+        Axios.post(`${API_BASE_URL}${API_ENDPOINTS.CHECK_USER}`,{
         payee_id_checkuser: transfer_payee
         }).then((checkuser_result) =>{
             //If it is existed, perform transfer_money
@@ -81,13 +82,13 @@ const Transfer = () =>{
             return setTransfer_Errormsg("Transaction amount is too large.")
         }
         //check if user have enough balance to transfer that amount
-        Axios.post("https://piggbank-backend-api.herokuapp.com/profile/check_balance",{
+        Axios.post(`${API_BASE_URL}${API_ENDPOINTS.CHECK_BALANCE}`,{
         payerID: loginID,
         check_amount: transfer_amount})
         .then((response) =>{
             //If yes, do the transfer
             if (response.data.length > 0){
-                Axios.post("https://piggbank-backend-api.herokuapp.com/function/transfer",{
+                Axios.post(`${API_BASE_URL}${API_ENDPOINTS.TRANSFER}`,{
                 transfer_payerID: loginID,
                 transfer_amount: transfer_amount,
                 transfer_payeeID: transfer_payee})
